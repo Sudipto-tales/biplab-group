@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsroom — Biplab Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#01040a',
+                        'brand-light': '#f5f7f9',
+                        'brand-blue': '#2e66d4',
+                        'brand-cyan': '#45c1ff'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { --bg: #01040a; --text: #ffffff; }
+        .light { --bg: #f5f7f9; --text: #01040a; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text); transition: background-color 0.5s ease, color 0.5s ease; overflow-x: hidden; font-family: 'Space Grotesk', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        .glass-nav { backdrop-filter: blur(15px); background: rgba(1, 4, 10, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px; }
+        .light .glass-nav { background: rgba(245, 247, 249, 0.7); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .mobile-menu-overlay { position: fixed; inset: 0; z-index: 200; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .light .mobile-menu-overlay { background: rgba(245, 247, 249, 0.95); }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu-overlay a { font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; padding: 12px 0; opacity: 0.7; transition: opacity 0.3s ease, color 0.3s ease; text-decoration: none; color: inherit; }
+        .mobile-menu-overlay a:hover { opacity: 1; color: #45c1ff; }
+        .mobile-menu-close { position: absolute; top: 30px; right: 30px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .light .mobile-menu-close { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); }
+        .gradient-text { background: linear-gradient(135deg, #45c1ff, #2e66d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* Page-specific styles */
+        .hero-newsroom {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-newsroom .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920') center/cover no-repeat;
+            will-change: transform;
+        }
+        .hero-newsroom .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(1,4,10,0.7) 0%, rgba(1,4,10,0.9) 100%);
+        }
+        .light .hero-newsroom .hero-overlay {
+            background: linear-gradient(180deg, rgba(245,247,249,0.7) 0%, rgba(245,247,249,0.92) 100%);
+        }
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(45,193,255,0.08);
+            border-color: rgba(45,193,255,0.2);
+        }
+        .light .news-card {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .light .news-card:hover {
+            box-shadow: 0 20px 60px rgba(46,102,212,0.1);
+            border-color: rgba(46,102,212,0.2);
+        }
+        .category-badge {
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(45,193,255,0.15), rgba(46,102,212,0.15));
+            color: #45c1ff;
+            border: 1px solid rgba(45,193,255,0.2);
+        }
+        .light .category-badge {
+            background: linear-gradient(135deg, rgba(46,102,212,0.1), rgba(45,193,255,0.1));
+            color: #2e66d4;
+            border: 1px solid rgba(46,102,212,0.2);
+        }
+        .filter-pill {
+            padding: 8px 20px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: inherit;
+            opacity: 0.6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-pill:hover, .filter-pill.active {
+            opacity: 1;
+            border-color: #45c1ff;
+            background: rgba(45,193,255,0.1);
+            color: #45c1ff;
+        }
+        .light .filter-pill {
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .light .filter-pill:hover, .light .filter-pill.active {
+            border-color: #2e66d4;
+            background: rgba(46,102,212,0.1);
+            color: #2e66d4;
+        }
+        .blog-card-img {
+            overflow: hidden;
+        }
+        .blog-card-img img {
+            transition: transform 0.6s ease;
+        }
+        .blog-card:hover .blog-card-img img {
+            transform: scale(1.05);
+        }
+        .newsletter-section {
+            background: linear-gradient(135deg, rgba(46,102,212,0.15), rgba(45,193,255,0.08), rgba(1,4,10,0.9));
+            border-top: 1px solid rgba(45,193,255,0.1);
+            border-bottom: 1px solid rgba(45,193,255,0.1);
+        }
+        .light .newsletter-section {
+            background: linear-gradient(135deg, rgba(46,102,212,0.08), rgba(45,193,255,0.05), rgba(245,247,249,0.95));
+            border-top: 1px solid rgba(46,102,212,0.1);
+            border-bottom: 1px solid rgba(46,102,212,0.1);
+        }
+
+        /* NAV DROPDOWN */
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
+        .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+        .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
+    </style>
+</head>
+<body class="dark:bg-brand-dark bg-brand-light dark:text-white text-brand-dark">
+
+    <!-- Navbar -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full overflow-hidden">
+        <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center no-underline" style="text-decoration:none;color:inherit;">Biplab Group</a>
+        <div class="flex items-center gap-4 md:gap-8">
+            <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-60">
+                <a href="index.html" class="hover:text-brand-cyan transition">Home</a>
+                <a href="about.html" class="hover:text-brand-cyan transition">About Us</a>
+                <div class="nav-dropdown relative">
+                    <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
+                    <div class="nav-dropdown-menu">
+                        <a href="sector-ev-mobility.html">EV Mobility</a>
+                        <a href="sector-kolkata-coder.html">The Kolkata Coder</a>
+                        <a href="sector-luxe-paints.html">Luxe House Paints</a>
+                        <a href="sector-smart-manufacturing.html">Smart Manufacturing</a>
+                        <a href="sector-smart-infrastructure.html">Smart Infrastructure</a>
+                        <a href="sector-rd-labs.html">R&D Labs</a>
+                    </div>
+                </div>
+                <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
+                <a href="community.html" class="hover:text-brand-cyan transition">Community</a>
+                <a href="contact.html" class="hover:text-brand-cyan transition">Contact</a>
+            </div>
+            <a href="mailto:contact@biplabgroup.com"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition relative">
+                <i class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
+            </a>
+            <button id="theme-toggle" class="hover:bg-brand-cyan/20 transition w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 relative">
+                <i class="fas fa-moon dark:!hidden absolute"></i>
+                <i class="fas fa-sun !hidden dark:!block text-brand-cyan absolute"></i>
+            </button>
+            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
+                <i class="fas fa-bars text-sm"></i>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col items-center gap-2">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
+            <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
+                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">EV Mobility</a>
+                <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
+                <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
+                <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
+                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart Infrastructure</a>
+                <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
+            </div>
+            <a href="newsroom.html">Newsroom</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="flex gap-6 mt-12">
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-newsroom">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 text-center px-6">
+            <div class="scroll-reveal">
+                <p class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-50 mb-4">Biplab Group</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]">
+                    <span class="gradient-text">Newsroom</span>
+                </h1>
+                <p class="mt-6 text-sm md:text-base max-w-xl mx-auto opacity-60 leading-relaxed">Latest updates, insights, and stories from across the Biplab Group ecosystem.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="relative py-20 dark:bg-brand-dark bg-brand-light" style="z-index:2;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="scroll-reveal">
+                <p class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-40 mb-8">Featured Story</p>
+                <div class="news-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+                    <div class="relative h-64 lg:h-auto min-h-[300px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800" alt="EV Fleet" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="category-badge">EV Mobility</span>
+                            <span class="text-xs opacity-40">March 2026</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-4">Biplab Group Unveils Next-Gen EV Fleet for Urban India</h2>
+                        <p class="text-sm opacity-60 leading-relaxed mb-8 max-w-lg">In a landmark announcement, Biplab Group has unveiled its next-generation electric vehicle fleet designed specifically for the unique demands of urban Indian mobility. The fleet integrates cutting-edge solid-state battery technology with AI-driven route optimization.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-sm uppercase tracking-widest hover:gap-4 transition-all">Read More <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter Bar -->
+    <section class="relative dark:bg-brand-dark bg-brand-light" style="z-index:2;">
+        <div class="max-w-7xl mx-auto px-6 pb-12">
+            <div class="scroll-reveal flex flex-wrap gap-3">
+                <button class="filter-pill active">All</button>
+                <button class="filter-pill">EV Mobility</button>
+                <button class="filter-pill">Technology</button>
+                <button class="filter-pill">Manufacturing</button>
+                <button class="filter-pill">Infrastructure</button>
+                <button class="filter-pill">R&amp;D</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="relative py-12 dark:bg-brand-dark bg-brand-light" style="z-index:2;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Card 1 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="AI Enterprise Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Technology</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">February 2026</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">The Kolkata Coder Launches AI-Powered Enterprise Suite</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">A comprehensive AI-driven platform designed to streamline enterprise operations, from automated workflows to predictive analytics.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600" alt="Eco Paint Range" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Manufacturing</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">January 2026</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Luxe House Paints Introduces Eco-Certified Color Range</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">The new eco-certified lineup features zero-VOC formulations with vibrant, long-lasting colors crafted for the modern Indian home.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600" alt="Urban Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Infrastructure</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">December 2025</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Smart Infrastructure Division Wins &#8377;200Cr Urban Project</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">A major milestone as the division secures one of Bengal's largest smart city infrastructure contracts for sustainable urban development.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600" alt="Battery Tech" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">R&amp;D</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">November 2025</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">R&amp;D Labs Achieves Breakthrough in Solid-State Battery Tech</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Our research team has achieved a significant breakthrough in solid-state battery energy density, pushing the boundaries of EV range.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600" alt="Manufacturing Expansion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Manufacturing</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">October 2025</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Biplab Group Expands Manufacturing Capacity by 40%</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Strategic investments in new production lines and automation have expanded our manufacturing capacity across all divisions.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600" alt="Green Jobs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Community</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">September 2025</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Community Impact: 1000+ Green Jobs Created in Bengal</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Our commitment to sustainable employment has resulted in over a thousand new green jobs across rural and semi-urban Bengal.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="relative py-24 dark:bg-brand-dark bg-brand-light" style="z-index:2;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="scroll-reveal mb-16">
+                <p class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-40 mb-4">Insights</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">From the <span class="gradient-text">Blog</span></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Blog Post 1 -->
+                <div class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group">
+                    <div class="blog-card-img relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800" alt="Electric Mobility" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="category-badge">EV Mobility</span>
+                            <span class="text-xs opacity-40">March 15, 2026</span>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">The Future of Electric Mobility in India</h3>
+                        <p class="text-sm opacity-50 leading-relaxed mb-6">An in-depth exploration of how India's EV ecosystem is evolving, the role of policy and infrastructure, and why the next five years will be transformative for sustainable transportation across the subcontinent.</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center text-white text-xs font-bold">BM</div>
+                            <div>
+                                <p class="text-xs font-bold">Biplab Mondal</p>
+                                <p class="text-[10px] opacity-40">Founder &amp; Chairman</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group">
+                    <div class="blog-card-img relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800" alt="Smart Factory" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="category-badge">Technology</span>
+                            <span class="text-xs opacity-40">February 28, 2026</span>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">Industry 4.0: How Smart Factories are Reshaping Bengal</h3>
+                        <p class="text-sm opacity-50 leading-relaxed mb-6">From IoT-enabled production lines to AI quality control, Bengal's manufacturing sector is undergoing a digital revolution. We explore how Biplab Group's smart factory initiative is leading this transformation.</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center text-white text-xs font-bold">AD</div>
+                            <div>
+                                <p class="text-xs font-bold">Arjun Dey</p>
+                                <p class="text-[10px] opacity-40">Head of Technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="relative newsletter-section py-24" style="z-index:2;">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-cyan/5 blur-[120px]"></div>
+            <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-brand-blue/5 blur-[100px]"></div>
+        </div>
+        <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+            <div class="scroll-reveal">
+                <p class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-40 mb-4">Newsletter</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Stay <span class="gradient-text">Updated</span></h2>
+                <p class="text-sm opacity-50 leading-relaxed max-w-lg mx-auto mb-10">Get the latest news, insights, and updates from Biplab Group delivered straight to your inbox. No spam, just substance.</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan/50 transition placeholder:opacity-40 dark:text-white text-brand-dark dark:bg-white/5 bg-black/5 dark:border-white/10 border-black/10">
+                    <button class="px-8 py-3 rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan text-white font-bold text-sm uppercase tracking-widest hover:shadow-[0_0_30px_rgba(45,193,255,0.3)] transition-shadow whitespace-nowrap">Subscribe</button>
+                </div>
+                <p class="text-[10px] opacity-30 mt-4">By subscribing, you agree to our Privacy Policy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-24 overflow-hidden dark:bg-gradient-to-b dark:from-[#030711] dark:to-brand-dark bg-[#fdfdfe]" style="z-index:2;">
+        <div class="absolute bottom-[-5%] left-1/2 -translate-x-1/2 text-[32vw] font-black leading-[0.8] tracking-[-0.05em] pointer-events-none lowercase dark:text-white/[0.03] text-black/[0.03]">Biplab</div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 border-t dark:border-gray-700/30 border-gray-300/50 pt-20">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="font-bold text-2xl uppercase mb-6">Biplab</div>
+                    <p class="text-xs max-w-[220px] leading-relaxed opacity-60">There is no risk-free industry — only disciplined execution.</p>
+                    <div class="flex gap-3 mt-6">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Company</h4>
+                    <a href="about.html" class="block transition hover:text-brand-cyan">About</a>
+                    <a href="index.html#sectors" class="block transition hover:text-brand-cyan">Sectors</a>
+                    <a href="index.html#journey" class="block transition hover:text-brand-cyan">Journey</a>
+                    <a href="newsroom.html" class="block transition hover:text-brand-cyan">Newsroom</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Divisions</h4>
+                    <a href="sector-ev-mobility.html" class="block transition hover:text-brand-cyan">EV Mobility</a>
+                    <a href="sector-kolkata-coder.html" class="block transition hover:text-brand-cyan">The Kolkata Coder</a>
+                    <a href="sector-luxe-paints.html" class="block transition hover:text-brand-cyan">Luxe House Paints</a>
+                    <a href="sector-smart-manufacturing.html" class="block transition hover:text-brand-cyan">Smart Manufacturing</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Contact</h4>
+                    <a href="mailto:contact@biplabgroup.com" class="block transition hover:text-brand-cyan">contact@biplabgroup.com</a>
+                    <a href="tel:+913300000000" class="block transition hover:text-brand-cyan">+91 33 0000 0000</a>
+                    <a href="contact.html" class="block transition hover:text-brand-cyan">Kolkata, West Bengal</a>
+                    <a href="#" class="block transition hover:text-brand-cyan">Careers</a>
+                </div>
+            </div>
+            <div class="mt-32 pt-10 border-t dark:border-gray-700/20 border-gray-300/30 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest opacity-50">
+                    <div class="w-[6px] h-[6px] rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)] animate-pulse"></div> All systems operational
+                </div>
+                <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
+                    <span>&copy; 2026 Biplab Group</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        document.getElementById('theme-toggle').addEventListener('click', () => { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); });
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; });
+            mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; });
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }); });
+        }
+
+        var mobileDivToggle = document.getElementById('mobile-divisions-toggle');
+        var mobileDivSub = document.getElementById('mobile-divisions-sub');
+        var mobileDivChevron = document.getElementById('mobile-div-chevron');
+        if (mobileDivToggle && mobileDivSub) {
+            mobileDivToggle.addEventListener('click', function() {
+                var open = mobileDivSub.style.display === 'flex';
+                mobileDivSub.style.display = open ? 'none' : 'flex';
+                if (mobileDivChevron) mobileDivChevron.style.transform = open ? '' : 'rotate(180deg)';
+            });
+        }
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            gsap.fromTo(el, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%' } });
+        });
+
+        // Hero parallax
+        gsap.to('#hero-bg', {
+            yPercent: 30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.hero-newsroom',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+
+        // Filter pill active state toggle (visual only)
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

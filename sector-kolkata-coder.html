@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kolkata Coder | Biplab Group</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#01040a',
+                        'brand-light': '#f5f7f9',
+                        'brand-blue': '#2e66d4',
+                        'brand-cyan': '#45c1ff',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --bg: #01040a; --text: #ffffff; }
+        .light { --bg: #f5f7f9; --text: #01040a; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+
+        .glass-nav {
+            backdrop-filter: blur(15px);
+            background: rgba(1, 4, 10, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+        }
+        .light .glass-nav {
+            background: rgba(245, 247, 249, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(1,4,10,0.6) 0%, rgba(1,4,10,0.85) 100%);
+        }
+        .light .hero-overlay {
+            background: linear-gradient(to bottom, rgba(245,247,249,0.4) 0%, rgba(245,247,249,0.8) 100%);
+        }
+
+        .capability-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .light .capability-card {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .capability-card:hover {
+            box-shadow: 0 20px 60px rgba(69,193,255,0.15);
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+        }
+        .light .stat-card {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(46,102,212,0.15), rgba(69,193,255,0.1));
+            border: 1px solid rgba(69,193,255,0.15);
+            border-radius: 24px;
+        }
+        .light .cta-section {
+            background: linear-gradient(135deg, rgba(46,102,212,0.08), rgba(69,193,255,0.05));
+            border: 1px solid rgba(46,102,212,0.15);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #45c1ff, #2e66d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .mobile-menu-overlay { position: fixed; inset: 0; z-index: 200; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .light .mobile-menu-overlay { background: rgba(245, 247, 249, 0.95); }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu-overlay a { font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; padding: 12px 0; opacity: 0.7; transition: opacity 0.3s ease, color 0.3s ease; text-decoration: none; color: inherit; }
+        .mobile-menu-overlay a:hover { opacity: 1; color: #45c1ff; }
+        .mobile-menu-close { position: absolute; top: 30px; right: 30px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .light .mobile-menu-close { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); }
+
+        /* NAV DROPDOWN */
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
+        .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+        .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
+    </style>
+</head>
+
+<body class="dark:bg-brand-dark bg-brand-light dark:text-white text-brand-dark">
+
+    <!-- NAV -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full overflow-hidden">
+        <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center no-underline" style="text-decoration:none;color:inherit;">Biplab Group</a>
+        <div class="flex items-center gap-4 md:gap-8">
+            <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-60">
+                <a href="index.html" class="hover:text-brand-cyan transition">Home</a>
+                <a href="about.html" class="hover:text-brand-cyan transition">About Us</a>
+                <div class="nav-dropdown relative">
+                    <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
+                    <div class="nav-dropdown-menu">
+                        <a href="sector-ev-mobility.html">EV Mobility</a>
+                        <a href="sector-kolkata-coder.html">The Kolkata Coder</a>
+                        <a href="sector-luxe-paints.html">Luxe House Paints</a>
+                        <a href="sector-smart-manufacturing.html">Smart Manufacturing</a>
+                        <a href="sector-smart-infrastructure.html">Smart Infrastructure</a>
+                        <a href="sector-rd-labs.html">R&D Labs</a>
+                    </div>
+                </div>
+                <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
+                <a href="community.html" class="hover:text-brand-cyan transition">Community</a>
+                <a href="contact.html" class="hover:text-brand-cyan transition">Contact</a>
+            </div>
+            <a href="mailto:contact@biplabgroup.com"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition relative">
+                <i class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
+            </a>
+            <button id="theme-toggle" class="hover:bg-brand-cyan/20 transition w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 relative">
+                <i class="fas fa-moon dark:!hidden absolute"></i>
+                <i class="fas fa-sun !hidden dark:!block text-brand-cyan absolute"></i>
+            </button>
+            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
+                <i class="fas fa-bars text-sm"></i>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col items-center gap-2">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
+            <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
+                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">EV Mobility</a>
+                <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
+                <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
+                <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
+                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart Infrastructure</a>
+                <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
+            </div>
+            <a href="newsroom.html">Newsroom</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="flex gap-6 mt-12">
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="images/image_6.jpg" alt="The Kolkata Coder" class="w-full h-full object-cover" id="hero-img">
+        </div>
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 mb-8" id="hero-badge">
+                <i class="fas fa-code text-brand-cyan"></i>
+                <span class="text-sm text-brand-cyan font-medium">The Kolkata Coder Division</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight" id="hero-title">
+                Engineering <span class="gradient-text">Digital Futures</span>
+            </h1>
+            <p class="text-lg md:text-xl opacity-70 max-w-2xl mx-auto mb-10" id="hero-sub">
+                Enterprise software, AI systems, and digital transformation solutions that empower businesses to thrive in an increasingly connected world.
+            </p>
+            <a href="#overview" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-cyan/10 border border-brand-cyan/30 rounded-full text-brand-cyan hover:bg-brand-cyan/20 transition-all">
+                <span>Explore Division</span>
+                <i class="fas fa-chevron-down text-sm animate-bounce"></i>
+            </a>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-dark dark:from-brand-dark from-brand-light to-transparent"></div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="py-24 md:py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6 reveal-left">
+                    <p class="section-label text-brand-cyan font-medium">Overview</p>
+                    <h2 class="text-3xl md:text-5xl font-bold leading-tight">Code That Drives<br>Innovation</h2>
+                    <p class="text-lg opacity-60 leading-relaxed">
+                        The Kolkata Coder is Biplab Group's technology powerhouse, delivering enterprise-grade software solutions and artificial intelligence systems that transform how businesses operate. Our team of world-class engineers builds scalable, secure, and intelligent platforms.
+                    </p>
+                    <p class="text-lg opacity-60 leading-relaxed">
+                        From custom AI/ML models to cloud-native architectures, we help organizations navigate digital transformation with confidence. Our solutions span industries, from fintech to healthcare, always prioritizing performance, reliability, and user experience.
+                    </p>
+                </div>
+                <div class="relative reveal-right">
+                    <div class="aspect-square rounded-3xl overflow-hidden border border-white/5">
+                        <img src="images/image_6.jpg" alt="The Kolkata Coder" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-brand-cyan/10 border border-brand-cyan/20 rounded-2xl px-6 py-4 backdrop-blur-sm">
+                        <p class="text-3xl font-bold text-brand-cyan">10x</p>
+                        <p class="text-sm opacity-60">Faster Delivery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY CAPABILITIES -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal-up">
+                <p class="section-label text-brand-cyan font-medium mb-4">What We Do</p>
+                <h2 class="text-3xl md:text-5xl font-bold">Key Capabilities</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="capability-card p-8 tilt-card reveal-up" data-delay="0">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-brand-cyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI & ML Solutions</h3>
+                    <p class="text-sm opacity-50 leading-relaxed">Custom machine learning models, natural language processing, computer vision, and predictive analytics platforms.</p>
+                </div>
+                <div class="capability-card p-8 tilt-card reveal-up" data-delay="0.1">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-server text-brand-blue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enterprise Software</h3>
+                    <p class="text-sm opacity-50 leading-relaxed">Scalable ERP, CRM, and business intelligence systems built for high-performance enterprise environments.</p>
+                </div>
+                <div class="capability-card p-8 tilt-card reveal-up" data-delay="0.2">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-brand-cyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cloud Architecture</h3>
+                    <p class="text-sm opacity-50 leading-relaxed">Multi-cloud infrastructure design, serverless computing, and Kubernetes orchestration for resilient deployments.</p>
+                </div>
+                <div class="capability-card p-8 tilt-card reveal-up" data-delay="0.3">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-brand-blue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Digital Transformation</h3>
+                    <p class="text-sm opacity-50 leading-relaxed">End-to-end digital strategy, legacy modernization, and agile development for business evolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US / STATS -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal-up">
+                <p class="section-label text-brand-cyan font-medium mb-4">Why Choose Us</p>
+                <h2 class="text-3xl md:text-5xl font-bold">Impact in Numbers</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card p-8 text-center reveal-up" data-delay="0">
+                    <p class="text-4xl font-bold text-brand-cyan mb-2">200+</p>
+                    <p class="text-sm opacity-50">Projects Delivered</p>
+                </div>
+                <div class="stat-card p-8 text-center reveal-up" data-delay="0.1">
+                    <p class="text-4xl font-bold text-brand-blue mb-2">50+</p>
+                    <p class="text-sm opacity-50">AI Models in Production</p>
+                </div>
+                <div class="stat-card p-8 text-center reveal-up" data-delay="0.2">
+                    <p class="text-4xl font-bold text-brand-cyan mb-2">99.9%</p>
+                    <p class="text-sm opacity-50">System Uptime</p>
+                </div>
+                <div class="stat-card p-8 text-center reveal-up" data-delay="0.3">
+                    <p class="text-4xl font-bold text-brand-blue mb-2">150+</p>
+                    <p class="text-sm opacity-50">Engineers Strong</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="cta-section p-12 md:p-16 text-center reveal-up">
+                <div class="w-16 h-16 rounded-full bg-brand-cyan/10 flex items-center justify-center mx-auto mb-8">
+                    <i class="fas fa-code text-brand-cyan text-2xl"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Build Something Extraordinary</h2>
+                <p class="text-lg opacity-60 mb-10 max-w-xl mx-auto">Transform your business with intelligent software solutions from The Kolkata Coder.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-cyan text-brand-dark font-bold rounded-full hover:scale-105 transition-transform">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                        <span>Back to Home</span>
+                    </a>
+                    <a href="mailto:contact@biplabgroup.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-brand-cyan/30 text-brand-cyan rounded-full hover:bg-brand-cyan/10 transition-all">
+                        <span>Get in Touch</span>
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative py-24 overflow-hidden dark:bg-gradient-to-b dark:from-[#030711] dark:to-brand-dark bg-[#fdfdfe]" style="z-index:2;">
+        <div class="absolute bottom-[-5%] left-1/2 -translate-x-1/2 text-[32vw] font-black leading-[0.8] tracking-[-0.05em] pointer-events-none lowercase dark:text-white/[0.03] text-black/[0.03]">Biplab</div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 border-t dark:border-gray-700/30 border-gray-300/50 pt-20">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="font-bold text-2xl uppercase mb-6">Biplab</div>
+                    <p class="text-xs max-w-[220px] leading-relaxed opacity-60">There is no risk-free industry — only disciplined execution. We manage industrial excellence with precision.</p>
+                    <div class="flex gap-3 mt-6">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Company</h4>
+                    <a href="about.html" class="block transition hover:text-brand-cyan">About</a>
+                    <a href="index.html#sectors" class="block transition hover:text-brand-cyan">Sectors</a>
+                    <a href="index.html#journey" class="block transition hover:text-brand-cyan">Journey</a>
+                    <a href="newsroom.html" class="block transition hover:text-brand-cyan">Newsroom</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Divisions</h4>
+                    <a href="sector-ev-mobility.html" class="block transition hover:text-brand-cyan">EV Mobility</a>
+                    <a href="sector-kolkata-coder.html" class="block transition hover:text-brand-cyan">The Kolkata Coder</a>
+                    <a href="sector-luxe-paints.html" class="block transition hover:text-brand-cyan">Luxe House Paints</a>
+                    <a href="sector-smart-manufacturing.html" class="block transition hover:text-brand-cyan">Smart Manufacturing</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Contact</h4>
+                    <a href="mailto:contact@biplabgroup.com" class="block transition hover:text-brand-cyan">contact@biplabgroup.com</a>
+                    <a href="tel:+913300000000" class="block transition hover:text-brand-cyan">+91 33 0000 0000</a>
+                    <a href="contact.html" class="block transition hover:text-brand-cyan">Kolkata, West Bengal · India</a>
+                    <a href="#" class="block transition hover:text-brand-cyan">Careers</a>
+                </div>
+            </div>
+            <div class="mt-32 pt-10 border-t dark:border-gray-700/20 border-gray-300/30 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest opacity-50">
+                    <div class="w-[6px] h-[6px] rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)] animate-pulse"></div> All systems operational
+                </div>
+                <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
+                    <span>&copy; 2026 Biplab Group</span>
+                    <a href="#" class="hover:text-brand-cyan transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-brand-cyan transition">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        toggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('light');
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; });
+            mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; });
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }); });
+        }
+
+        var mobileDivToggle = document.getElementById('mobile-divisions-toggle');
+        var mobileDivSub = document.getElementById('mobile-divisions-sub');
+        var mobileDivChevron = document.getElementById('mobile-div-chevron');
+        if (mobileDivToggle && mobileDivSub) {
+            mobileDivToggle.addEventListener('click', function() {
+                var open = mobileDivSub.style.display === 'flex';
+                mobileDivSub.style.display = open ? 'none' : 'flex';
+                if (mobileDivChevron) mobileDivChevron.style.transform = open ? '' : 'rotate(180deg)';
+            });
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('#hero-badge', { opacity: 0, y: 30, duration: 1, delay: 0.3 });
+        gsap.from('#hero-title', { opacity: 0, y: 40, duration: 1, delay: 0.5 });
+        gsap.from('#hero-sub', { opacity: 0, y: 30, duration: 1, delay: 0.7 });
+
+        gsap.to('#hero-img', {
+            yPercent: 20, ease: 'none',
+            scrollTrigger: { trigger: '#hero-img', start: 'top top', end: 'bottom top', scrub: true }
+        });
+
+        document.querySelectorAll('.reveal-up').forEach(el => {
+            const delay = el.getAttribute('data-delay') || 0;
+            gsap.from(el, {
+                opacity: 0, y: 60, duration: 1, delay: parseFloat(delay),
+                scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            });
+        });
+        document.querySelectorAll('.reveal-left').forEach(el => {
+            gsap.from(el, { opacity: 0, x: -60, duration: 1, scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } });
+        });
+        document.querySelectorAll('.reveal-right').forEach(el => {
+            gsap.from(el, { opacity: 0, x: 60, duration: 1, scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } });
+        });
+
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 12;
+                const rotateY = (centerX - x) / 12;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+            });
+        });
+    </script>
+</body>
+</html>
