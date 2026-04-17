@@ -125,7 +125,6 @@
             backdrop-filter: blur(15px);
             background: rgba(1, 4, 10, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 999px;
         }
 
         .light .glass-nav {
@@ -158,53 +157,25 @@
             opacity: 1;
         }
 
-        /* WATER DRIP CURSOR */
-        .cursor-main {
+        /* CUSTOM CURSOR (lightweight) */
+        .cursor-dot {
             position: fixed;
             width: 8px;
             height: 8px;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            backdrop-filter: blur(2px);
             background: rgba(69, 193, 255, 0.9);
-            box-shadow: 0 0 35px 12px rgba(69, 193, 255, 0.5), inset 0 0 3px rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px 6px rgba(69, 193, 255, 0.3);
+            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
         }
-
-        .cursor-trail {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            background: rgba(69, 193, 255, 0.4);
-            box-shadow: 0 0 20px 5px rgba(69, 193, 255, 0.4);
+        .light .cursor-dot {
+            background: rgba(255, 75, 58, 0.9);
+            box-shadow: 0 0 20px 6px rgba(255, 107, 53, 0.3);
         }
-
-        .cursor-ripple {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9997;
-            border: 2px solid rgba(69, 193, 255, 0.4);
-            background: rgba(69, 193, 255, 0.05);
-        }
-
-        /* LIGHT MODE CURSOR OVERRIDES */
-        .light .cursor-main {
-            background: rgba(255, 75, 58, 0.95);
-            box-shadow: 0 0 35px 12px rgba(255, 107, 53, 0.4), inset 0 0 3px rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .light .cursor-trail {
-            background: rgba(255, 107, 53, 0.4);
-            box-shadow: 0 0 20px 5px rgba(255, 107, 53, 0.3);
-        }
-
-        .light .cursor-ripple {
-            border: 2px solid rgba(255, 75, 58, 0.4);
-            background: rgba(255, 107, 53, 0.08);
+        @media (max-width: 768px) {
+            .cursor-dot { display: none; }
         }
 
         /* BENTO GRID */
@@ -1240,11 +1211,8 @@
         <img src="images/image_1.jpg" alt="Hero Background">
     </div>
 
-    <!-- WATER DRIP CURSOR ELEMENTS -->
-    <div class="cursor-main" id="cursor-main"></div>
-    <div class="cursor-trail" id="cursor-trail-1" style="width:12px;height:12px;"></div>
-    <div class="cursor-trail" id="cursor-trail-2" style="width:8px;height:8px;"></div>
-    <div class="cursor-trail" id="cursor-trail-3" style="width:5px;height:5px;"></div>
+    <!-- CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
 
     <!-- 5-SEC SCROLL INDICATOR -->
     <div id="intro-scroll-hint"
@@ -1279,7 +1247,7 @@
 
     <!-- NAV with mobile hamburger menu -->
     <nav id="main-nav"
-        class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full overflow-hidden">
+        class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
         <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center w-[120px] md:w-[180px] no-underline" style="text-decoration:none;color:inherit;">
             <span id="brand-typewriter">BG</span>
         </a>
@@ -1800,64 +1768,16 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
         const SCRUB_JOURNEY = 0.5;     // horizontal timeline
         const EASE_REVEAL = "power2.out";
 
-        // ===================== WATER DRIP CURSOR =====================
-        const cursorMain = document.getElementById('cursor-main');
-        const trails = [
-            document.getElementById('cursor-trail-1'),
-            document.getElementById('cursor-trail-2'),
-            document.getElementById('cursor-trail-3')
-        ];
-        let mouseX = 0, mouseY = 0;
-        let ripplePool = [];
-        const MAX_RIPPLES = 12;
-
-        for (let i = 0; i < MAX_RIPPLES; i++) {
-            const el = document.createElement('div');
-            el.className = 'cursor-ripple';
-            el.style.cssText = 'width:0;height:0;opacity:0;position:fixed;border-radius:50%;pointer-events:none;z-index:9997;';
-            document.body.appendChild(el);
-            ripplePool.push({ el, active: false });
+        // ===================== LIGHTWEIGHT CURSOR =====================
+        const cursorDot = document.getElementById('cursor-dot');
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            }, { passive: true });
+            document.addEventListener('mousedown', () => { cursorDot.style.transform = 'translate(-50%,-50%) scale(2)'; });
+            document.addEventListener('mouseup', () => { cursorDot.style.transform = 'translate(-50%,-50%) scale(1)'; });
         }
-
-        let rippleTimer = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            rippleTimer++;
-            if (rippleTimer % 5 === 0) {
-                spawnRipple(mouseX, mouseY);
-            }
-        });
-
-        function spawnRipple(x, y) {
-            const r = ripplePool.find(r => !r.active);
-            if (!r) return;
-            r.active = true;
-            gsap.set(r.el, { left: x, top: y, width: 0, height: 0, opacity: 0.6, xPercent: -50, yPercent: -50 });
-            gsap.to(r.el, {
-                width: 150, height: 150, opacity: 0, duration: 1.2, ease: "power2.out",
-                onComplete: () => { r.active = false; }
-            });
-        }
-
-        gsap.ticker.add(() => {
-            gsap.to(cursorMain, { x: mouseX - 4, y: mouseY - 4, duration: 0.15, ease: "power2.out" });
-            trails.forEach((trail, i) => {
-                gsap.to(trail, {
-                    x: mouseX - parseInt(trail.style.width) / 2,
-                    y: mouseY - parseInt(trail.style.height) / 2,
-                    duration: 0.3 + i * 0.12,
-                    ease: "power2.out",
-                    opacity: 0.4 - i * 0.1
-                });
-            });
-        });
-
-        window.addEventListener('click', (e) => {
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => spawnRipple(e.clientX, e.clientY), i * 80);
-            }
-        });
 
         // ===================== CHOREOGRAPHED ENTRANCE =====================
         // Master entrance timeline - nav and hero are synchronized
@@ -1873,8 +1793,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         const navEntryTl = gsap.timeline({
             paused: true,
-            onComplete: () => { topNav.style.overflow = "visible"; },
-            onReverseComplete: () => { topNav.style.overflow = "hidden"; }
+            onComplete: () => {},
+            onReverseComplete: () => {}
         });
         navEntryTl.to(topNav, {
             width: "92%", opacity: 1, duration: 0.8, ease: "expo.inOut"
@@ -1920,7 +1840,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         // Layer 3: Particles drift at medium speed
         const particleContainer = document.getElementById('hero-particles');
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 6; i++) {
             const dot = document.createElement('div');
             dot.style.cssText = `position:absolute;width:${2 + Math.random() * 3}px;height:${2 + Math.random() * 3}px;background:rgba(69,193,255,${0.15 + Math.random() * 0.2});border-radius:50%;left:${Math.random() * 100}%;top:${Math.random() * 100}%;`;
             particleContainer.appendChild(dot);
@@ -2353,7 +2273,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
             if (current > lastScroll && current > 100) {
                 if (isNavVisible) {
                     isNavVisible = false;
-                    topNav.style.overflow = "hidden";
                     navEntryTl.timeScale(1).reverse();
                 }
             } else if (current < lastScroll || current <= 100) {
