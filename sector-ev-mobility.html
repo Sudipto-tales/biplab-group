@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -31,7 +32,7 @@
     <style>
         :root { --bg: #01040a; --text: #ffffff; }
         .light { --bg: #f5f7f9; --text: #01040a; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -121,13 +122,18 @@
         .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
         .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
         .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
+    
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
     </style>
 </head>
 
 <body class="dark:bg-brand-dark bg-brand-light dark:text-white text-brand-dark">
 
     <!-- NAV -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
+    <nav id="main-nav" class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
         <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center no-underline" style="text-decoration:none;color:inherit;">Biplab Group</a>
         <div class="flex items-center gap-4 md:gap-8">
             <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-60">
@@ -394,9 +400,9 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuClose = document.getElementById('mobile-menu-close');
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; });
-            mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; });
-            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }); });
+            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('active'); lenis.stop(); });
+            mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('active'); lenis.start(); });
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); lenis.start(); }); });
         }
 
         var mobileDivToggle = document.getElementById('mobile-divisions-toggle');
@@ -412,6 +418,50 @@
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
+        // ===================== LENIS SMOOTH SCROLL =====================
+        const lenis = new Lenis({
+            wrapper: window,
+            content: document.documentElement,
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            autoResize: true,
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        function lenisRaf(time) { lenis.raf(time); requestAnimationFrame(lenisRaf); }
+        requestAnimationFrame(lenisRaf);
+
+        // ===================== NAVBAR ENTRANCE ANIMATION =====================
+        const EASE_REVEAL = "power2.out";
+        const topNav = document.getElementById('main-nav');
+        const topNavItems = topNav.querySelectorAll(':scope > *');
+        gsap.set(topNav, { width: 0, opacity: 0, xPercent: -50, left: "50%", transformOrigin: "center center" });
+        gsap.set(topNavItems, { opacity: 0, y: 10 });
+
+        const navEntryTl = gsap.timeline({ paused: true });
+        navEntryTl.to(topNav, { width: "92%", opacity: 1, duration: 0.8, ease: "expo.inOut" })
+            .to(topNavItems, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: EASE_REVEAL }, "-=0.4");
+
+        const entranceTl = gsap.timeline({ delay: 0.2 });
+        entranceTl.add(() => navEntryTl.play(), 0);
+
+        // Nav hide/show on scroll
+        let lastScroll = 0;
+        let isNavVisible = true;
+        window.addEventListener('scroll', () => {
+            const current = window.pageYOffset;
+            if (current > lastScroll && current > 100) {
+                if (isNavVisible) { isNavVisible = false; navEntryTl.timeScale(1).reverse(); }
+            } else if (current < lastScroll || current <= 100) {
+                if (!isNavVisible) { isNavVisible = true; navEntryTl.timeScale(1).play(); }
+            }
+            lastScroll = current;
+        }, { passive: true });
+
 
         // Hero animations
         gsap.from('#hero-badge', { opacity: 0, y: 30, duration: 1, delay: 0.3 });

@@ -157,25 +157,50 @@
             opacity: 1;
         }
 
-        /* CUSTOM CURSOR (lightweight) */
-        .cursor-dot {
+        /* WATER DRIP CURSOR */
+        .cursor-main {
             position: fixed;
             width: 8px;
             height: 8px;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
+            backdrop-filter: blur(2px);
             background: rgba(69, 193, 255, 0.9);
-            box-shadow: 0 0 20px 6px rgba(69, 193, 255, 0.3);
-            transition: transform 0.15s ease-out;
-            transform: translate(-50%, -50%);
+            box-shadow: 0 0 35px 12px rgba(69, 193, 255, 0.5), inset 0 0 3px rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        .light .cursor-dot {
-            background: rgba(255, 75, 58, 0.9);
-            box-shadow: 0 0 20px 6px rgba(255, 107, 53, 0.3);
+        .cursor-trail {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            background: rgba(69, 193, 255, 0.4);
+            box-shadow: 0 0 20px 5px rgba(69, 193, 255, 0.4);
+        }
+        .cursor-ripple {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9997;
+            border: 2px solid rgba(69, 193, 255, 0.4);
+            background: rgba(69, 193, 255, 0.05);
+        }
+        .light .cursor-main {
+            background: rgba(255, 75, 58, 0.95);
+            box-shadow: 0 0 35px 12px rgba(255, 107, 53, 0.4), inset 0 0 3px rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .light .cursor-trail {
+            background: rgba(255, 107, 53, 0.4);
+            box-shadow: 0 0 20px 5px rgba(255, 107, 53, 0.3);
+        }
+        .light .cursor-ripple {
+            border: 2px solid rgba(255, 75, 58, 0.4);
+            background: rgba(255, 107, 53, 0.08);
         }
         @media (max-width: 768px) {
-            .cursor-dot { display: none; }
+            .cursor-main, .cursor-trail, .cursor-ripple { display: none; }
         }
 
         /* BENTO GRID */
@@ -1211,8 +1236,11 @@
         <img src="images/image_1.jpg" alt="Hero Background">
     </div>
 
-    <!-- CURSOR -->
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <!-- WATER DRIP CURSOR -->
+    <div class="cursor-main" id="cursor-main"></div>
+    <div class="cursor-trail" id="cursor-trail-1" style="width:14px;height:14px;opacity:0"></div>
+    <div class="cursor-trail" id="cursor-trail-2" style="width:10px;height:10px;opacity:0"></div>
+    <div class="cursor-trail" id="cursor-trail-3" style="width:6px;height:6px;opacity:0"></div>
 
     <!-- 5-SEC SCROLL INDICATOR -->
     <div id="intro-scroll-hint"
@@ -1339,7 +1367,7 @@
     <section id="about" class="relative py-24 px-6 md:px-24 dark:bg-[#050505] bg-white" style="z-index:2;">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div class="relative group skew-image-wrapper scroll-fade-in overflow-hidden rounded-xl">
-                <img src="images/image_2.jpg"
+                <img src="images/image_2.jpg" loading="lazy"
                     class="w-full h-[420px] object-cover shadow-2xl grayscale hover:grayscale-0 transition duration-700"
                     id="about-img">
                 <div
@@ -1387,7 +1415,7 @@
                 <!-- Slide 1 -->
                 <div class="feature-slide is-active" data-slide="0">
                     <div class="feature-img-wrap">
-                        <img src="images/image_3.jpg" class="feature-img">
+                        <img src="images/image_3.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Industrial Update</span>
@@ -1401,7 +1429,7 @@
                 <!-- Slide 2 -->
                 <div class="feature-slide" data-slide="1">
                     <div class="feature-img-wrap">
-                        <img src="images/image_5.jpg" class="feature-img">
+                        <img src="images/image_5.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Mobility Division</span>
@@ -1415,7 +1443,7 @@
                 <!-- Slide 3 -->
                 <div class="feature-slide" data-slide="2">
                     <div class="feature-img-wrap">
-                        <img src="images/image_6.jpg" class="feature-img">
+                        <img src="images/image_6.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Tech Division</span>
@@ -1447,7 +1475,7 @@
             </div>
 
             <div class="bottom-card-small group scroll-fade-in">
-                <img src="images/image_4.jpg"
+                <img src="images/image_4.jpg" loading="lazy"
                     class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
             </div>
 
@@ -1473,7 +1501,7 @@
             <!-- Card 1 -->
             <div class="sector-carousel-card" data-card-index="0">
                 <a href="sector-ev-mobility.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_5.jpg" class="sector-card-img">
+                    <img src="images/image_5.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-bolt"></i></div>
                     <div class="sector-card-inner">
@@ -1487,7 +1515,7 @@
             <!-- Card 2 -->
             <div class="sector-carousel-card" data-card-index="1">
                 <a href="sector-kolkata-coder.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_6.jpg" class="sector-card-img">
+                    <img src="images/image_6.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-code"></i></div>
                     <div class="sector-card-inner">
@@ -1501,7 +1529,7 @@
             <!-- Card 3 -->
             <div class="sector-carousel-card" data-card-index="2">
                 <a href="sector-luxe-paints.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_3.jpg" class="sector-card-img">
+                    <img src="images/image_3.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-paint-roller"></i></div>
                     <div class="sector-card-inner">
@@ -1515,7 +1543,7 @@
             <!-- Card 4 -->
             <div class="sector-carousel-card" data-card-index="3">
                 <a href="sector-smart-manufacturing.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_4.jpg" class="sector-card-img">
+                    <img src="images/image_4.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-industry"></i></div>
                     <div class="sector-card-inner">
@@ -1529,7 +1557,7 @@
             <!-- Card 5 -->
             <div class="sector-carousel-card" data-card-index="4">
                 <a href="sector-smart-infrastructure.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_7.jpg" class="sector-card-img">
+                    <img src="images/image_7.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-building"></i></div>
                     <div class="sector-card-inner">
@@ -1543,7 +1571,7 @@
             <!-- Card 6 -->
             <div class="sector-carousel-card" data-card-index="5">
                 <a href="sector-rd-labs.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_2.jpg" class="sector-card-img">
+                    <img src="images/image_2.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-flask"></i></div>
                     <div class="sector-card-inner">
@@ -1576,7 +1604,7 @@
 
             <!-- 2021 -->
             <div class="horizontal-panel">
-                <img src="images/image_7.jpg" class="panel-bg" alt="">
+                <img src="images/image_7.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 01</span>
@@ -1591,7 +1619,7 @@
 
             <!-- 2022 -->
             <div class="horizontal-panel">
-                <img src="images/image_4.jpg" class="panel-bg" alt="">
+                <img src="images/image_4.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 02</span>
@@ -1606,7 +1634,7 @@
 
             <!-- 2023 -->
             <div class="horizontal-panel">
-                <img src="images/image_6.jpg" class="panel-bg" alt="">
+                <img src="images/image_6.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 03</span>
@@ -1621,7 +1649,7 @@
 
             <!-- 2024 -->
             <div class="horizontal-panel">
-                <img src="images/image_5.jpg" class="panel-bg" alt="">
+                <img src="images/image_5.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 04</span>
@@ -1636,7 +1664,7 @@
 
             <!-- 2025 -->
             <div class="horizontal-panel">
-                <img src="images/image_3.jpg" class="panel-bg" alt="">
+                <img src="images/image_3.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 05</span>
@@ -1651,7 +1679,7 @@
 
             <!-- 2026 -->
             <div class="horizontal-panel">
-                <img src="images/image_1.jpg" class="panel-bg" alt="">
+                <img src="images/image_1.jpg" class="panel-bg" alt="" loading="lazy">
                 <div class="panel-overlay"></div>
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 06 &mdash; Now</span>
@@ -1762,21 +1790,68 @@
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         // ===================== GLOBAL SCRUB CONFIG =====================
-        // Unified timing constants for consistent scroll feel
-        const SCRUB_SMOOTH = 0.6;      // main scroll-linked animations
-        const SCRUB_TIGHT = 0.3;       // parallax layers (tighter = more responsive)
-        const SCRUB_JOURNEY = 0.5;     // horizontal timeline
+        const SCRUB_SMOOTH = 0.6;
+        const SCRUB_TIGHT = 0.3;
+        const SCRUB_JOURNEY = 0.5;
         const EASE_REVEAL = "power2.out";
 
-        // ===================== LIGHTWEIGHT CURSOR =====================
-        const cursorDot = document.getElementById('cursor-dot');
-        if (cursorDot && window.innerWidth > 768) {
-            document.addEventListener('mousemove', (e) => {
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
+        // ===================== WATER DRIP CURSOR =====================
+        const cursorMain = document.getElementById('cursor-main');
+        const trails = [
+            document.getElementById('cursor-trail-1'),
+            document.getElementById('cursor-trail-2'),
+            document.getElementById('cursor-trail-3')
+        ];
+        let mouseX = 0, mouseY = 0;
+        let ripplePool = [];
+        const MAX_RIPPLES = 12;
+
+        if (window.innerWidth > 768) {
+            for (let i = 0; i < MAX_RIPPLES; i++) {
+                const el = document.createElement('div');
+                el.className = 'cursor-ripple';
+                el.style.cssText = 'width:0;height:0;opacity:0;position:fixed;border-radius:50%;pointer-events:none;z-index:9997;';
+                document.body.appendChild(el);
+                ripplePool.push({ el, active: false });
+            }
+
+            let rippleTimer = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                rippleTimer++;
+                if (rippleTimer % 5 === 0) spawnRipple(mouseX, mouseY);
             }, { passive: true });
-            document.addEventListener('mousedown', () => { cursorDot.style.transform = 'translate(-50%,-50%) scale(2)'; });
-            document.addEventListener('mouseup', () => { cursorDot.style.transform = 'translate(-50%,-50%) scale(1)'; });
+
+            function spawnRipple(x, y) {
+                const r = ripplePool.find(r => !r.active);
+                if (!r) return;
+                r.active = true;
+                gsap.set(r.el, { left: x, top: y, width: 0, height: 0, opacity: 0.6, xPercent: -50, yPercent: -50 });
+                gsap.to(r.el, {
+                    width: 150, height: 150, opacity: 0, duration: 1.2, ease: "power2.out",
+                    onComplete: () => { r.active = false; }
+                });
+            }
+
+            gsap.ticker.add(() => {
+                gsap.to(cursorMain, { x: mouseX - 4, y: mouseY - 4, duration: 0.15, ease: "power2.out" });
+                trails.forEach((trail, i) => {
+                    gsap.to(trail, {
+                        x: mouseX - parseInt(trail.style.width) / 2,
+                        y: mouseY - parseInt(trail.style.height) / 2,
+                        duration: 0.3 + i * 0.12,
+                        ease: "power2.out",
+                        opacity: 0.4 - i * 0.1
+                    });
+                });
+            });
+
+            window.addEventListener('click', (e) => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => spawnRipple(e.clientX, e.clientY), i * 80);
+                }
+            });
         }
 
         // ===================== CHOREOGRAPHED ENTRANCE =====================
