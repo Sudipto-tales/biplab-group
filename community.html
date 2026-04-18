@@ -137,6 +137,10 @@
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
+    
+        /* Active nav link */
+        .nav-link-active { opacity: 1 !important; color: #45c1ff !important; }
+        .light .nav-link-active { color: #2e66d4 !important; }
     </style>
 </head>
 
@@ -161,7 +165,7 @@
                     </div>
                 </div>
                 <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
-                <a href="community.html" class="hover:text-brand-cyan transition">Community</a>
+                <a href="community.html" class="hover:text-brand-cyan transition nav-link-active">Community</a>
                 <a href="contact.html" class="hover:text-brand-cyan transition">Contact</a>
             </div>
             <a href="mailto:contact@biplabgroup.com"
@@ -595,7 +599,12 @@
         gsap.set(topNav, { width: 0, opacity: 0, xPercent: -50, left: "50%", transformOrigin: "center center" });
         gsap.set(topNavItems, { opacity: 0, y: 10 });
 
-        const navEntryTl = gsap.timeline({ paused: true });
+        const navEntryTl = gsap.timeline({
+            paused: true,
+            onComplete: () => { topNav.style.overflow = "visible"; },
+            onReverseComplete: () => { topNav.style.overflow = "hidden"; }
+        });
+        topNav.style.overflow = "hidden";
         navEntryTl.to(topNav, { width: "92%", opacity: 1, duration: 0.8, ease: "expo.inOut" })
             .to(topNavItems, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: EASE_REVEAL }, "-=0.4");
 
@@ -608,7 +617,7 @@
         window.addEventListener('scroll', () => {
             const current = window.pageYOffset;
             if (current > lastScroll && current > 100) {
-                if (isNavVisible) { isNavVisible = false; navEntryTl.timeScale(1).reverse(); }
+                if (isNavVisible) { isNavVisible = false; topNav.style.overflow = 'hidden'; navEntryTl.timeScale(1).reverse(); }
             } else if (current < lastScroll || current <= 100) {
                 if (!isNavVisible) { isNavVisible = true; navEntryTl.timeScale(1).play(); }
             }
