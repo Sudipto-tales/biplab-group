@@ -2043,22 +2043,22 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
             const outSlide = slides[currentSlide];
             const inSlide = slides[nextIndex];
 
-            // Make incoming slide active for layout
-            inSlide.classList.add('is-active');
-
-            // Incoming: enter from left
+            // Incoming animates in while absolute (no layout shift)
             gsap.fromTo(inSlide,
                 { x: '-100%', opacity: 0 },
-                { x: '0%', opacity: 1, duration: 0.8, ease: "power2.inOut" }
+                { x: '0%', opacity: 1, duration: 0.8, ease: "power2.inOut",
+                    onComplete: () => {
+                        // Swap: incoming becomes the layout anchor
+                        inSlide.classList.add('is-active');
+                        outSlide.classList.remove('is-active');
+                        gsap.set(outSlide, { x: '-100%', opacity: 0 });
+                    }
+                }
             );
 
-            // Outgoing: exit to right
+            // Outgoing fades out in place (stays relative to hold card height)
             gsap.to(outSlide, {
-                x: '100%', opacity: 0, duration: 0.8, ease: "power2.inOut",
-                onComplete: () => {
-                    outSlide.classList.remove('is-active');
-                    gsap.set(outSlide, { x: '-100%', opacity: 0 });
-                }
+                opacity: 0, duration: 0.8, ease: "power2.inOut"
             });
 
             // Update dots
