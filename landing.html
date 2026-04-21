@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stuxen — Creative Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#1a1008;
+  --white:#fff;
+  --off-white:#fdf8f3;
+  --accent:#F26419;
+  --accent-light:#fff0e6;
+  --accent-dark:#c44e0e;
+  --border:rgba(26,16,8,0.12);
+  --text-muted:rgba(26,16,8,0.6);
+  --radius:12px;
+  --nav-h:80px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--black);background:#fff;overflow-x:hidden}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--off-white)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  height:var(--nav-h);
+  display:flex;align-items:center;
+  padding:0 40px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto}
+.nav-logo{font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--black)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--black);font-size:14px;font-weight:500;
+  position:relative;overflow:hidden;display:inline-block;
+}
+.nav-links a::after{
+  content:attr(data-text);position:absolute;top:100%;left:0;
+  color:var(--accent);transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a:hover::after{transform:translateY(-100%)}
+.nav-links a:hover{color:transparent}
+.nav-links a{transition:color .25s}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:100px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  border:1.5px solid var(--black);color:var(--black);
+  background:transparent;cursor:pointer;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;position:relative;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;background:var(--black);
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:0;
+}
+.btn span,.btn svg{position:relative;z-index:1}
+.btn:hover{color:#fff}
+.btn:hover::before{transform:translateY(0)}
+.btn-primary{background:var(--black);color:#fff;border-color:var(--black)}
+.btn-primary::before{background:var(--accent)}
+.btn-primary:hover{color:#fff}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--black);transition:.3s}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:calc(var(--nav-h) + 60px) 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,#fff8f2 0%,#fff 60%,#ffe8d6 100%);
+}
+.hero-noise{
+  position:absolute;inset:0;z-index:1;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+.hero-grid-lines{
+  position:absolute;inset:0;z-index:1;
+  background-image:linear-gradient(rgba(33,33,33,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(33,33,33,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-inner{
+  max-width:1200px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;
+  position:relative;z-index:2;
+}
+.hero-content{}
+.sub-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:24px;
+}
+.sub-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero-title{
+  font-size:clamp(56px,7vw,96px);font-weight:800;line-height:.95;
+  letter-spacing:-3px;margin-bottom:12px;
+}
+.hero-title em{
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--accent);font-weight:700;
+}
+.hero-desc{
+  font-size:16px;line-height:1.7;color:var(--text-muted);
+  max-width:420px;margin:28px 0 40px;
+}
+.hero-ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hero-badges{
+  display:flex;align-items:center;gap:12px;margin-top:48px;
+  flex-wrap:wrap;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:100px;
+  background:var(--off-white);border:1px solid var(--border);
+  font-size:12px;font-weight:500;
+}
+.badge-num{font-weight:800;font-size:16px;color:var(--black)}
+.hero-visual{
+  position:relative;
+  border-radius:20px;overflow:hidden;
+  aspect-ratio:4/5;
+  box-shadow:0 40px 80px rgba(0,0,0,0.15);
+}
+.hero-img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.1);
+  transition:transform 8s ease-out;
+}
+.hero-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(33,33,33,0.6) 100%);
+}
+.hero-img-label{
+  position:absolute;bottom:24px;left:24px;right:24px;
+  display:flex;align-items:center;justify-content:space-between;
+  color:#fff;
+}
+.hero-img-label-left{font-size:20px;font-weight:700;font-family:'Playfair Display',serif;font-style:italic}
+.hero-img-label-right{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+
+/* ─── MARQUEE ─── */
+.marquee-section{
+  padding:20px 0;background:var(--black);color:#fff;
+  overflow:hidden;
+}
+.marquee-track{
+  display:flex;gap:48px;align-items:center;
+  animation:marquee 20s linear infinite;
+  white-space:nowrap;width:max-content;
+}
+.marquee-item{
+  font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:48px;
+}
+.marquee-sep{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── SECTIONS ─── */
+section{padding:100px 40px}
+.container{max-width:1200px;margin:0 auto;width:100%}
+.section-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:20px;
+}
+.section-title{
+  font-size:clamp(36px,5vw,64px);font-weight:800;
+  letter-spacing:-2px;line-height:1;margin-bottom:16px;
+}
+.section-title em{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent)}
+
+/* ─── ABOUT ─── */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text p{font-size:16px;line-height:1.8;color:var(--text-muted);margin-bottom:24px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.stat-card{
+  background:#fff;padding:36px 28px;
+  transition:background .25s;
+}
+.stat-card:hover{background:var(--off-white)}
+.stat-num{font-size:52px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--black)}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:13px;font-weight:500;color:var(--text-muted);margin-top:8px}
+.stat-desc{font-size:13px;line-height:1.6;color:var(--text-muted);margin-top:12px}
+
+/* ─── SERVICES ─── */
+.services-section{background:var(--off-white)}
+.services-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;gap:32px;flex-wrap:wrap}
+.services-list{border-top:1px solid var(--border)}
+.service-item{
+  display:flex;align-items:center;gap:32px;
+  padding:32px 0;border-bottom:1px solid var(--border);
+  cursor:pointer;position:relative;
+  transition:padding .3s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+.service-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--accent);transition:width .3s cubic-bezier(.4,0,.2,1);z-index:0;
+}
+.service-item:hover::before{width:4px}
+.service-num{
+  font-size:13px;font-weight:600;letter-spacing:1px;
+  color:var(--text-muted);min-width:40px;position:relative;z-index:1;
+}
+.service-name{
+  font-size:clamp(24px,3vw,42px);font-weight:700;letter-spacing:-1px;
+  flex:1;position:relative;z-index:1;
+  transition:transform .3s,color .3s;
+}
+.service-item:hover .service-name{color:var(--accent);transform:translateX(8px)}
+.service-tags{
+  display:flex;gap:8px;position:relative;z-index:1;
+  flex-wrap:wrap;justify-content:flex-end;
+}
+.service-tag{
+  padding:6px 14px;border-radius:100px;
+  background:#fff;border:1px solid var(--border);
+  font-size:12px;font-weight:500;
+}
+.service-arrow{
+  width:48px;height:48px;border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;z-index:1;
+  transition:all .3s;
+}
+.service-item:hover .service-arrow{background:var(--accent);border-color:var(--accent);transform:rotate(45deg)}
+.service-item:hover .service-arrow svg{stroke:#fff}
+
+/* ─── PROJECTS ─── */
+.projects-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;gap:32px;flex-wrap:wrap}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.project-card{
+  border-radius:var(--radius);overflow:hidden;
+  position:relative;aspect-ratio:3/4;
+  cursor:pointer;
+}
+.project-card.large{grid-column:span 2;aspect-ratio:2/1}
+.project-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.project-card:hover .project-img{transform:scale(1.05)}
+.project-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.75) 100%);
+  opacity:0;transition:opacity .4s;
+}
+.project-card:hover .project-overlay{opacity:1}
+.project-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px;
+  transform:translateY(20px);opacity:0;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+}
+.project-card:hover .project-info{transform:translateY(0);opacity:1}
+.project-info-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
+.project-tags-row{display:flex;gap:8px;flex-wrap:wrap}
+.project-tag-pill{
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);
+}
+.project-num{
+  position:absolute;top:20px;right:20px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+}
+/* Placeholder colored backgrounds for project cards */
+.project-card:nth-child(1) .project-bg{background:linear-gradient(135deg,#1a1a2e,#16213e,#5235F6)}
+.project-card:nth-child(2) .project-bg{background:linear-gradient(135deg,#2d1b69,#11998e,#38ef7d)}
+.project-card:nth-child(3) .project-bg{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)}
+.project-card:nth-child(4) .project-bg{background:linear-gradient(135deg,#4a0072,#7b2ff7,#f107a3)}
+.project-card:nth-child(5) .project-bg{background:linear-gradient(135deg,#1c1c1c,#5235F6,#a855f7)}
+.project-bg{position:absolute;inset:0}
+.project-inner-content{
+  position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;
+  opacity:.25;
+}
+.project-inner-icon{font-size:64px;line-height:1}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-section{background:var(--black);color:#fff;padding:100px 40px}
+.testimonials-section .section-tag{color:rgba(255,255,255,0.4)}
+.testimonials-section .section-title{color:#fff}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-top:60px;border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);overflow:hidden}
+.testi-card{
+  background:var(--black);padding:40px 32px;
+  transition:background .3s;
+}
+.testi-card:hover{background:#1a1a1a}
+.testi-quote-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;font-size:20px;color:#fff;font-weight:800;
+}
+.testi-text{
+  font-size:15px;line-height:1.8;color:rgba(255,255,255,0.75);
+  margin-bottom:32px;
+}
+.testi-author{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px}
+.testi-name{font-size:15px;font-weight:700;color:#fff}
+.testi-role{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px}
+
+/* ─── BLOG ─── */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:60px}
+.blog-card{
+  border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .3s,box-shadow .3s;
+}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(0,0,0,0.08)}
+.blog-card-img-wrap{aspect-ratio:16/9;overflow:hidden;background:var(--off-white)}
+.blog-card-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.blog-card:hover .blog-card-img{transform:scale(1.05)}
+.blog-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+}
+.blog-body{padding:24px}
+.blog-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.blog-author-img{width:32px;height:32px;border-radius:50%;background:var(--off-white);border:2px solid var(--border)}
+.blog-author-name{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)}
+.blog-card-title{
+  font-size:18px;font-weight:700;line-height:1.3;letter-spacing:-.5px;
+  margin-bottom:12px;
+  text-decoration:none;color:var(--black);
+  transition:color .2s;
+}
+.blog-card-title:hover{color:var(--accent)}
+.blog-card-desc{font-size:13px;line-height:1.7;color:var(--text-muted);margin-bottom:20px}
+.read-more{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--black);text-decoration:none;
+  transition:gap .2s,color .2s;
+}
+.read-more:hover{gap:10px;color:var(--accent)}
+.read-more svg{transition:transform .2s}
+.read-more:hover svg{transform:translateX(4px)}
+
+/* ─── FAQ ─── */
+.faq-section{background:var(--off-white)}
+.faq-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:60px}
+.faq-item{
+  border-bottom:1px solid var(--border);
+  padding-bottom:0;overflow:hidden;
+}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:24px 0;cursor:pointer;
+  font-size:15px;font-weight:600;
+  transition:color .2s;
+}
+.faq-q:hover{color:var(--accent)}
+.faq-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:#fff;border:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:400;line-height:1;
+  transition:all .3s;color:var(--black);
+}
+.faq-item.open .faq-icon{background:var(--accent);border-color:var(--accent);color:#fff;transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .4s;
+}
+.faq-a p{padding-bottom:24px;font-size:14px;line-height:1.8;color:var(--text-muted)}
+.faq-item.open .faq-a{max-height:200px}
+
+/* ─── CTA ─── */
+.cta-section{
+  padding:120px 40px;
+  background:var(--black);color:#fff;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-bg-circles{position:absolute;inset:0;pointer-events:none}
+.cta-circle{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(82,53,246,0.2);
+}
+.cta-circle:nth-child(1){width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.cta-circle:nth-child(2){width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.cta-circle:nth-child(3){width:800px;height:800px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta-title{
+  font-size:clamp(40px,6vw,80px);font-weight:800;
+  letter-spacing:-3px;line-height:.95;
+  margin-bottom:32px;
+}
+.cta-title em{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent)}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:48px}
+.btn-white{background:#fff;color:var(--black);border-color:#fff}
+.btn-white::before{background:var(--accent)}
+.btn-white:hover{color:#fff;border-color:var(--accent)}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+
+/* ─── FOOTER ─── */
+footer{background:var(--black);color:#fff;padding:60px 40px 32px;border-top:1px solid rgba(255,255,255,0.08)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand{}
+.footer-logo{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:16px}
+.footer-logo span{color:var(--accent)}
+.footer-brand-desc{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.4);max-width:240px}
+.footer-social{display:flex;gap:12px;margin-top:24px}
+.social-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:#fff;font-size:14px;font-weight:700;
+  transition:all .25s;
+}
+.social-btn:hover{background:var(--accent);border-color:var(--accent)}
+.footer-col-title{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links a{
+  text-decoration:none;color:rgba(255,255,255,0.6);font-size:14px;
+  transition:color .2s;
+}
+.footer-links a:hover{color:#fff}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.08);padding-top:32px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:13px;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:16px;
+}
+.footer-bottom a{color:rgba(255,255,255,0.5);text-decoration:none}
+.footer-bottom a:hover{color:#fff}
+
+/* ─── PARALLAX ─── */
+.parallax-el{will-change:transform}
+
+/* ─── MOBILE NAV ─── */
+.mobile-menu{
+  position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:#fff;z-index:998;
+  padding:40px;
+  transform:translateY(-110%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mobile-nav-links a{
+  display:block;padding:16px 0;
+  font-size:28px;font-weight:700;letter-spacing:-1px;
+  text-decoration:none;color:var(--black);
+  border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.mobile-nav-links a:hover{color:var(--accent)}
+
+/* ─── ANIMATIONS ─── */
+.fade-up{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);
+}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.delay-1{transition-delay:.1s}
+.delay-2{transition-delay:.2s}
+.delay-3{transition-delay:.3s}
+.delay-4{transition-delay:.4s}
+.delay-5{transition-delay:.5s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;max-width:600px}
+  .hero-visual{display:none}
+  .about-layout{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:repeat(2,1fr)}
+  .project-card.large{grid-column:span 2}
+  .testi-grid{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .faq-layout{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links,.btn.desktop-only{display:none}
+  .hamburger{display:flex}
+  section{padding:72px 20px}
+  .hero{padding:calc(var(--nav-h)+40px) 20px 60px}
+  .services-header,.projects-header{flex-direction:column;align-items:flex-start}
+  .service-tags{display:none}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.large{grid-column:span 1;aspect-ratio:3/4}
+  .blog-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .cta-btns{flex-direction:column}
+  .testi-grid{border-radius:var(--radius);overflow:hidden}
+}
+@media(max-width:480px){
+  .hero-title{letter-spacing:-2px}
+  .section-title{letter-spacing:-1px}
+}
+
+/* ─── CURSOR ─── */
+.cursor{
+  position:fixed;top:0;left:0;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--accent);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform .1s,width .25s,height .25s,opacity .25s;
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;top:0;left:0;
+  width:40px;height:40px;border-radius:50%;
+  border:1.5px solid var(--accent);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:left .15s cubic-bezier(.4,0,.2,1),top .15s cubic-bezier(.4,0,.2,1),width .3s,height .3s;
+  opacity:.5;
+}
+.cursor.hover{width:8px;height:8px}
+.cursor-ring.hover{width:60px;height:60px}
+@media(pointer:coarse){.cursor,.cursor-ring{display:none}}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">STU<span>X</span>EN</a>
+    <ul class="nav-links">
+      <li><a href="#about" data-text="About">About</a></li>
+      <li><a href="#services" data-text="Services">Services</a></li>
+      <li><a href="#projects" data-text="Projects">Projects</a></li>
+      <li><a href="#blog" data-text="Blog">Blog</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary desktop-only"><span>Get started free</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="sub-label fade-up">
+        <span class="sub-dot"></span>
+        Best Agency Near You
+      </div>
+      <h1 class="hero-title fade-up delay-1">
+        Creative<br><em>agency.</em>
+      </h1>
+      <p class="hero-desc fade-up delay-2">
+        A forward-thinking digital agency dedicated to helping brands grow and thrive in the digital era.
+      </p>
+      <div class="hero-ctas fade-up delay-3">
+        <a href="#services" class="btn btn-primary"><span>Explore Services</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <a href="#about" class="btn"><span>About Us</span></a>
+      </div>
+      <div class="hero-badges fade-up delay-4">
+        <div class="badge"><span class="badge-num">84K+</span> Projects Done</div>
+        <div class="badge"><span class="badge-num">3Y+</span> Experience</div>
+        <div class="badge"><span class="badge-num">92+</span> Awards Won</div>
+      </div>
+    </div>
+    <div class="hero-visual parallax-el" data-speed="-0.15">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80&fit=crop" alt="Creative agency team" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,16,8,0.15) 0%,rgba(26,16,8,0.55) 100%)"></div>
+      <!-- floating badge top-left -->
+      <div style="position:absolute;top:24px;left:24px;background:rgba(255,255,255,0.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:8px 16px;display:flex;align-items:center;gap:8px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#F26419;animation:pulse 2s infinite"></div>
+        <span style="font-size:12px;font-weight:600;color:#fff;letter-spacing:1px;text-transform:uppercase">Available for Projects</span>
+      </div>
+      <!-- floating rating badge top-right -->
+      <div style="position:absolute;top:24px;right:24px;background:rgba(255,255,255,0.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:12px 16px;text-align:center;">
+        <div style="font-size:22px;font-weight:800;color:#fff;line-height:1">4.9</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.7);letter-spacing:1px;margin-top:2px">Rating</div>
+        <div style="display:flex;gap:2px;justify-content:center;margin-top:4px">
+          <span style="color:#F26419;font-size:10px">★★★★★</span>
+        </div>
+      </div>
+      <div class="hero-img-label">
+        <div class="hero-img-label-left">Digital Experts</div>
+        <div class="hero-img-label-right">[Creative Agency]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item">Branding<span class="marquee-sep"></span>Design<span class="marquee-sep"></span>Visual<span class="marquee-sep"></span>Development<span class="marquee-sep"></span>Strategy<span class="marquee-sep"></span>Marketing<span class="marquee-sep"></span></div>
+    <div class="marquee-item">Branding<span class="marquee-sep"></span>Design<span class="marquee-sep"></span>Visual<span class="marquee-sep"></span>Development<span class="marquee-sep"></span>Strategy<span class="marquee-sep"></span>Marketing<span class="marquee-sep"></span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-left">
+        <div class="section-tag fade-up"><span class="sub-dot"></span> About Us</div>
+        <h2 class="section-title fade-up delay-1">Stuxen is a forward-thinking<em> digital agency.</em></h2>
+        <div class="about-text fade-up delay-2">
+          <p>We are dedicated to helping brands grow and thrive in the digital era. Our team of creative professionals combines strategy, design, and technology to deliver exceptional results.</p>
+          <p>From startups to established enterprises, we partner with businesses to create meaningful digital experiences that connect with audiences and drive growth.</p>
+        </div>
+        <a href="#contact" class="btn btn-primary fade-up delay-3" style="margin-top:16px"><span>More About Us</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+      <div class="about-right fade-up delay-2">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">84<span>K+</span></div>
+            <div class="stat-label">Projects Ready</div>
+            <div class="stat-desc">Enhance the online presence with impactful solutions.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3<span>Y+</span></div>
+            <div class="stat-label">Years Experience</div>
+            <div class="stat-desc">Powerful digital experiences crafted for growth.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">92<span>+</span></div>
+            <div class="stat-label">Awards Won</div>
+            <div class="stat-desc">A journey defined by relentless pursuit of excellence.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">19<span>K+</span></div>
+            <div class="stat-label">Happy Customers</div>
+            <div class="stat-desc">Clients who trust us to deliver beyond expectations.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="section-tag fade-up"><span class="sub-dot"></span> Our Services</div>
+        <h2 class="section-title fade-up delay-1">Creative <em>Services.</em></h2>
+      </div>
+      <a href="#contact" class="btn fade-up delay-2"><span>View All Services</span></a>
+    </div>
+    <div class="services-list">
+      <div class="service-item fade-up">
+        <div class="service-num">01</div>
+        <div class="service-name">Branding</div>
+        <div class="service-tags">
+          <span class="service-tag">Digital Agency</span>
+          <span class="service-tag">Identity</span>
+          <span class="service-tag">Creative</span>
+        </div>
+        <div class="service-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="#212121" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="service-item fade-up delay-1">
+        <div class="service-num">02</div>
+        <div class="service-name">Design</div>
+        <div class="service-tags">
+          <span class="service-tag">UI/UX</span>
+          <span class="service-tag">Product</span>
+          <span class="service-tag">Visual</span>
+        </div>
+        <div class="service-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="#212121" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="service-item fade-up delay-2">
+        <div class="service-num">03</div>
+        <div class="service-name">Visual</div>
+        <div class="service-tags">
+          <span class="service-tag">Motion</span>
+          <span class="service-tag">Video</span>
+          <span class="service-tag">Photography</span>
+        </div>
+        <div class="service-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="#212121" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="service-item fade-up delay-3">
+        <div class="service-num">04</div>
+        <div class="service-name">Development</div>
+        <div class="service-tags">
+          <span class="service-tag">Web</span>
+          <span class="service-tag">App</span>
+          <span class="service-tag">CMS</span>
+        </div>
+        <div class="service-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="#212121" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <div>
+        <div class="section-tag fade-up"><span class="sub-dot"></span> Our Projects</div>
+        <h2 class="section-title fade-up delay-1">Perfect <em>works.</em></h2>
+      </div>
+      <div class="fade-up delay-2">
+        <p style="font-size:14px;color:var(--text-muted);max-width:300px;margin-bottom:16px">We craft impactful digital strategies, cutting-edge designs, and seamless web solutions.</p>
+        <a href="#" class="read-more">Explore Projects <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card large fade-up">
+        <div class="project-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#5235F6)"></div>
+        <div class="project-inner-content"><span class="project-inner-icon">✦</span></div>
+        <div class="project-num">01</div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-info-title">Brandex Identity</div>
+          <div class="project-tags-row">
+            <span class="project-tag-pill">Branding</span>
+            <span class="project-tag-pill">· Product</span>
+            <span class="project-tag-pill">· UX</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-up delay-1">
+        <div class="project-bg" style="background:linear-gradient(135deg,#2d1b69,#11998e,#38ef7d)"></div>
+        <div class="project-inner-content"><span class="project-inner-icon">◈</span></div>
+        <div class="project-num">02</div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-info-title">Project Nova</div>
+          <div class="project-tags-row">
+            <span class="project-tag-pill">Branding</span>
+            <span class="project-tag-pill">· UX</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-up delay-2">
+        <div class="project-bg" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)"></div>
+        <div class="project-inner-content"><span class="project-inner-icon">⬡</span></div>
+        <div class="project-num">03</div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-info-title">VisionFlow Website</div>
+          <div class="project-tags-row">
+            <span class="project-tag-pill">Web</span>
+            <span class="project-tag-pill">· Design</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-up delay-1">
+        <div class="project-bg" style="background:linear-gradient(135deg,#4a0072,#7b2ff7,#f107a3)"></div>
+        <div class="project-inner-content"><span class="project-inner-icon">◉</span></div>
+        <div class="project-num">04</div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-info-title">Pixelwave Campaign</div>
+          <div class="project-tags-row">
+            <span class="project-tag-pill">Marketing</span>
+            <span class="project-tag-pill">· Visual</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-up delay-2">
+        <div class="project-bg" style="background:linear-gradient(135deg,#1c1c1c,#5235F6,#a855f7)"></div>
+        <div class="project-inner-content"><span class="project-inner-icon">⬢</span></div>
+        <div class="project-num">05</div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-info-title">Coreline Branding</div>
+          <div class="project-tags-row">
+            <span class="project-tag-pill">Branding</span>
+            <span class="project-tag-pill">· Identity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-tag fade-up"><span class="sub-dot"></span> Our Testimonials</div>
+    <h2 class="section-title fade-up delay-1">Clients <em>words.</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-quote-icon">"</div>
+        <p class="testi-text">"Stuxen transformed our digital presence with a sleek, modern website and a solid marketing strategy. Their team is highly skilled and genuinely cares about delivering results. We've seen a noticeable boost in leads since working with them."</p>
+        <div class="testi-author">
+          <div class="testi-name">Albert Flores</div>
+          <div class="testi-role">Web Designer</div>
+        </div>
+      </div>
+      <div class="testi-card fade-up delay-1">
+        <div class="testi-quote-icon">"</div>
+        <p class="testi-text">"The creativity and professionalism at Stuxen are unmatched. They took the time to understand our brand and delivered a website that exceeded our expectations. Their attention to detail is what makes them stand out."</p>
+        <div class="testi-author">
+          <div class="testi-name">Jane Cooper</div>
+          <div class="testi-role">Medical Assistant</div>
+        </div>
+      </div>
+      <div class="testi-card fade-up delay-2">
+        <div class="testi-quote-icon">"</div>
+        <p class="testi-text">"Partnering with Stuxen was the best decision we made for our rebranding project. They brought fresh ideas to the table and executed them flawlessly. The outcome not only impressed us but resonated deeply with our customers."</p>
+        <div class="testi-author">
+          <div class="testi-name">Marvin McKinney</div>
+          <div class="testi-role">President of Sales</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="projects-header">
+      <div>
+        <div class="section-tag fade-up"><span class="sub-dot"></span> News &amp; Articles</div>
+        <h2 class="section-title fade-up delay-1">Our <em>articles.</em></h2>
+      </div>
+      <div class="fade-up delay-2">
+        <p style="font-size:14px;color:var(--text-muted);max-width:300px;margin-bottom:16px">We craft impactful digital strategies, cutting-edge designs, and seamless web solutions.</p>
+        <a href="#" class="read-more">Explore Articles <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card fade-up">
+        <div class="blog-card-img-wrap">
+          <div class="blog-placeholder" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">📱</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <div class="blog-author-img" style="background:linear-gradient(135deg,#5235F6,#a78bfa)"></div>
+            <div>
+              <div class="blog-author-name">Sophia Martin</div>
+              <div style="font-size:11px;color:var(--text-muted)">Editor</div>
+            </div>
+          </div>
+          <a href="#" class="blog-card-title">Top Digital Marketing Shifts Brands Can't Ignore in 2025.</a>
+          <p class="blog-card-desc">Stay ahead of the competition by exploring the latest strategies shaping the future of marketing.</p>
+          <a href="#" class="read-more">Read more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div class="blog-card fade-up delay-1">
+        <div class="blog-card-img-wrap">
+          <div class="blog-placeholder" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🌐</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <div class="blog-author-img" style="background:linear-gradient(135deg,#059669,#34d399)"></div>
+            <div>
+              <div class="blog-author-name">James Wilson</div>
+              <div style="font-size:11px;color:var(--text-muted)">Editor</div>
+            </div>
+          </div>
+          <a href="#" class="blog-card-title">Why Modern Web Design Is Crucial for Business Growth.</a>
+          <p class="blog-card-desc">Stay ahead of the competition by exploring the latest strategies shaping the future.</p>
+          <a href="#" class="read-more">Read more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div class="blog-card fade-up delay-2">
+        <div class="blog-card-img-wrap">
+          <div class="blog-placeholder" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">✦</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <div class="blog-author-img" style="background:linear-gradient(135deg,#db2777,#f472b6)"></div>
+            <div>
+              <div class="blog-author-name">Emma Harris</div>
+              <div style="font-size:11px;color:var(--text-muted)">Editor</div>
+            </div>
+          </div>
+          <a href="#" class="blog-card-title">Branding Strategies: Building Identities That Last.</a>
+          <p class="blog-card-desc">Stay ahead of the competition by exploring the latest strategies shaping the future.</p>
+          <a href="#" class="read-more">Read more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-tag fade-up"><span class="sub-dot"></span> FAQ</div>
+    <h2 class="section-title fade-up delay-1">Frequently asked <em>questions!</em></h2>
+    <div class="faq-layout">
+      <div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>1. What services does Stuxen provide?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>We offer a comprehensive range of digital services including branding, UI/UX design, visual identity, web development, digital marketing strategy, and ongoing creative support for businesses of all sizes.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>3. How long does it take to complete a project?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Project timelines vary depending on scope and complexity. On average, website projects take 4–8 weeks, while branding and marketing campaigns may take 2–6 weeks depending on deliverables.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>5. Can you redesign my existing website?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Absolutely. We specialize in both new website builds and redesigns. We start with a thorough audit of your current site to identify opportunities and craft a strategy that improves both design and performance.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-3">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>7. What makes Stuxen different from other agencies?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>We combine creativity with strategy. Every project is treated as a unique challenge — we don't use cookie-cutter templates. Our team deeply invests in understanding your brand and audience to deliver genuinely distinctive results.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-4">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>9. Do you work with clients internationally?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Yes, we work with clients globally. Our team is fully remote-capable and experienced in managing projects across different time zones and cultures seamlessly.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>2. How much does a typical project cost?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Pricing depends on the scope, complexity, and timeline of the project. We offer flexible packages for startups as well as enterprise-level solutions. Contact us for a custom quote tailored to your needs.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>4. Do you work with small businesses?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Yes! We love working with businesses of all sizes, from ambitious startups to established enterprises. We have packages and processes designed to scale with your needs and budget.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>6. Do you provide ongoing support after completion?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Yes, we offer ongoing maintenance and support packages to ensure your digital assets continue to perform at their best. We're here for you long after the initial launch.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-3">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>8. How do I get started with Stuxen?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Simply reach out via our contact page or email us directly. We'll schedule a discovery call to understand your goals and put together a proposal tailored to your project within a few days.</p></div>
+        </div>
+        <div class="faq-item fade-up delay-4">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>10. Can you customize services based on my needs?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a"><p>Absolutely. We understand that no two businesses are alike. We work closely with you to create a custom service package that addresses your specific challenges and objectives.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-bg-circles">
+    <div class="cta-circle"></div>
+    <div class="cta-circle"></div>
+    <div class="cta-circle"></div>
+  </div>
+  <div class="cta-inner">
+    <div class="section-tag fade-up" style="color:rgba(255,255,255,0.3);justify-content:center"><span class="sub-dot"></span> Let's Work Together</div>
+    <h2 class="cta-title fade-up delay-1">Ready to build something <em>great?</em></h2>
+    <p class="cta-sub fade-up delay-2">Start your project with Stuxen and experience the difference that thoughtful design and strategy can make.</p>
+    <div class="cta-btns fade-up delay-3">
+      <a href="mailto:stuxen.creative@gmail.com" class="btn btn-white"><span>Get Started Free</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="#services" class="btn" style="border-color:rgba(255,255,255,0.2);color:#fff"><span>Explore Services</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">STU<span>X</span>EN</div>
+        <p class="footer-brand-desc">A forward-thinking digital agency dedicated to helping brands grow and thrive in the digital era.</p>
+        <div class="footer-social">
+          <a href="https://x.com" target="_blank" class="social-btn">𝕏</a>
+          <a href="https://instagram.com" target="_blank" class="social-btn">IG</a>
+          <a href="https://dribbble.com" target="_blank" class="social-btn">Dr</a>
+          <a href="https://behance.net" target="_blank" class="social-btn">Be</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">[Pages]</div>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Works</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">[Services]</div>
+        <ul class="footer-links">
+          <li><a href="#services">Branding</a></li>
+          <li><a href="#services">Design</a></li>
+          <li><a href="#services">Visual</a></li>
+          <li><a href="#services">Development</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">[Contact]</div>
+        <ul class="footer-links">
+          <li><a href="mailto:stuxen.creative@gmail.com">stuxen.creative@gmail.com</a></li>
+          <li><a href="tel:+014065550120">+01 (406) 555-0120</a></li>
+          <li><a href="#">Los Angeles, CA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>©2024 Copyright — <a href="#">Stuxen</a>. All rights reserved.</span>
+      <span>Designed by <a href="#">Digitexen</a> | Powered by Webflow</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cursor=document.getElementById('cursor');
+const cursorRing=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursorRing.style.left=rx+'px';cursorRing.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button,.service-item,.project-card,.blog-card,.faq-q,.btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');cursorRing.classList.add('hover')});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');cursorRing.classList.remove('hover')});
+});
+
+// ─── NAVBAR SCROLL ───
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ─── HAMBURGER ───
+const ham=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{
+  mobileMenu.classList.toggle('open');
+  const spans=ham.querySelectorAll('span');
+  if(mobileMenu.classList.contains('open')){
+    spans[0].style.transform='rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+  }else{
+    spans[0].style.transform='';spans[1].style.opacity='';spans[2].style.transform='';
+  }
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mobileMenu.classList.remove('open');
+  const spans=ham.querySelectorAll('span');
+  spans[0].style.transform='';spans[1].style.opacity='';spans[2].style.transform='';
+}));
+
+// ─── FADE UP OBSERVER ───
+const fadeEls=document.querySelectorAll('.fade-up');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+fadeEls.forEach(el=>observer.observe(el));
+
+// ─── PARALLAX ───
+const parallaxEls=document.querySelectorAll('.parallax-el');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  parallaxEls.forEach(el=>{
+    const speed=parseFloat(el.dataset.speed)||-.1;
+    const rect=el.getBoundingClientRect();
+    const centerY=sy+rect.top+rect.height/2;
+    const offset=(sy-centerY+window.innerHeight/2)*speed;
+    el.style.transform=`translateY(${offset}px)`;
+  });
+});
+
+// ─── PARALLAX FOR HERO GRID ───
+const heroGrid=document.querySelector('.hero-grid-lines');
+const heroNoise=document.querySelector('.hero-noise');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  if(heroGrid)heroGrid.style.transform=`translateY(${sy*0.3}px)`;
+  if(heroNoise)heroNoise.style.transform=`translateY(${sy*0.2}px)`;
+});
+
+// ─── FAQ TOGGLE ───
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// ─── HERO IMG PARALLAX ───
+window.addEventListener('scroll',()=>{
+  const heroVisual=document.querySelector('.hero-visual');
+  if(heroVisual&&window.innerWidth>768){
+    const sy=window.scrollY;
+    const inner=heroVisual.querySelector('[style*="position:absolute;inset:0;display:flex"]');
+  }
+});
+
+// ─── SMOOTH REVEAL HERO ON LOAD ───
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.hero .fade-up').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('visible'),i*120+100);
+  });
+});
+</script>
+</body>
+</html>
