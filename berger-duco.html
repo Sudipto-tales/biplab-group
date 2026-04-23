@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berger & Duco Paints | Biplab Group</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#0a0a0c',
+                        'brand-light': '#ffffff',
+                        'paint-red': '#0284c7', // Sky Blue (Previously Red)
+                        'paint-blue': '#1e3a8a', // Deep Navy Blue
+                        'paint-yellow': '#38bdf8', // Neon Bright Blue
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1e1e24;
+        }
+
+        .dark {
+            --bg: #0a0a0c;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: auto;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 999px;
+        }
+
+        .dark .glass-nav {
+            background: rgba(10, 10, 12, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 50%, var(--bg) 100%);
+        }
+
+        .capability-card {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dark .capability-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .capability-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            will-change: transform, opacity, filter;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #0284c7;
+        }
+
+        .brand-logo {
+            height: 40px;
+            opacity: 0.5;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            filter: grayscale(100%);
+        }
+
+        .dark .brand-logo {
+            filter: grayscale(100%) invert(1);
+        }
+
+        .brand-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .dark .brand-logo:hover {
+            filter: grayscale(0%) invert(0);
+        }
+
+        .menu-btn {
+            background: #0284c7;
+            color: white;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: #1e3a8a;
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(2, 132, 199, 0.3);
+        }
+
+        /* Services Carousel */
+        .services-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .service-card {
+            min-width: 320px;
+            flex-shrink: 0;
+        }
+
+        /* Brand Marquee */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-inner {
+            display: flex;
+            gap: 4rem;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-inner:hover {
+            animation-play-state: paused;
+        }
+
+        /* Color Mixer */
+        .mixer-blob {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: grab;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        @media (min-width: 768px) {
+            .mixer-blob {
+                width: 72px;
+                height: 72px;
+                border: 4px solid white;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .mixer-blob:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .mixer-blob.active {
+            border-color: #38bdf8;
+            transform: scale(1.2);
+        }
+
+        .result-swatch {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.5s ease;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .dark .mobile-menu-overlay {
+            background: rgba(10, 10, 12, 0.98);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .palette-grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            min-height: 160px;
+        }
+
+        @media (min-width: 768px) {
+            .palette-grid-item {
+                border-radius: 32px;
+                min-height: auto;
+            }
+        }
+
+        /* Punch Card Animation */
+        .punch-card {
+            perspective: 1200px;
+        }
+
+        .punch-card-inner {
+            border-radius: 32px;
+            overflow: hidden;
+            transition: box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .punch-card-inner.punched {
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .dark .faq-item {
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+            padding: 0 0;
+        }
+
+        .faq-answer.open {
+            max-height: 300px;
+            padding: 16px 0;
+        }
+
+        .faq-toggle-icon {
+            transition: transform 0.4s ease;
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Round Table Reviews */
+        .review-table {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .dark .review-table {
+            border-color: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .review-card {
+            position: absolute;
+            width: 280px;
+            padding: 24px;
+            border-radius: 24px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            z-index: 5;
+        }
+
+        .dark .review-card {
+            background: #141418;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* =============================================
+           FOOTER (nock-footer)
+        ============================================= */
+        .nock-footer {
+            position: relative;
+            padding: 120px 0 60px 0;
+            overflow: hidden;
+        }
+
+        .light .nock-footer {
+            background: #ffffff;
+            color: #1e1e24;
+        }
+
+        .dark .nock-footer {
+            background: linear-gradient(180deg, #0f0f12 0%, #0a0a0c 100%);
+            color: #ffffff;
+        }
+
+        .light .nock-footer a {
+            color: rgba(30, 30, 36, 0.6);
+        }
+
+        .light .nock-footer a:hover {
+            color: #0284c7;
+        }
+
+        .dark .nock-footer a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .nock-footer a:hover {
+            color: #38bdf8;
+        }
+
+        .light .nock-footer .footer-heading {
+            color: #1e1e24;
+        }
+
+        .light .nock-footer .footer-sub {
+            color: rgba(30, 30, 36, 0.4);
+        }
+
+        .dark .nock-footer .footer-heading {
+            color: #ffffff;
+        }
+
+        .dark .nock-footer .footer-sub {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer Background Text */
+        .footer-bg-text {
+            position: absolute;
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32vw;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: lowercase;
+        }
+
+        .light .footer-bg-text {
+            color: rgba(0, 0, 0, 0.03);
+        }
+
+        .dark .footer-bg-text {
+            color: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Footer status badge */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-brand-light dark:bg-brand-dark dark:text-white text-brand-dark">
+
+    <nav id="main-nav"
+        class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 py-3 flex justify-between items-center glass-nav shadow-2xl transition-all duration-500">
+        <a href="#" class="font-black tracking-tighter text-xl flex items-center gap-2">
+            <i class="fas fa-paint-roller text-paint-red"></i> <span id="nav-brand-text">BERGER & DUCO</span>
+        </a>
+        <div class="flex items-center gap-6">
+            <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.2em] font-bold opacity-70 uppercase">
+                <a href="#palette" class="hover:text-paint-red transition">Palette</a>
+                <a href="#services" class="hover:text-paint-red transition">Services</a>
+                <a href="#color-mixer" class="hover:text-paint-red transition">Mixer</a>
+                <a href="#collections" class="hover:text-paint-red transition">Products</a>
+            </div>
+            <button id="theme-toggle"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-400/20">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:block text-paint-yellow"></i>
+            </button>
+            <a href="index.html"
+                class="w-10 h-10 flex items-center justify-center rounded-full transition border border-gray-400/20 hover:border-paint-red/50 hover:text-paint-red">
+                <i class="fas fa-home text-sm"></i>
+            </a>
+            <button id="mobile-menu-btn"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-400/20">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="absolute top-10 right-10 text-2xl" id="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col items-center gap-8 text-3xl font-black uppercase">
+            <a href="#palette" onclick="mobileMenu.classList.remove('active')">Palette</a>
+            <a href="#services" onclick="mobileMenu.classList.remove('active')">Services</a>
+            <a href="#color-mixer" onclick="mobileMenu.classList.remove('active')">Mixer</a>
+            <a href="#collections" onclick="mobileMenu.classList.remove('active')">Products</a>
+        </div>
+    </div>
+
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div id="hero-bg-wrapper" class="absolute inset-0">
+            <img src="images/image_8.jpg" class="w-full h-full object-cover opacity-80 dark:opacity-40" id="hero-img">
+            <div class="hero-gradient-overlay absolute inset-0"></div>
+        </div>
+
+        <canvas id="sandCanvas" class="absolute inset-0 w-full h-full z-[10]"
+            style="filter: drop-shadow(0 25px 35px rgba(0,0,0,0.95));"></canvas>
+
+        <div
+            class="relative z-20 text-center px-6 w-full max-w-4xl flex flex-col items-center h-full justify-between py-32 pointer-events-none">
+            <div
+                class="hero-ui-element inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 pointer-events-auto shadow-xl">
+                <i class="fas fa-palette text-paint-red"></i>
+                <span class="text-[10px] uppercase tracking-widest text-white font-bold">Premium Finishes &
+                    Coatings</span>
+            </div>
+
+            <!-- <div class="hero-ui-element pointer-events-auto">
+                <p class="text-lg md:text-xl font-medium text-white/80 mb-12 max-w-xl mx-auto drop-shadow-md">
+                    Bringing the world's most vibrant colors to your home and automobile.
+                </p>
+                <a href="#palette"
+                    class="menu-btn px-12 py-5 font-bold text-xs uppercase tracking-widest inline-block shadow-2xl">
+                    Explore the Spectrum <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
+                </a>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="palette" class="py-16 md:py-24 px-6 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-14 gap-6">
+                <div class="space-y-4">
+                    <p class="section-label">Curated 2026 Collection</p>
+                    <h2 class="vanish-header section-title text-4xl md:text-6xl">
+                        Signature<br><span class="gradient-text">Pigments.</span></h2>
+                </div>
+                <p class="reveal-up max-w-xs opacity-50 text-sm leading-relaxed">
+                    Digital-to-surface color matching that ensures perfection in every drop.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 md:h-[700px]">
+                <div class="palette-grid-item sm:col-span-2 md:col-span-1 md:row-span-2 group min-h-[300px] md:min-h-0">
+                    <img src="https://images.unsplash.com/photo-1562619741-56bb30c3fe83?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-paint-blue/90 to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <h3 class="text-2xl md:text-3xl font-black text-white uppercase">Cobalt Silk</h3>
+                        <p class="text-white/60 text-xs uppercase tracking-widest mt-2">Deep Interior Luxury</p>
+                    </div>
+                </div>
+                <div class="palette-grid-item group" data-delay="0.1">
+                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-paint-red/80 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="text-lg md:text-xl font-black text-white uppercase">Velocity Red</h3>
+                        <p class="text-white/60 text-[10px] uppercase tracking-widest">Duco Auto Grade</p>
+                    </div>
+                </div>
+                <div class="palette-grid-item group" data-delay="0.2">
+                    <img src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-paint-yellow/80 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="text-lg md:text-xl font-black text-white uppercase">Solar Amber</h3>
+                        <p class="text-white/60 text-[10px] uppercase tracking-widest">High-Gloss Finish</p>
+                    </div>
+                </div>
+                <div class="palette-grid-item sm:col-span-2 group min-h-[200px] md:min-h-0" data-delay="0.3">
+                    <img src="https://images.unsplash.com/photo-1525904097878-94fb15835963?q=80&w=2040&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <button
+                            class="px-8 py-3 bg-white text-black font-bold text-[10px] uppercase tracking-[0.2em] rounded-full hover:bg-paint-red hover:text-white transition">Explore
+                            Full Catalog</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR COLLECTION - Punch Card Style -->
+    <section id="collections" class="py-16 md:py-24 px-6 md:px-24 bg-gray-50 dark:bg-black/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10 md:mb-14">
+                <p class="section-label reveal-up">Premium Range</p>
+                <h2 class="vanish-header section-title text-4xl md:text-6xl mt-3">Our <span
+                        class="gradient-text">Collection</span></h2>
+                <p class="mt-4 opacity-40 text-sm max-w-md mx-auto reveal-up">Each finish is engineered to last — scroll
+                    to discover.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Interior Paint">
+                        </div>
+                        <div class="p-8">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-paint-red">Interior</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">Silk Glamor</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">Luxurious washable finish with a silky sheen.
+                                Stain-guard technology keeps your walls pristine for decades.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹320/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">View
+                                    Shades <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542361345-89e58247f2d5?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Duco Auto Paint">
+                        </div>
+                        <div class="p-8">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-paint-red">Automotive</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">Duco PU Gloss</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">Mirror-finish polyurethane coat for luxury
+                                vehicles. UV-stabilized for showroom-quality durability.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹480/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">Auto
+                                    Shades <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Weathercoat">
+                        </div>
+                        <div class="p-8">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-paint-red">Exterior</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">WeatherCoat</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">10-year weather warranty with anti-algal and
+                                dust-proof technology. Ideal for harsh tropical climates.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹290/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">Explore
+                                    <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Wood Finish">
+                        </div>
+                        <div class="p-8">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-paint-red">Wood</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">WoodKeeper</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">Premium wood stains and PU polish for doors,
+                                furniture, and cabinets. Rich grain-enhancing formula.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹350/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">Wood
+                                    Tones <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Texture Paint">
+                        </div>
+                        <div class="p-8">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-paint-red">Texture</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">Royal Stucco</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">Designer texture effects — Italian stucco,
+                                metallic shimmer, and rustic stone finishes for feature walls.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹520/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">Textures
+                                    <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="punch-card">
+                    <div class="punch-card-inner bg-white dark:bg-[#141418]">
+                        <div class="h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop"
+                                class="w-full h-full object-cover" alt="Primer">
+                        </div>
+                        <div class="p-8">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-paint-red">Foundation</span>
+                            <h3 class="text-2xl font-black uppercase mt-2 mb-3">BondCrete Primer</h3>
+                            <p class="opacity-50 text-sm leading-relaxed">High-adhesion white primer for new walls,
+                                metal surfaces, and re-painting jobs. Seals and protects.</p>
+                            <div class="flex items-center justify-between mt-6">
+                                <span class="text-xl font-black text-paint-blue">₹180/L</span>
+                                <a href="#"
+                                    class="text-[10px] font-black uppercase tracking-widest text-paint-red hover:underline">Details
+                                    <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLOR MIXER PALETTE -->
+    <section id="color-mixer"
+        class="py-16 md:py-24 px-6 md:px-24 bg-gray-50 dark:bg-black/20 border-t border-gray-100 dark:border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="section-label reveal-up">Interactive Studio</p>
+                <h2 class="vanish-header section-title text-4xl md:text-6xl mt-3">Color <span
+                        class="gradient-text">Mixer</span></h2>
+                <p class="mt-4 opacity-40 text-sm max-w-lg mx-auto reveal-up">Pick colors from the palette, blend them,
+                    and generate a shade code you can order from our store.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16 items-center justify-center">
+                <!-- LEFT: Artist Palette -->
+                <div class="relative w-full max-w-[380px] md:max-w-none md:w-auto">
+                    <!-- Palette Shape (SVG artist palette) -->
+                    <svg viewBox="0 0 400 320" class="w-full md:w-[450px] drop-shadow-2xl"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="200" cy="160" rx="195" ry="155" class="fill-[#f5e6d3] dark:fill-[#2a2520]"
+                            stroke="currentColor" stroke-width="1" opacity="0.3" />
+                        <ellipse cx="200" cy="160" rx="185" ry="145" class="fill-[#f0dcc8] dark:fill-[#1e1b17]" />
+                        <!-- Thumb hole -->
+                        <ellipse cx="100" cy="230" rx="30" ry="25" class="fill-[var(--bg)]" />
+                    </svg>
+                    <!-- Color blobs positioned on the palette -->
+                    <div class="absolute inset-0 grid grid-cols-4 place-items-center gap-2 md:gap-4 p-7 md:p-14">
+                        <button class="mixer-blob" data-color="#e63946" style="background:#e63946;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#1e3a8a" style="background:#1e3a8a;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#0284c7" style="background:#0284c7;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#38bdf8" style="background:#38bdf8;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#f4a261" style="background:#f4a261;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#2a9d8f" style="background:#2a9d8f;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#264653" style="background:#264653;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#ffffff" style="background:#ffffff;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#1e1e24" style="background:#1e1e24;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#9b59b6" style="background:#9b59b6;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#f1c40f" style="background:#f1c40f;"
+                            onclick="selectColor(this)"></button>
+                        <button class="mixer-blob" data-color="#e74c3c" style="background:#e74c3c;"
+                            onclick="selectColor(this)"></button>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Mixer Result -->
+                <div class="flex flex-col items-center gap-8">
+                    <div class="text-center">
+                        <p class="text-[10px] tracking-[0.2em] font-black uppercase opacity-40 mb-4">Selected Colors</p>
+                        <div class="flex gap-4 items-center justify-center mb-8" id="selectedSlots">
+                            <div id="slot1"
+                                class="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 dark:border-white/20 flex items-center justify-center text-xs opacity-40">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <span class="text-2xl font-black opacity-30">+</span>
+                            <div id="slot2"
+                                class="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 dark:border-white/20 flex items-center justify-center text-xs opacity-40">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="mixColors()"
+                        class="menu-btn px-10 py-4 font-bold text-xs uppercase tracking-widest shadow-xl"><i
+                            class="fas fa-blender mr-2"></i> Mix Colors</button>
+
+                    <div class="text-center mt-4">
+                        <p class="text-[10px] tracking-[0.2em] font-black uppercase opacity-40 mb-4">Your Unique Shade
+                        </p>
+                        <div class="result-swatch mx-auto mb-6" id="resultSwatch"
+                            style="background: linear-gradient(135deg, #ddd, #eee);"></div>
+                        <p class="text-3xl font-black uppercase tracking-wider" id="resultHex">#------</p>
+                        <p class="text-xs opacity-40 mt-1" id="resultName">Select two colors to begin</p>
+                    </div>
+
+                    <button onclick="requestColor()"
+                        class="px-8 py-3 rounded-full border-2 border-paint-red text-paint-red font-bold text-xs uppercase tracking-widest hover:bg-paint-red hover:text-white transition mt-2"
+                        id="requestBtn" disabled>
+                        <i class="fas fa-paper-plane mr-2"></i> Request This Color
+                    </button>
+                    <button onclick="resetMixer()"
+                        class="text-[10px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition"><i
+                            class="fas fa-redo mr-1"></i> Reset Palette</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-16 md:py-24 px-6 md:px-24 border-t border-gray-100 dark:border-white/5">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="section-label reveal-up">Got Questions?</p>
+                <h2 class="vanish-header section-title text-4xl md:text-5xl mt-3">Frequently <span
+                        class="gradient-text">Asked</span></h2>
+            </div>
+
+            <div class="space-y-2">
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">What brands do you stock?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">We are authorized dealers for Berger
+                        Paints, Asian Paints, and their sub-brands including Duco, Berger Silk, Berger Homeshield, and
+                        Asian Paints Royale.</div>
+                </div>
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Do you offer home painting services?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">Yes! We provide end-to-end painting
+                        services including wall preparation, primer application, and two-coat finish with premium
+                        paints. Free site inspection included.</div>
+                </div>
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Can I become a paint dealer through Biplab Group?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">Absolutely. We onboard sub-dealers across
+                        West Bengal. Visit our Community page or contact us directly for dealership opportunities,
+                        territory mapping, and margins.</div>
+                </div>
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">How does the Color Mixer work?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">Pick any two colors from our on-screen
+                        artist palette, click Mix, and we'll generate the exact HEX code. Submit a request and our team
+                        will custom-mix that shade in-store for you.</div>
+                </div>
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Do you provide automotive Duco finishes?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">Yes, we carry the full Asian Paints Duco
+                        line and PU finishes for automotive refinishing. We serve body shops, garages, and individual
+                        vehicle owners with professional-grade products.</div>
+                </div>
+                <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">What is the delivery range?</h3>
+                        <i class="fas fa-plus faq-toggle-icon text-paint-red"></i>
+                    </div>
+                    <div class="faq-answer text-sm opacity-60 leading-relaxed">We deliver across Bankura district and
+                        surrounding areas. Bulk orders get free delivery. For other regions, contact us for shipping
+                        estimates.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS - Interactive Half-Round Table on Left -->
+    <section id="reviews" class="relative bg-gray-50 dark:bg-black/20 border-t border-gray-100 dark:border-white/5"
+        style="height: 400vh;">
+        <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" id="reviews-sticky">
+
+            <!-- Section Title — Responsive positioning -->
+            <div
+                class="absolute top-12 md:top-1/2 left-1/2 md:left-[20vw] -translate-x-1/2 md:-translate-x-0 md:-translate-y-1/2 text-center md:text-left z-40 w-full md:w-auto px-6 pointer-events-none">
+                <p class="section-label">Testimonials</p>
+                <h2 class="vanish-header section-title text-3xl md:text-5xl mt-3">What<br>People <span
+                        class="gradient-text">Say</span></h2>
+            </div>
+
+            <!-- LEFT SIDE: Rotating Half-Round Table -->
+            <div class="hidden md:block absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[100vw] md:-translate-x-[50vw] w-[130vw] md:w-[100vw] h-[130vw] md:h-[100vw] rounded-full pointer-events-none z-10"
+                id="wheel-container">
+                <div class="absolute inset-0 m-auto w-[60%] h-[60%] rounded-full bg-paint-red/5 blur-[100px] transition-colors duration-500"
+                    id="table-glow"></div>
+                <div
+                    class="absolute inset-0 w-full h-full rounded-full border-[1.5px] border-dashed border-gray-300 dark:border-white/20">
+                </div>
+
+                <div id="rotating-table" class="absolute inset-0 w-full h-full rounded-full pointer-events-auto">
+                    <!-- Javascript populates plates here -->
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: Dynamic Review Card -->
+            <div
+                class="w-full h-full flex items-center justify-center md:justify-center px-6 md:pl-[50vw] md:pr-12 pt-32 md:pt-20 z-20">
+                <div id="dynamic-review-card"
+                    class="bg-white dark:bg-[#141418] border border-gray-200 dark:border-white/5 p-6 md:p-14 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.1)] w-full max-w-xl relative overflow-hidden opacity-0 translate-x-12 transform-gpu">
+                    <div class="absolute -right-20 -top-20 w-48 md:w-64 h-48 md:h-64 bg-paint-red/5 rounded-full blur-2xl transition-colors duration-500"
+                        id="card-blob"></div>
+                    <div class="text-paint-red/10 text-5xl md:text-8xl absolute top-4 md:top-8 left-4 md:left-8 transition-colors duration-500"
+                        id="card-quote-icon"><i class="fas fa-quote-left"></i></div>
+
+                    <p class="relative z-10 text-lg md:text-3xl font-medium leading-relaxed opacity-85 mt-4"
+                        id="card-text" style="font-family:'Playfair Display',serif;">"Scroll down to read our customer
+                        feedback."</p>
+
+                    <div
+                        class="mt-8 md:mt-12 flex items-center gap-4 relative z-10 border-t border-gray-100 dark:border-white/10 pt-6">
+                        <div class="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full flex items-center justify-center font-black text-lg md:text-xl text-white bg-paint-red shadow-lg transition-colors duration-500"
+                            id="card-initials">BD</div>
+                        <div>
+                            <p class="font-bold text-base md:text-lg" id="card-name">Berger & Duco</p>
+                            <p class="text-[9px] md:text-[11px] opacity-40 uppercase tracking-widest mt-1"
+                                id="card-role">Verified Reviews</p>
+                            <div class="flex gap-1 text-paint-yellow text-[10px] md:text-xs mt-2" id="card-stars">★★★★★
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER - FULLY THEMED -->
+    <footer class="nock-footer" style="z-index:2;">
+        <div class="footer-bg-text">Biplab</div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-12 border-t dark:border-gray-700/30 border-gray-300/50 pt-20">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="footer-heading pixel-title text-2xl uppercase mb-6">Biplab</div>
+                    <p class="footer-sub text-xs max-w-[220px] leading-relaxed">
+                        There is no risk-free industry &mdash; only disciplined execution. We manage industrial
+                        excellence with precision.
+                    </p>
+                    <div class="flex gap-3 mt-6">
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-x-twitter text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Company</h4>
+                    <a href="about.html" class="block transition">About</a>
+                    <a href="community.html" class="block transition">Community</a>
+                    <a href="newsroom.html" class="block transition">Newsroom</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Divisions</h4>
+                    <a href="berger-duco.html" class="block transition">Berger & Duco</a>
+                    <a href="bankura-ev.html" class="block transition">EV Mobility</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Contact</h4>
+                    <a href="mailto:contact@biplabgroup.com" class="block transition">contact@biplabgroup.com</a>
+                    <a href="tel:+913300000000" class="block transition">+91 33 0000 0000</a>
+                    <a href="#" class="block transition">Kolkata, West Bengal &middot; India</a>
+                    <a href="#" class="block transition">Careers</a>
+                </div>
+            </div>
+
+            <div
+                class="mt-32 pt-10 border-t dark:border-gray-700/20 border-gray-300/30 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="status-badge">
+                    <div class="status-dot"></div> All systems operational
+                </div>
+                <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
+                    <span>&copy; 2026 Biplab Group</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // THEME TOGGLE
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // MOBILE MENU
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.getElementById('mobile-menu-close');
+
+        mobileBtn.onclick = () => mobileMenu.classList.add('active');
+        mobileClose.onclick = () => mobileMenu.classList.remove('active');
+
+        // LENIS SMOOTH SCROLL
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ===================== NAVBAR ENTRANCE ANIMATION =====================
+        const EASE_REVEAL = "power2.out";
+        const topNav = document.getElementById('main-nav');
+        const topNavItems = topNav.querySelectorAll(':scope > *');
+        gsap.set(topNav, { width: 0, opacity: 0, xPercent: -50, left: "50%", transformOrigin: "center center" });
+        gsap.set(topNavItems, { opacity: 0, y: 10 });
+
+        const navEntryTl = gsap.timeline({
+            paused: true,
+            onComplete: () => { topNav.style.overflow = "visible"; },
+            onReverseComplete: () => { topNav.style.overflow = "hidden"; }
+        });
+        topNav.style.overflow = "hidden";
+        navEntryTl.to(topNav, { width: "92%", opacity: 1, duration: 0.8, ease: "expo.inOut" })
+            .to(topNavItems, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: EASE_REVEAL }, "-=0.4");
+
+        const entranceTl = gsap.timeline({ delay: 0.2 });
+        entranceTl.add(() => navEntryTl.play(), 0);
+
+        // Nav hide/show on scroll
+        let lastScroll = 0;
+        let isNavVisible = true;
+        window.addEventListener('scroll', () => {
+            const current = window.pageYOffset;
+            if (current > lastScroll && current > 100) {
+                if (isNavVisible) { isNavVisible = false; topNav.style.overflow = 'hidden'; navEntryTl.timeScale(1).reverse(); }
+            } else if (current < lastScroll || current <= 100) {
+                if (!isNavVisible) { isNavVisible = true; navEntryTl.timeScale(1).play(); }
+            }
+            lastScroll = current;
+        }, { passive: true });
+
+        // --- HERO PARALLAX ---
+        // Keeps the background fixed and sliding gently with a pure parallax effect
+        gsap.to("#hero-img", {
+            yPercent: 35,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero-bg-wrapper",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // --- PAGE LOAD HERO ANIMATION ---
+        let preloadTl = gsap.timeline();
+
+        // Initial locked states for the preloader style effect
+        gsap.set("#hero-bg-wrapper", {
+            clipPath: "inset(35% 35% 35% 35% round 120px)",
+            scale: 1.3
+        });
+        gsap.set("#sandCanvas, .hero-ui-element", { opacity: 0, y: 30 });
+
+        // The cinematic expand animation
+        preloadTl.to("#hero-bg-wrapper", {
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
+            scale: 1,
+            duration: 2.2,
+            ease: "power4.inOut"
+        })
+            .to("#sandCanvas, .hero-ui-element", {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.2, // Cascades the fading elements one by one
+                ease: "power2.out"
+            }, "-=1");
+
+        // Vanishing Text Animation — applied to ALL section headers
+        document.querySelectorAll('.vanish-header').forEach(el => {
+            gsap.from(el, {
+                x: -150,
+                opacity: 0,
+                filter: "blur(16px)",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 92%",
+                    end: "top 45%",
+                    scrub: 1.2
+                }
+            });
+        });
+
+        // Sync'd Image Spreading & Zooming Animation using Scrub
+        document.querySelectorAll('.palette-grid-item').forEach(el => {
+            let img = el.querySelector('img');
+
+            // Set initial state: Container clipped small, image zoomed in
+            gsap.set(el, { clipPath: "inset(20% 20% 20% 20% round 32px)" });
+            if (img) gsap.set(img, { scale: 1.3 });
+
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 95%",
+                    end: "top 40%",
+                    scrub: 1.5 // Keeps the animation solidly synced back and forth with scroll wheel
+                }
+            });
+
+            // Animate spread and zoom out
+            tl.to(el, { clipPath: "inset(0% 0% 0% 0% round 32px)", duration: 1, ease: "none" }, 0);
+            if (img) {
+                tl.to(img, { scale: 1, duration: 1, ease: "none" }, 0);
+            }
+        });
+
+        document.querySelectorAll('.reveal-up').forEach(el => {
+            gsap.from(el, {
+                opacity: 0, y: 50, duration: 1,
+                scrollTrigger: { trigger: el, start: 'top 90%' },
+                delay: el.dataset.delay || 0
+            });
+        });
+
+        // SAND TEXT LOGIC
+        const canvas = document.getElementById('sandCanvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        let particles = [];
+        const mouse = { x: -1000, y: -1000, radius: 100 };
+
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x + (Math.random() * 4 - 2);
+                this.y = y + (Math.random() * 4 - 2);
+                this.originX = this.x;
+                this.originY = this.y;
+                // Soft and high-class array of blues to match the new theme
+                const colors = ['#ffffff', '#ffffff', '#f8f9fa', '#e9ecef', '#fdfbfb', '#dee2e6'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.size = Math.random() * 1.5 + 0.5;
+                this.vx = 0; this.vy = 0;
+                this.friction = 0.88; this.ease = 0.08;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+            update() {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    let angle = Math.atan2(dy, dx);
+                    this.vx -= Math.cos(angle) * force * 6;
+                    this.vy -= Math.sin(angle) * force * 6;
+                    this.x += (Math.random() - 0.5) * 2;
+                }
+                this.vx *= this.friction; this.vy *= this.friction;
+                this.x += this.vx + (this.originX - this.x) * this.ease;
+                this.y += this.vy + (this.originY - this.y) * this.ease;
+            }
+        }
+
+        function initSand() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            particles = [];
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Using a classic, elegant Serif font for the sand text
+            const isMobile = window.innerWidth < 768;
+            ctx.font = `900 ${isMobile ? '12vw' : '8vw'} 'Playfair Display', serif`;
+            ctx.fillText('BERGER & DUCO', canvas.width / 2, canvas.height / 2 - 40);
+
+            ctx.font = `800 ${isMobile ? '6vw' : '3vw'} 'Playfair Display', serif`;
+            ctx.fillText('THE ART OF FINISH', canvas.width / 2, canvas.height / 2 + 40);
+
+            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const step = isMobile ? 3 : 2;
+            for (let y = 0; y < canvas.height; y += step) {
+                for (let x = 0; x < canvas.width; x += step) {
+                    if (pixels.data[(y * canvas.width + x) * 4 + 3] > 128) {
+                        particles.push(new Particle(x, y));
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.onresize = initSand;
+        document.fonts.ready.then(() => { initSand(); animate(); });
+
+        // ========== SERVICES CAROUSEL ==========
+        let carouselPos = 0;
+        const track = document.getElementById('servicesTrack');
+
+        function moveCarousel(dir) {
+            const cardW = 320 + 32; // min-width + gap
+            const maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
+            carouselPos = Math.max(0, Math.min(carouselPos + dir * cardW, maxScroll));
+            track.style.transform = `translateX(-${carouselPos}px)`;
+        }
+
+        // ========== COLOR MIXER ==========
+        let selectedColors = [null, null];
+        let currentSlot = 0;
+        let mixedHex = null;
+
+        function selectColor(btn) {
+            const color = btn.dataset.color;
+
+            // Remove active from all blobs
+            document.querySelectorAll('.mixer-blob').forEach(b => b.classList.remove('active'));
+
+            selectedColors[currentSlot] = color;
+            const slot = document.getElementById('slot' + (currentSlot + 1));
+            slot.style.background = color;
+            slot.style.borderStyle = 'solid';
+            slot.style.opacity = '1';
+            slot.innerHTML = '';
+
+            btn.classList.add('active');
+            currentSlot = currentSlot === 0 ? 1 : 0;
+        }
+
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            return {
+                r: parseInt(hex.substring(0, 2), 16),
+                g: parseInt(hex.substring(2, 4), 16),
+                b: parseInt(hex.substring(4, 6), 16)
+            };
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => Math.round(x).toString(16).padStart(2, '0')).join('');
+        }
+
+        function mixColors() {
+            if (!selectedColors[0] || !selectedColors[1]) {
+                alert('Please select two colors from the palette first!');
+                return;
+            }
+
+            const c1 = hexToRgb(selectedColors[0]);
+            const c2 = hexToRgb(selectedColors[1]);
+
+            // Blend using a weighted average for more natural paint mixing
+            const mixed = {
+                r: Math.sqrt((c1.r * c1.r + c2.r * c2.r) / 2),
+                g: Math.sqrt((c1.g * c1.g + c2.g * c2.g) / 2),
+                b: Math.sqrt((c1.b * c1.b + c2.b * c2.b) / 2)
+            };
+
+            mixedHex = rgbToHex(mixed.r, mixed.g, mixed.b);
+
+            const swatch = document.getElementById('resultSwatch');
+            swatch.style.background = mixedHex;
+
+            // Animate the swatch
+            gsap.fromTo(swatch, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)' });
+
+            document.getElementById('resultHex').textContent = mixedHex.toUpperCase();
+            document.getElementById('resultName').textContent = 'Custom Mixed Shade';
+            document.getElementById('requestBtn').disabled = false;
+        }
+
+        function requestColor() {
+            if (!mixedHex) return;
+            const msg = `I'd like to request color ${mixedHex.toUpperCase()} (mixed from ${selectedColors[0]} + ${selectedColors[1]}). Can you match this shade?`;
+            alert(`✅ Color Request Submitted!\n\nYour Shade: ${mixedHex.toUpperCase()}\nMixed from: ${selectedColors[0]} + ${selectedColors[1]}\n\nOur team at Berger & Duco Bankura will contact you shortly.`);
+        }
+
+        function resetMixer() {
+            selectedColors = [null, null];
+            currentSlot = 0;
+            mixedHex = null;
+
+            ['slot1', 'slot2'].forEach(id => {
+                const el = document.getElementById(id);
+                el.style.background = '';
+                el.style.borderStyle = 'dashed';
+                el.style.opacity = '0.4';
+                el.innerHTML = '<i class="fas fa-plus"></i>';
+            });
+
+            document.getElementById('resultSwatch').style.background = 'linear-gradient(135deg, #ddd, #eee)';
+            document.getElementById('resultHex').textContent = '#------';
+            document.getElementById('resultName').textContent = 'Select two colors to begin';
+            document.getElementById('requestBtn').disabled = true;
+            document.querySelectorAll('.mixer-blob').forEach(b => b.classList.remove('active'));
+        }
+
+        // ========== PUNCH CARD SCROLL ANIMATION ==========
+        document.querySelectorAll('.punch-card').forEach((card, i) => {
+            const inner = card.querySelector('.punch-card-inner');
+
+            // Initial state: card is scaled down, rotated, and invisible
+            gsap.set(inner, {
+                rotateX: 15,
+                rotateY: -10,
+                scale: 0.7,
+                opacity: 0,
+                y: 80
+            });
+
+            gsap.to(inner, {
+                rotateX: 0,
+                rotateY: 0,
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    end: "top 50%",
+                    scrub: 1.2
+                },
+                onComplete: () => inner.classList.add('punched')
+            });
+        });
+
+        // ========== FAQ ACCORDION ==========
+        function toggleFaq(item) {
+            const wasActive = item.classList.contains('active');
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+                faq.querySelector('.faq-answer').classList.remove('open');
+            });
+            // Open clicked if it wasn't already open
+            if (!wasActive) {
+                item.classList.add('active');
+                item.querySelector('.faq-answer').classList.add('open');
+            }
+        }
+
+        // ========== REVIEWS PARALLAX ROUND TABLE ==========
+        const reviewsData = [
+            { name: "Rina Mondal", role: "Homeowner, Bankura", initials: "RM", stars: 5, text: "Got my entire 3BHK painted through Biplab Group. The finish is silky smooth and they used genuine Berger Silk. Very satisfied!", color: "paint-red" },
+            { name: "Subhash Koner", role: "Auto Body Shop Owner", initials: "SK", stars: 5, text: "Best Duco finish I've ever seen on a car. The metallic gloss is unreal. Will definitely come back for my next vehicle.", color: "paint-blue" },
+            { name: "Debashis Roy", role: "Interior Designer", initials: "DR", stars: 4, text: "The Color Mixer tool helped me find the exact shade I had in mind. They matched it perfectly in-store. Incredible technology!", color: "paint-yellow" },
+            { name: "Amit Ghosh", role: "Building Contractor", initials: "AG", stars: 5, text: "We've been sourcing WeatherCoat from Biplab Group for 3 years now. Consistent quality, fair pricing, and fast delivery every time.", color: "paint-red" }
+        ];
+
+        const tableRotationTable = document.getElementById('rotating-table');
+        const angleStep = 45; // Space between plates in degrees
+
+        reviewsData.forEach((rev, i) => {
+            let angle = i * angleStep;
+
+            let wrapper = document.createElement('div');
+            wrapper.className = "plate-wrapper absolute inset-0 pointer-events-none";
+            wrapper.style.transform = `rotate(${angle}deg)`;
+
+            let translateAnchor = document.createElement('div');
+            // Anchor to the RIGHT edge of the wheel (3 o'clock position)
+            translateAnchor.className = "absolute top-1/2 left-full pointer-events-auto flex items-center justify-center";
+            translateAnchor.style.transform = "translate(-50%, -50%)";
+
+            let content = document.createElement('div');
+            content.className = "plate-content flex flex-col items-center transform-gpu opacity-30 grayscale scale-75 transition-all duration-300 cursor-pointer";
+            content.style.transform = `rotate(${-angle}deg)`;
+
+            let colorCls = rev.color === 'paint-red' ? 'text-paint-red' : (rev.color === 'paint-blue' ? 'text-paint-blue' : 'text-paint-yellow');
+
+            let plateOuter = document.createElement('div');
+            plateOuter.className = `w-16 h-16 md:w-24 md:h-24 rounded-full bg-white dark:bg-[#141418] border-4 border-gray-100 dark:border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.15)] flex items-center justify-center text-xl md:text-3xl font-black ${colorCls}`;
+            plateOuter.textContent = rev.initials;
+
+            let stars = document.createElement('div');
+            stars.className = "text-paint-yellow mt-3 text-[10px] md:text-xs tracking-widest bg-white/90 dark:bg-black/60 px-3 py-1 rounded-full backdrop-blur-sm shadow-md border border-gray-100 dark:border-white/5";
+            stars.textContent = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
+
+            content.appendChild(plateOuter);
+            content.appendChild(stars);
+            translateAnchor.appendChild(content);
+            wrapper.appendChild(translateAnchor);
+            tableRotationTable.appendChild(wrapper);
+        });
+
+        const plates = document.querySelectorAll('.plate-content');
+        const totalRotation = -(reviewsData.length - 1) * angleStep;
+        let lastActiveIndex = -1;
+
+        function renderReviewCard(index) {
+            if (index === lastActiveIndex) return;
+            lastActiveIndex = index;
+
+            const rev = reviewsData[index];
+            const card = document.getElementById('dynamic-review-card');
+
+            plates.forEach((p, i) => {
+                if (i === index) p.classList.remove('opacity-30', 'grayscale', 'scale-75');
+                else p.classList.add('opacity-30', 'grayscale', 'scale-75');
+            });
+
+            gsap.to(card, {
+                x: 50, opacity: 0, duration: 0.3, ease: "power2.in",
+                onComplete: () => {
+                    document.getElementById('card-text').textContent = `"${rev.text}"`;
+                    document.getElementById('card-name').textContent = rev.name;
+                    document.getElementById('card-role').textContent = rev.role;
+                    document.getElementById('card-initials').textContent = rev.initials;
+                    document.getElementById('card-stars').textContent = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
+
+                    const uiColor = rev.color === 'paint-red' ? '#0284c7' : (rev.color === 'paint-blue' ? '#1e3a8a' : '#38bdf8');
+                    document.getElementById('card-initials').style.backgroundColor = uiColor;
+                    document.getElementById('card-blob').style.backgroundColor = `${uiColor}15`;
+                    document.getElementById('card-quote-icon').style.color = `${uiColor}15`;
+                    document.getElementById('table-glow').style.backgroundColor = `${uiColor}15`;
+
+                    gsap.fromTo(card,
+                        { x: -50, opacity: 0 },
+                        { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }
+                    );
+                }
+            });
+        }
+
+        // Initialize first review immediately
+        renderReviewCard(0);
+
+        gsap.to(tableRotationTable, {
+            rotation: totalRotation,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#reviews",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    let activeIndex = Math.min(Math.round(self.progress * (reviewsData.length - 1)), reviewsData.length - 1);
+                    renderReviewCard(activeIndex);
+                }
+            }
+        });
+
+        // Counter-rotate the plates to keep them upright while table rotates
+        gsap.to(plates, {
+            rotation: `+=${Math.abs(totalRotation)}`,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#reviews",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5
+            }
+        });
+
+        // ===================== FOOTER PARALLAX =====================
+        gsap.to(".footer-bg-text", {
+            y: -60, ease: "none", force3D: true,
+            scrollTrigger: { trigger: ".nock-footer", start: "top bottom", end: "bottom top", scrub: 0.8 }
+        });
+
+        // ===================== NAVBAR BRANDING CHANGER (TYPEWRITER) =====================
+        const brandText = document.getElementById('nav-brand-text');
+        const titles = ["BERGER & DUCO", "BIPLAB GROUP"];
+        let titleIndex = 0;
+        let charIndex = titles[titleIndex].length;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function typeEffect() {
+            const currentTitle = titles[titleIndex];
+            
+            if (isDeleting) {
+                brandText.textContent = currentTitle.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                brandText.textContent = currentTitle.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                isDeleting = true;
+                typeSpeed = 3000; // Pause at full word
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                typeSpeed = 500; // Pause before typing next
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Start the effect after an initial delay
+        setTimeout(typeEffect, 3000);
+    </script>
+</body>
+
+</html>

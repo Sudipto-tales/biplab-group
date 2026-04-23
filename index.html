@@ -8,7 +8,9 @@
     <title>Biplab Group | Kinetic Evolution</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -33,7 +35,7 @@
     </script>
 
     <style>
-:root {
+        :root {
             --bg: #01040a;
             --text: #ffffff;
         }
@@ -170,6 +172,7 @@
             box-shadow: 0 0 35px 12px rgba(69, 193, 255, 0.5), inset 0 0 3px rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
+
         .cursor-trail {
             position: fixed;
             border-radius: 50%;
@@ -178,6 +181,7 @@
             background: rgba(69, 193, 255, 0.4);
             box-shadow: 0 0 20px 5px rgba(69, 193, 255, 0.4);
         }
+
         .cursor-ripple {
             position: fixed;
             border-radius: 50%;
@@ -186,21 +190,30 @@
             border: 2px solid rgba(69, 193, 255, 0.4);
             background: rgba(69, 193, 255, 0.05);
         }
+
         .light .cursor-main {
             background: rgba(255, 75, 58, 0.95);
             box-shadow: 0 0 35px 12px rgba(255, 107, 53, 0.4), inset 0 0 3px rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
+
         .light .cursor-trail {
             background: rgba(255, 107, 53, 0.4);
             box-shadow: 0 0 20px 5px rgba(255, 107, 53, 0.3);
         }
+
         .light .cursor-ripple {
             border: 2px solid rgba(255, 75, 58, 0.4);
             background: rgba(255, 107, 53, 0.08);
         }
+
         @media (max-width: 768px) {
-            .cursor-main, .cursor-trail, .cursor-ripple { display: none; }
+
+            .cursor-main,
+            .cursor-trail,
+            .cursor-ripple {
+                display: none;
+            }
         }
 
         /* BENTO GRID */
@@ -430,16 +443,20 @@
                 align-items: flex-end;
                 padding-bottom: 80px;
             }
+
             .panel-year {
                 font-size: clamp(48px, 15vw, 80px);
             }
+
             .panel-title {
                 font-size: clamp(14px, 4vw, 20px);
             }
+
             .panel-desc {
                 font-size: clamp(11px, 3vw, 14px);
                 max-width: 90vw;
             }
+
             .panel-tag {
                 font-size: 9px;
                 letter-spacing: 0.2em;
@@ -450,13 +467,16 @@
             .horizontal-panel .panel-content {
                 padding: 0 16px;
             }
+
             .panel-year {
                 font-size: clamp(40px, 14vw, 64px);
             }
+
             .panel-desc {
                 max-width: 85vw;
                 line-height: 1.5;
             }
+
             .journey-progress {
                 left: 16px;
                 right: 16px;
@@ -621,6 +641,7 @@
             color: inherit;
             cursor: pointer;
         }
+
         .sector-card {
             position: relative;
             overflow: hidden;
@@ -942,12 +963,15 @@
         .dark .panel-desc {
             color: rgba(255, 255, 255, 0.72);
         }
+
         .light .panel-desc {
             color: rgba(0, 0, 0, 0.68);
         }
+
         .dark .nock-footer .footer-sub {
             color: rgba(255, 255, 255, 0.68);
         }
+
         .light .nock-footer .footer-sub {
             color: rgba(0, 0, 0, 0.62);
         }
@@ -957,6 +981,7 @@
             font-family: 'Space Grotesk', sans-serif;
             letter-spacing: -0.02em;
         }
+
         #hero-title .italic-pixel {
             font-style: normal;
             background: linear-gradient(135deg, #45c1ff, #2e66d4);
@@ -966,6 +991,7 @@
             -webkit-text-fill-color: transparent;
             text-shadow: none;
         }
+
         .light #hero-title .italic-pixel {
             background: linear-gradient(135deg, #2e66d4, #0d47a1);
             -webkit-background-clip: text;
@@ -987,6 +1013,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
         }
+
         .light .sector-card-tag {
             border: 1px solid rgba(46, 102, 212, 0.25);
             background: rgba(46, 102, 212, 0.08);
@@ -1009,6 +1036,7 @@
             color: #45c1ff;
             font-size: 16px;
         }
+
         .light .sector-card-icon {
             background: rgba(46, 102, 212, 0.12);
             border: 1px solid rgba(46, 102, 212, 0.3);
@@ -1018,6 +1046,7 @@
         .dark .sector-card {
             background: linear-gradient(145deg, rgba(13, 17, 23, 0.6), rgba(1, 4, 10, 0.9));
         }
+
         .light .sector-card {
             background: linear-gradient(145deg, #ffffff, #eef2f7);
         }
@@ -1029,6 +1058,7 @@
             gap: 8px;
             margin-top: 16px;
         }
+
         .sector-progress-dot {
             width: 6px;
             height: 6px;
@@ -1036,6 +1066,7 @@
             background: rgba(128, 128, 128, 0.3);
             transition: all 0.3s ease;
         }
+
         .sector-progress-dot.active {
             background: #45c1ff;
             width: 24px;
@@ -1054,6 +1085,7 @@
             .pixel-title {
                 letter-spacing: 0;
             }
+
             #hero-title {
                 line-height: 0.95;
             }
@@ -1078,10 +1110,12 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
+
         .video-modal-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
+
         .video-modal-content {
             position: relative;
             width: 90vw;
@@ -1092,14 +1126,17 @@
             transform: scale(0.9);
             transition: transform 0.4s ease;
         }
+
         .video-modal-overlay.active .video-modal-content {
             transform: scale(1);
         }
+
         .video-modal-content iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+
         .video-modal-close {
             position: absolute;
             top: -40px;
@@ -1117,6 +1154,7 @@
             justify-content: center;
             transition: background 0.3s ease;
         }
+
         .video-modal-close:hover {
             background: rgba(255, 255, 255, 0.25);
         }
@@ -1136,13 +1174,16 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
+
         .light .mobile-menu-overlay {
             background: rgba(245, 247, 249, 0.95);
         }
+
         .mobile-menu-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
+
         .mobile-menu-overlay a {
             font-size: 2rem;
             font-weight: 700;
@@ -1154,10 +1195,12 @@
             text-decoration: none;
             color: inherit;
         }
+
         .mobile-menu-overlay a:hover {
             opacity: 1;
             color: #45c1ff;
         }
+
         .mobile-menu-close {
             position: absolute;
             top: 30px;
@@ -1165,8 +1208,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: inherit;
             font-size: 20px;
             cursor: pointer;
@@ -1174,13 +1217,17 @@
             align-items: center;
             justify-content: center;
         }
+
         .light .mobile-menu-close {
-            background: rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         /* NAV DROPDOWN */
-        .nav-dropdown { position: relative; }
+        .nav-dropdown {
+            position: relative;
+        }
+
         .nav-dropdown-menu {
             position: absolute;
             top: calc(100% + 12px);
@@ -1200,16 +1247,19 @@
             display: flex;
             flex-direction: column;
         }
+
         .light .nav-dropdown-menu {
             background: rgba(245, 247, 249, 0.95);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
+
         .nav-dropdown:hover .nav-dropdown-menu,
         .nav-dropdown-menu:hover {
             opacity: 1;
             pointer-events: auto;
             transform: translateX(-50%) translateY(0);
         }
+
         .nav-dropdown-menu a {
             padding: 8px 20px;
             font-size: 11px;
@@ -1220,6 +1270,7 @@
             transition: opacity 0.2s, color 0.2s, background 0.2s;
             white-space: nowrap;
         }
+
         .nav-dropdown-menu a:hover {
             opacity: 1;
             color: #45c1ff;
@@ -1227,9 +1278,14 @@
         }
 
         /* Active nav link */
-        .nav-link-active { opacity: 1 !important; color: #45c1ff !important; }
-        .light .nav-link-active { color: #2e66d4 !important; }
+        .nav-link-active {
+            opacity: 1 !important;
+            color: #45c1ff !important;
+        }
 
+        .light .nav-link-active {
+            color: #2e66d4 !important;
+        }
     </style>
 </head>
 
@@ -1280,7 +1336,9 @@
     <!-- NAV with mobile hamburger menu -->
     <nav id="main-nav"
         class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
-        <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center w-[120px] md:w-[180px] no-underline" style="text-decoration:none;color:inherit;">
+        <a href="index.html"
+            class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center w-[120px] md:w-[180px] no-underline"
+            style="text-decoration:none;color:inherit;">
             <span id="brand-typewriter">BG</span>
         </a>
         <div class="flex items-center gap-4 md:gap-8">
@@ -1288,14 +1346,12 @@
                 <a href="index.html" class="hover:text-brand-cyan transition nav-link-active">Home</a>
                 <a href="about.html" class="hover:text-brand-cyan transition">About Us</a>
                 <div class="nav-dropdown relative">
-                    <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
+                    <button
+                        class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions
+                        <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
                     <div class="nav-dropdown-menu">
-                        <a href="sector-ev-mobility.html">EV Mobility</a>
-                        <a href="sector-kolkata-coder.html">The Kolkata Coder</a>
-                        <a href="sector-luxe-paints.html">Luxe House Paints</a>
-                        <a href="sector-smart-manufacturing.html">Smart Manufacturing</a>
-                        <a href="sector-smart-infrastructure.html">Smart Infrastructure</a>
-                        <a href="sector-rd-labs.html">R&D Labs</a>
+                        <a href="berger-duco.html">Berger & Duco</a>
+                        <a href="sector-ev-mobility.html">Bankura EV Care</a>
                     </div>
                 </div>
                 <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
@@ -1304,14 +1360,16 @@
             </div>
             <a href="mailto:contact@biplabgroup.com"
                 class="email-icon-btn w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition relative">
-                <i class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
+                <i
+                    class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
             </a>
             <button id="theme-toggle"
                 class="hover:bg-brand-cyan/20 transition w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 relative">
                 <i class="fas fa-moon dark:!hidden absolute"></i>
                 <i class="fas fa-sun !hidden dark:!block text-brand-cyan absolute"></i>
             </button>
-            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
+            <button id="mobile-menu-btn"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
                 <i class="fas fa-bars text-sm"></i>
             </button>
         </div>
@@ -1323,13 +1381,18 @@
         <div class="flex flex-col items-center gap-2">
             <a href="index.html" class="mobile-nav-link">Home</a>
             <a href="about.html" class="mobile-nav-link">About Us</a>
-            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
-            <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
-                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">EV Mobility</a>
+            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle"
+                style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions
+                <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
+            <div class="mobile-divisions-sub" id="mobile-divisions-sub"
+                style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
+                <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco Store</a>
+                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
                 <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
                 <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
                 <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
-                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart Infrastructure</a>
+                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart
+                    Infrastructure</a>
                 <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
             </div>
             <a href="newsroom.html" class="mobile-nav-link">Newsroom</a>
@@ -1337,9 +1400,15 @@
             <a href="contact.html" class="mobile-nav-link">Contact</a>
         </div>
         <div class="flex gap-6 mt-12">
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram"></i></a>
+            <a href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                    class="fab fa-x-twitter"></i></a>
+            <a href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                    class="fab fa-instagram"></i></a>
         </div>
     </div>
 
@@ -1347,9 +1416,12 @@
     <section id="hero" class="relative h-screen flex flex-col justify-center items-center overflow-hidden"
         style="z-index:1;">
         <div class="relative z-10 text-center px-4" id="hero-content">
-            <span class="pixel-accent block text-[10px] tracking-[0.6em] uppercase bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text mb-3" id="hero-tag">Kinetic
+            <span
+                class="pixel-accent block text-[10px] tracking-[0.6em] uppercase bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text mb-3"
+                id="hero-tag">Kinetic
                 Infrastructure</span>
-            <h1 class="pixel-title text-6xl md:text-[10vw] font-bold leading-[0.85] tracking-tighter uppercase" id="hero-title">
+            <h1 class="pixel-title text-6xl md:text-[10vw] font-bold leading-[0.85] tracking-tighter uppercase"
+                id="hero-title">
                 Biplab
                 <span class="italic-pixel">GROUP.</span>
             </h1>
@@ -1380,12 +1452,15 @@
             </div>
             <div class="about-content scroll-fade-in">
                 <div class="text-reveal-line mb-6" id="about-line"></div>
-                <h2 class="pixel-title section-title-slide text-4xl md:text-6xl uppercase tracking-tighter mb-5 leading-none">Digital
+                <h2
+                    class="pixel-title section-title-slide text-4xl md:text-6xl uppercase tracking-tighter mb-5 leading-none">
+                    Digital
                     <span class="text-brand-cyan">Intelligence.</span>
                 </h2>
                 <p class="section-title-sub text-base opacity-80 leading-relaxed mb-5">
-                    Under the vision of <span class="text-brand-blue font-bold">Sudipta Ghosh</span>, we bridge the gap
-                    between heavy industrial production and modern software — crafting systems where precision engineering meets intelligent code.
+                    Under the vision of <span class="text-brand-blue font-bold">Biplab</span>, we bridge the gap
+                    between heavy industrial production and modern software — crafting systems where precision
+                    engineering meets intelligent code.
                 </p>
                 <div class="grid grid-cols-2 gap-6 border-t border-gray-500/20 pt-6">
                     <div>
@@ -1408,24 +1483,31 @@
                 <span
                     class="pixel-accent bg-brand-cyan/10 text-brand-cyan px-3 py-1 text-[10px] uppercase tracking-widest border-l-2 border-brand-cyan section-title-sub">In
                     Focus</span>
-                <h2 class="pixel-title section-title-slide text-4xl mt-3 tracking-tighter uppercase dark:text-white text-black">Business News
+                <h2
+                    class="pixel-title section-title-slide text-4xl mt-3 tracking-tighter uppercase dark:text-white text-black">
+                    Business News
                 </h2>
             </div>
         </div>
 
         <div class="bento-grid">
             <!-- FEATURED CARD SLIDESHOW -->
-            <div class="featured-card shimmer-border dark:bg-[#0d1117] bg-white shadow-xl scroll-fade-in" id="featured-slideshow">
+            <div class="featured-card shimmer-border dark:bg-[#0d1117] bg-white shadow-xl scroll-fade-in"
+                id="featured-slideshow">
                 <!-- Slide 1 -->
                 <div class="feature-slide is-active" data-slide="0">
                     <div class="feature-img-wrap">
                         <img src="images/image_3.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Industrial Update</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">Luxe House Paints</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Architectural coatings engineered for premium sustainable aesthetics.</p>
-                        <a href="#" class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
+                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Industrial
+                            Update</span>
+                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">Luxe
+                            House Paints</h3>
+                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Architectural coatings engineered for
+                            premium sustainable aesthetics.</p>
+                        <a href="#"
+                            class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
                             Read Portfolio <i class="fas fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
@@ -1436,10 +1518,14 @@
                         <img src="images/image_5.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Mobility Division</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">EV Smart Fleet</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Next-generation electric vehicles engineered for urban efficiency and sustainability.</p>
-                        <a href="#" class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
+                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Mobility
+                            Division</span>
+                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">EV Smart
+                            Fleet</h3>
+                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Next-generation electric vehicles
+                            engineered for urban efficiency and sustainability.</p>
+                        <a href="#"
+                            class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
                             Explore Fleet <i class="fas fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
@@ -1451,9 +1537,12 @@
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Tech Division</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">The Kolkata Coder</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Custom software solutions and digital transformation for enterprise clients.</p>
-                        <a href="#" class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
+                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">The
+                            Kolkata Coder</h3>
+                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Custom software solutions and digital
+                            transformation for enterprise clients.</p>
+                        <a href="#"
+                            class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
                             View Projects <i class="fas fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
@@ -1497,92 +1586,120 @@
     <!-- SECTORS - Click carousel -->
     <section id="sectors" class="relative dark:bg-brand-dark bg-brand-light overflow-hidden pb-12" style="z-index:2;">
         <div class="px-6 md:px-24 pt-24 pb-4">
-            <span class="pixel-accent section-title-sub inline-block text-[10px] tracking-[0.4em] uppercase text-brand-cyan mb-3">// Portfolio</span>
-            <h2 class="pixel-title section-title-slide text-4xl md:text-5xl uppercase tracking-tighter mb-4">Strategic Sectors</h2>
-            <p class="section-title-sub text-sm opacity-70 max-w-md">Six divisions, one mission. Scroll to explore how Biplab Group is rebuilding industry for a kinetic future.</p>
+            <span
+                class="pixel-accent section-title-sub inline-block text-[10px] tracking-[0.4em] uppercase text-brand-cyan mb-3">//
+                Portfolio</span>
+            <h2 class="pixel-title section-title-slide text-4xl md:text-5xl uppercase tracking-tighter mb-4">Strategic
+                Sectors</h2>
+            <p class="section-title-sub text-sm opacity-70 max-w-md">Six divisions, one mission. Scroll to explore how
+                Biplab Group is rebuilding industry for a kinetic future.</p>
         </div>
         <div class="sector-carousel-viewport" id="sector-carousel">
             <!-- Card 1 -->
             <div class="sector-carousel-card" data-card-index="0">
-                <a href="sector-ev-mobility.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_5.jpg" class="sector-card-img" loading="lazy">
+                <a href="berger-duco.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                    <img src="images/image_6.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="sector-card-icon"><i class="fas fa-paint-roller"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 01</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">EV Mobility</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Next-generation electric vehicles engineered for urban efficiency, range and zero-emission transport.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Berger & Duco Store</h3>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Bankura's premier destination for
+                            Berger House Paints & Asian Paints Duco Auto Finishes.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
             <!-- Card 2 -->
             <div class="sector-carousel-card" data-card-index="1">
-                <a href="sector-kolkata-coder.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/image_6.jpg" class="sector-card-img" loading="lazy">
+                <a href="sector-ev-mobility.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                    <img src="images/image_5.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-code"></i></div>
+                    <div class="sector-card-icon"><i class="fas fa-leaf"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 02</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">The Kolkata Coder</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Enterprise software, AI systems and digital transformation — crafted in Kolkata, deployed worldwide.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Bankura EV Care</h3>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Sustainable engineering and clean
+                            energy driving the future of rural and urban mobility in West Bengal.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
             <!-- Card 3 -->
             <div class="sector-carousel-card" data-card-index="2">
-                <a href="sector-luxe-paints.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                <a href="sector-luxe-paints.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
                     <img src="images/image_3.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-paint-roller"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 03</span>
                         <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Luxe House Paints</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Architectural and industrial coatings engineered for durability, colour-fastness and sustainable finish.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Architectural and industrial
+                            coatings engineered for durability, colour-fastness and sustainable finish.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
             <!-- Card 4 -->
             <div class="sector-carousel-card" data-card-index="3">
-                <a href="sector-smart-manufacturing.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                <a href="sector-smart-manufacturing.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
                     <img src="images/image_4.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-industry"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 04</span>
                         <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Smart Manufacturing</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Automated production lines and Industry 4.0 facilities delivering precision at industrial scale.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Automated production lines and
+                            Industry 4.0 facilities delivering precision at industrial scale.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
             <!-- Card 5 -->
             <div class="sector-carousel-card" data-card-index="4">
-                <a href="sector-smart-infrastructure.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                <a href="sector-smart-infrastructure.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
                     <img src="images/image_7.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-building"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 05</span>
                         <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Smart Infrastructure</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Connected real estate, EV-ready buildings and urban infrastructure for the cities of tomorrow.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Connected real estate, EV-ready
+                            buildings and urban infrastructure for the cities of tomorrow.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
             <!-- Card 6 -->
             <div class="sector-carousel-card" data-card-index="5">
-                <a href="sector-rd-labs.html" class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
+                <a href="sector-rd-labs.html"
+                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
                     <img src="images/image_2.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
                     <div class="sector-card-icon"><i class="fas fa-flask"></i></div>
                     <div class="sector-card-inner">
                         <span class="sector-card-tag relative z-10 mb-3">Division 06</span>
                         <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">R&amp;D Labs</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Pure research into materials, batteries and automation — fuelling the next decade of Biplab innovation.</p>
-                        <span class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[10px]"></i></span>
+                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Pure research into materials,
+                            batteries and automation — fuelling the next decade of Biplab innovation.</p>
+                        <span
+                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
+                            <i class="fas fa-arrow-right text-[10px]"></i></span>
                     </div>
                 </a>
             </div>
@@ -1596,9 +1713,14 @@
             <span class="sector-progress-dot" data-index="5"></span>
         </div>
         <div class="flex justify-center items-center gap-6 mt-6 mb-8">
-            <button id="sector-prev" class="w-10 h-10 rounded-full border dark:border-white/15 border-black/15 flex items-center justify-center hover:border-brand-cyan/50 hover:text-brand-cyan transition text-sm opacity-60 hover:opacity-100"><i class="fas fa-chevron-left"></i></button>
-            <span class="pixel-accent text-[10px] uppercase tracking-[0.2em] opacity-50"><i class="fas fa-hand-pointer mr-2"></i>Click card or tap arrows</span>
-            <button id="sector-next" class="w-10 h-10 rounded-full border dark:border-white/15 border-black/15 flex items-center justify-center hover:border-brand-cyan/50 hover:text-brand-cyan transition text-sm opacity-60 hover:opacity-100"><i class="fas fa-chevron-right"></i></button>
+            <button id="sector-prev"
+                class="w-10 h-10 rounded-full border dark:border-white/15 border-black/15 flex items-center justify-center hover:border-brand-cyan/50 hover:text-brand-cyan transition text-sm opacity-60 hover:opacity-100"><i
+                    class="fas fa-chevron-left"></i></button>
+            <span class="pixel-accent text-[10px] uppercase tracking-[0.2em] opacity-50"><i
+                    class="fas fa-hand-pointer mr-2"></i>Click card or tap arrows</span>
+            <button id="sector-next"
+                class="w-10 h-10 rounded-full border dark:border-white/15 border-black/15 flex items-center justify-center hover:border-brand-cyan/50 hover:text-brand-cyan transition text-sm opacity-60 hover:opacity-100"><i
+                    class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
@@ -1712,8 +1834,10 @@
         <div class="relative z-10 max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-20 mb-32 items-end">
                 <div class="max-w-xl scroll-fade-in">
-                    <span class="pixel-accent block text-[10px] tracking-[0.4em] uppercase text-brand-cyan mb-4">// Join the Journey</span>
-                    <h2 class="footer-heading pixel-title text-4xl md:text-5xl tracking-tighter mb-8 leading-[1.05]">Engineering the next chapter of mobility &amp; industrial intelligence.</h2>
+                    <span class="pixel-accent block text-[10px] tracking-[0.4em] uppercase text-brand-cyan mb-4">// Join
+                        the Journey</span>
+                    <h2 class="footer-heading pixel-title text-4xl md:text-5xl tracking-tighter mb-8 leading-[1.05]">
+                        Engineering the next chapter of mobility &amp; industrial intelligence.</h2>
                     <div class="flex flex-wrap gap-4">
                         <a href="mailto:contact@biplabgroup.com"
                             class="footer-cta-btn magnetic-btn px-8 py-3 bg-brand-dark dark:bg-white dark:text-brand-dark text-white rounded-xl font-bold text-sm transition hover:scale-105 inline-flex items-center">
@@ -1726,7 +1850,8 @@
                     </div>
                 </div>
                 <p class="footer-sub text-sm md:text-base max-w-sm ml-auto leading-relaxed scroll-fade-in">
-                    From EV fleets to software, paints to smart factories &mdash; every Biplab system is built to reduce risk
+                    From EV fleets to software, paints to smart factories &mdash; every Biplab system is built to reduce
+                    risk
                     and run industrial-scale operations with precision.
                 </p>
             </div>
@@ -1736,28 +1861,34 @@
                 <div class="col-span-2 md:col-span-1">
                     <div class="footer-heading pixel-title text-2xl uppercase mb-6">Biplab</div>
                     <p class="footer-sub text-xs max-w-[220px] leading-relaxed">
-                        There is no risk-free industry &mdash; only disciplined execution. We manage industrial excellence with precision.
+                        There is no risk-free industry &mdash; only disciplined execution. We manage industrial
+                        excellence with precision.
                     </p>
                     <div class="flex gap-3 mt-6">
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-youtube text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-x-twitter text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-youtube text-xs"></i></a>
                     </div>
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Company</h4>
                     <a href="about.html" class="block transition">About</a>
-                    <a href="index.html#sectors" class="block transition">Sectors</a>
-                    <a href="index.html#journey" class="block transition">Journey</a>
+                    <a href="community.html" class="block transition">Community</a>
                     <a href="newsroom.html" class="block transition">Newsroom</a>
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Divisions</h4>
-                    <a href="sector-ev-mobility.html" class="block transition">EV Mobility</a>
-                    <a href="sector-kolkata-coder.html" class="block transition">The Kolkata Coder</a>
-                    <a href="sector-luxe-paints.html" class="block transition">Luxe House Paints</a>
-                    <a href="sector-smart-manufacturing.html" class="block transition">Smart Manufacturing</a>
+                    <a href="berger-duco.html" class="block transition">Berger & Duco</a>
+                    <a href="bankura-ev.html" class="block transition">EV Mobility</a>
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Contact</h4>
@@ -1791,7 +1922,7 @@
     </div>
 
     <script>
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         // ===================== GLOBAL SCRUB CONFIG =====================
         const SCRUB_SMOOTH = 0.6;
@@ -2046,7 +2177,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
             // Incoming animates in while absolute (no layout shift)
             gsap.fromTo(inSlide,
                 { x: '-100%', opacity: 0 },
-                { x: '0%', opacity: 1, duration: 0.8, ease: "power2.inOut",
+                {
+                    x: '0%', opacity: 1, duration: 0.8, ease: "power2.inOut",
                     onComplete: () => {
                         // Swap: incoming becomes the layout anchor
                         inSlide.classList.add('is-active');

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bankura EV Care | Biplab Group</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#01040a',
+                        'brand-light': '#fdfdfe',
+                        'brand-forest': '#10b981',
+                        'brand-green': '#4ade80',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* =============================================
+           THEME CSS VARIABLES
+        ============================================= */
+        :root {
+            /* Dark Mode (default) */
+            --bg-primary:    #01040a;
+            --bg-secondary:  #030711;
+            --bg-surface:    rgba(255, 255, 255, 0.02);
+            --bg-surface-hover: rgba(255, 255, 255, 0.05);
+
+            --text-primary:  #ffffff;
+            --text-muted:    rgba(255, 255, 255, 0.6);
+            --text-faint:    rgba(255, 255, 255, 0.4);
+
+            --border-color:  rgba(255, 255, 255, 0.08);
+            --border-hover:  rgba(74, 222, 128, 0.4);
+            --border-panel:  rgba(255, 255, 255, 0.05);
+
+            --nav-bg:        rgba(1, 4, 10, 0.75);
+            --nav-border:    rgba(255, 255, 255, 0.1);
+
+            --card-bg:       rgba(255, 255, 255, 0.02);
+            --input-bg:      rgba(0, 0, 0, 0.3);
+            --input-border:  rgba(255, 255, 255, 0.1);
+            --input-text:    #ffffff;
+
+            --progress-track: rgba(255, 255, 255, 0.1);
+            --counter-num:   rgba(255, 255, 255, 0.2);
+
+            --tech-gradient: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, #01040a 70%);
+
+            --overlay-shop:  linear-gradient(to top, #01040a, transparent);
+        }
+
+        html.light {
+            --bg-primary:    #f0f4f0;
+            --bg-secondary:  #e6ede8;
+            --bg-surface:    rgba(0, 0, 0, 0.03);
+            --bg-surface-hover: rgba(0, 0, 0, 0.06);
+
+            --text-primary:  #0d1f13;
+            --text-muted:    rgba(13, 31, 19, 0.6);
+            --text-faint:    rgba(13, 31, 19, 0.4);
+
+            --border-color:  rgba(16, 185, 129, 0.15);
+            --border-hover:  rgba(16, 185, 129, 0.5);
+            --border-panel:  rgba(16, 185, 129, 0.08);
+
+            --nav-bg:        rgba(240, 244, 240, 0.82);
+            --nav-border:    rgba(16, 185, 129, 0.2);
+
+            --card-bg:       rgba(255, 255, 255, 0.7);
+            --input-bg:      rgba(255, 255, 255, 0.9);
+            --input-border:  rgba(16, 185, 129, 0.2);
+            --input-text:    #0d1f13;
+
+            --progress-track: rgba(13, 31, 19, 0.12);
+            --counter-num:   rgba(13, 31, 19, 0.3);
+
+            --tech-gradient: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, #f0f4f0 70%);
+
+            --overlay-shop:  linear-gradient(to top, #f0f4f0, transparent);
+        }
+
+        /* =============================================
+           GLOBAL RESETS
+        ============================================= */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* =============================================
+           NAVBAR
+        ============================================= */
+        .glass-nav {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* =============================================
+           GRADIENT TEXT
+        ============================================= */
+        .gradient-text {
+            background: linear-gradient(135deg, #4ade80, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* =============================================
+           STACK PANELS
+        ============================================= */
+        .panel {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-panel);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* =============================================
+           SCROLL COUNTER
+        ============================================= */
+        .counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            font-size: 40px;
+            font-weight: 300;
+            z-index: 2000;
+            color: var(--counter-num);
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 0.4s ease;
+            pointer-events: none;
+        }
+
+        .counter.is-visible { opacity: 1; transform: translateX(0); }
+        .counter span { color: #4ade80; }
+
+        /* =============================================
+           SCROLL PROGRESS
+        ============================================= */
+        .progress-track {
+            width: 2px;
+            height: 60px;
+            background: var(--progress-track);
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: background 0.4s ease;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 0%;
+            background: #4ade80;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        /* =============================================
+           HERO IMAGE
+        ============================================= */
+        .scooter-hero {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: 1;
+            filter: drop-shadow(0 20px 50px rgba(74, 222, 128, 0.15));
+            pointer-events: none;
+            border-radius: 1rem;
+            transition: opacity 0.4s ease;
+        }
+
+        html.light .scooter-hero { opacity: 0.25; }
+
+        @media (min-width: 768px) {
+            .scooter-hero {
+                right: -5%;
+                width: 55%;
+                height: 70%;
+                opacity: 1 !important;
+                z-index: 0;
+                border-radius: 24px;
+                mask-image: linear-gradient(to left, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+                -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            }
+        }
+
+        /* =============================================
+           GLOBAL IMAGE ROUNDING
+        ============================================= */
+        .img-rounded {
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        /* =============================================
+           GLASS CARDS
+        ============================================= */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background 0.4s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(74, 222, 128, 0.12);
+        }
+
+        /* =============================================
+           SERVICE NODES
+        ============================================= */
+        .service-node {
+            position: absolute;
+            opacity: 0;
+            z-index: 30;
+        }
+
+        .mask-fade {
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+        }
+
+        /* =============================================
+           CAROUSEL HIDE SCROLLBAR
+        ============================================= */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* =============================================
+           TECH BG
+        ============================================= */
+        .tech-bg {
+            background: var(--tech-gradient) !important;
+        }
+
+        /* =============================================
+           FORM INPUTS
+        ============================================= */
+        .themed-input {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--input-text);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.3s ease, background 0.4s ease, color 0.4s ease;
+        }
+        .themed-input:focus { border-color: #4ade80; }
+        .themed-input::placeholder { color: var(--text-faint); }
+
+        /* =============================================
+           SHOP IMAGE OVERLAY
+        ============================================= */
+        .shop-gradient-overlay {
+            background: var(--overlay-shop);
+            transition: background 0.4s ease;
+        }
+
+        /* =============================================
+           THEME TOGGLE BUTTON
+        ============================================= */
+        #themeToggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        #themeToggle:hover {
+            border-color: #4ade80;
+            color: #4ade80;
+            transform: rotate(20deg) scale(1.08);
+        }
+
+        /* icon swap */
+        #themeToggle .icon-dark { display: block; }
+        #themeToggle .icon-light { display: none; }
+        html.light #themeToggle .icon-dark { display: none; }
+        html.light #themeToggle .icon-light { display: block; }
+
+        /* =============================================
+           LIGHT-MODE NAV TEXT
+        ============================================= */
+        html.light .nav-link-text { color: var(--text-primary); }
+        html.light .nav-brand-text { color: var(--text-primary); }
+
+        /* =============================================
+           FOOTER / DIVIDERS
+        ============================================= */
+        .themed-border-top {
+            border-top: 1px solid var(--border-color);
+            transition: border-color 0.4s ease;
+        }
+
+        /* =============================================
+           SECTION 5: PANEL GRADIENT
+        ============================================= */
+        .panel-cta {
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary)) !important;
+        }
+
+        /* =============================================
+           NAVBAR SCROLL HIDE/SHOW
+        ============================================= */
+        #main-nav {
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                        background 0.4s ease,
+                        border-color 0.4s ease;
+        }
+
+        #main-nav.nav-hidden {
+            transform: translate(-50%, -120%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* =============================================
+           BRAND TEXT CYCLING
+        ============================================= */
+        .brand-text-wrapper {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            height: 1.4em;
+            vertical-align: middle;
+        }
+
+        .brand-text-wrapper span {
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-text-wrapper span.slide-out {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .brand-text-wrapper span.slide-in-prep {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+                .footer-bg-text {
+            position: absolute;
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32vw;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: lowercase;
+        }
+
+        .dark .footer-bg-text {
+            color: rgba(255, 255, 255, 0.03);
+        }
+
+        .light .footer-bg-text {
+            color: rgba(0, 0, 0, 0.03);
+        }
+
+        /* =============================================
+           FOOTER (nock-footer)
+        ============================================= */
+        .nock-footer {
+            position: relative;
+            padding: 120px 0 60px 0;
+            overflow: hidden;
+        }
+
+        .dark .nock-footer {
+            background: linear-gradient(180deg, #030711 0%, #01040a 100%);
+            color: #ffffff;
+        }
+
+        .light .nock-footer {
+            background: #f0f4f0;
+            color: #0d1f13;
+        }
+
+        .dark .nock-footer a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .nock-footer a:hover {
+            color: #4ade80;
+        }
+
+        .light .nock-footer a {
+            color: rgba(13, 31, 19, 0.6);
+        }
+
+        .light .nock-footer a:hover {
+            color: #10b981;
+        }
+
+        .dark .nock-footer .footer-heading {
+            color: #ffffff;
+        }
+
+        .dark .nock-footer .footer-sub {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .light .nock-footer .footer-heading {
+            color: #0d1f13;
+        }
+
+        .light .nock-footer .footer-sub {
+            color: rgba(13, 31, 19, 0.4);
+        }
+
+        /* Footer status badge */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="main-nav"
+        class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[3000] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-full">
+
+        <a href="index.html"
+            class="nav-brand-text font-bold tracking-tighter text-xl uppercase flex items-center gap-2"
+            style="color: var(--text-primary);">
+            <i class="fas fa-leaf text-brand-green"></i>
+            <span class="brand-text-wrapper"><span id="brandText">Bankura EV Care</span></span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-6 text-[11px] tracking-[0.2em] uppercase font-bold"
+             style="color: var(--text-muted);">
+            <a href="#hero"      class="nav-link-text hover:text-brand-green transition" style="color: inherit;">Discover</a>
+            <a href="#services"  class="nav-link-text hover:text-brand-green transition" style="color: inherit;">Tech</a>
+            <a href="#fleet"     class="nav-link-text hover:text-brand-green transition" style="color: inherit;">Fleet</a>
+            <a href="#shops"     class="nav-link-text hover:text-brand-green transition" style="color: inherit;">Centers</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="#dealership"
+                class="px-5 py-2 rounded-full border border-brand-green/50 text-brand-green text-[10px] tracking-widest font-bold uppercase hover:bg-brand-green hover:text-brand-dark transition-all">
+                Partner
+            </a>
+
+            <!-- Theme Toggle -->
+            <button id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
+                <!-- Moon (shown in dark mode) -->
+                <i class="fas fa-moon text-sm icon-dark"></i>
+                <!-- Sun (shown in light mode) -->
+                <i class="fas fa-sun text-sm icon-light"></i>
+            </button>
+
+            <a href="index.html"
+                class="w-10 h-10 flex items-center justify-center rounded-full transition"
+                style="background: var(--bg-surface); color: var(--text-muted);"
+                onmouseover="this.style.color='#4ade80'" onmouseout="this.style.color=''">
+                <i class="fas fa-home text-sm"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- SCROLL COUNTER -->
+    <div class="counter" id="counterWrapper">
+        <div class="progress-track">
+            <div class="progress-fill" id="scrollProgress"></div>
+        </div>
+        <div id="cNum">01/<span>05</span></div>
+    </div>
+
+    <div class="stack-container relative">
+
+        <!-- SECTION 1: HERO -->
+        <section class="panel tech-bg" id="hero">
+            <div class="w-full max-w-7xl mx-auto px-6 relative z-10 flex items-center h-full">
+                <div class="w-full md:w-1/2 relative z-20 mt-10 md:mt-0">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-green/10 border border-brand-green/20 mb-6">
+                        <i class="fas fa-bolt text-brand-green text-xs"></i>
+                        <span class="text-[10px] tracking-widest uppercase font-bold text-brand-green">Bankura Mobility Division</span>
+                    </div>
+                    <h1 class="text-4xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+                        Ride the<br><span class="gradient-text">Lightning.</span>
+                    </h1>
+                    <p class="text-base md:text-lg max-w-md leading-relaxed mb-8" style="color: var(--text-muted);">
+                        The next generation of urban and rural mobility has arrived in West Bengal. Faster, smarter, and
+                        100% emission-free.
+                    </p>
+                    <a href="#fleet"
+                        class="inline-flex items-center gap-3 px-8 py-4 bg-brand-green text-brand-dark rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(74,222,128,0.3)]">
+                        Explore Fleet <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <img src="images/image_10.png" class="scooter-hero" alt="Bankura EV Scooter">
+        </section>
+
+        <!-- SECTION 2: TECH -->
+        <section class="panel" id="services">
+            <div class="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/3">
+                    <p class="text-[10px] tracking-widest uppercase font-bold text-brand-green mb-4">Engineering</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Precision Tech.</h2>
+                    <p class="leading-relaxed text-sm" style="color: var(--text-muted);">
+                        Every vehicle in our lineup is engineered for the unique terrain of Bengal. Intelligent systems,
+                        rugged build quality, and unmatched efficiency.
+                    </p>
+                </div>
+
+                <div class="md:w-2/3 flex items-center justify-center">
+                    <div class="relative w-full max-w-md aspect-square md:aspect-auto">
+                        <!-- Technical Image -->
+                        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=800&q=80"
+                            class="w-full h-full object-cover rounded-3xl shadow-2xl"
+                            style="min-height: 400px; border: 1px solid rgba(74, 222, 128, 0.2); opacity: 0.9;"
+                            id="focusScooter" alt="EV Tech Base">
+
+                        <!-- Nodes -->
+                        <div class="service-node glass-card p-3 md:p-4 rounded-xl node-1 absolute top-[10%] -left-[10%] w-44 md:w-52">
+                            <h4 class="text-brand-green font-bold text-xs md:text-sm mb-1">
+                                <i class="fas fa-battery-full mr-1"></i> Smart Battery
+                            </h4>
+                            <p class="text-[10px] md:text-[11px] leading-tight" style="color: var(--text-muted);">
+                                120km Range per charge. Advanced thermal management.
+                            </p>
+                        </div>
+                        <div class="service-node glass-card p-3 md:p-4 rounded-xl node-2 absolute top-[40%] -right-[15%] w-44 md:w-52">
+                            <h4 class="text-brand-green font-bold text-xs md:text-sm mb-1">
+                                <i class="fas fa-compact-disc mr-1"></i> High-Torque Motor
+                            </h4>
+                            <p class="text-[10px] md:text-[11px] leading-tight" style="color: var(--text-muted);">
+                                Instant power delivery. Built for rugged rural terrain.
+                            </p>
+                        </div>
+                        <div class="service-node glass-card p-3 md:p-4 rounded-xl node-3 absolute bottom-[10%] left-[5%] w-44 md:w-52">
+                            <h4 class="text-brand-green font-bold text-xs md:text-sm mb-1">
+                                <i class="fas fa-satellite-dish mr-1"></i> Cloud Telemetry
+                            </h4>
+                            <p class="text-[10px] md:text-[11px] leading-tight" style="color: var(--text-muted);">
+                                Anti-theft GPS, OTA updates, and live diagnostics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FLEET -->
+        <section class="panel" id="fleet">
+            <div class="w-full max-w-7xl mx-auto px-6 h-[85vh] flex flex-col md:flex-row gap-10 items-center justify-center overflow-hidden">
+
+                <!-- Left: Feature Image -->
+                <div class="w-full md:w-1/2 h-full flex items-center justify-center relative group">
+                    <div class="absolute inset-0 bg-brand-green/5 rounded-[40px] blur-3xl group-hover:bg-brand-green/10 transition-colors duration-700"></div>
+                    <img id="featuredImg"
+                        src="https://images.unsplash.com/photo-1620021666060-63ce094cd4c8?w=800&q=80"
+                        class="relative z-10 w-full h-[300px] md:h-[450px] object-contain transition-all duration-700 ease-out rounded-3xl"
+                        alt="Featured Scooter">
+                </div>
+
+                <!-- Right: Product Details -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6 md:space-y-8">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/20 mb-3 md:mb-4">
+                            <i class="fas fa-certificate text-brand-green text-[10px]"></i>
+                            <span class="text-[9px] tracking-widest uppercase font-bold text-brand-green">Premium Collection</span>
+                        </div>
+                        <h2 id="modelTitle" class="text-4xl md:text-6xl font-bold mb-2 transition-all duration-500">
+                            EcoGlide X
+                        </h2>
+                        <div class="flex items-center gap-4">
+                            <p id="modelPrice" class="text-2xl md:text-3xl text-brand-green font-bold transition-all duration-500">
+                                &#8377;85,999
+                            </p>
+                            <span class="px-2 py-1 rounded text-[10px] uppercase tracking-tighter"
+                                  style="background: var(--bg-surface); color: var(--text-faint);">Ex-Showroom Price</span>
+                        </div>
+                    </div>
+
+                    <p id="modelDesc" class="text-sm md:text-base leading-relaxed transition-all duration-500 max-w-lg"
+                       style="color: var(--text-muted);">
+                        Perfect balance of range and style for daily urban commuting in Bankura. Experience the smooth
+                        silence of premium electric mobility.
+                    </p>
+
+                    <!-- Specs Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-bolt text-brand-green"></i>
+                            <div>
+                                <p class="text-[9px] uppercase font-bold" style="color: var(--text-faint);">Top Speed</p>
+                                <p id="specSpeed" class="text-sm font-bold">65 km/h</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-road text-brand-green"></i>
+                            <div>
+                                <p class="text-[9px] uppercase font-bold" style="color: var(--text-faint);">Max Range</p>
+                                <p id="specRange" class="text-sm font-bold">120 km</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thumbnail Carousel -->
+                    <div>
+                        <p class="text-[10px] tracking-widest uppercase font-bold mb-4" style="color: var(--text-faint);">Choose Your Ride</p>
+                        <div class="flex items-center gap-4" id="thumbCarousel"></div>
+                    </div>
+
+                    <div class="pt-4 flex gap-4">
+                        <button
+                            class="px-8 py-4 bg-brand-green text-brand-dark rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(74,222,128,0.3)]">
+                            Book a Test Ride
+                        </button>
+                        <button class="w-12 h-12 flex items-center justify-center rounded-full transition-colors"
+                                style="border: 1px solid var(--border-color); color: var(--text-muted);"
+                                onmouseover="this.style.borderColor='rgba(74,222,128,0.5)'"
+                                onmouseout="this.style.borderColor=''">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SHOPS -->
+        <section class="panel" id="shops">
+            <div class="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="text-[10px] tracking-widest uppercase font-bold text-brand-green mb-4">Retail presence</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Experience Centers.</h2>
+                    <p class="mb-10 text-sm leading-relaxed max-w-md" style="color: var(--text-muted);">
+                        Visit our flagship showrooms across West Bengal to test ride the future of mobility.
+                        Real-time servicing, charging stations, and part replacements.
+                    </p>
+
+                    <div class="space-y-4">
+                        <!-- Hub 1 -->
+                        <div class="glass-card p-6 rounded-2xl flex items-center gap-6 transition"
+                             onmouseover="this.style.background='var(--bg-surface-hover)'"
+                             onmouseout="this.style.background=''">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-brand-green/20"
+                                 style="background: rgba(74,222,128,0.1);">
+                                <i class="fas fa-map-marker-alt text-brand-green text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Bankura Main Hub</h3>
+                                <p class="text-xs mt-1" style="color: var(--text-faint);">Central Station Road, Machantala</p>
+                            </div>
+                        </div>
+                        <!-- Hub 2 -->
+                        <div class="glass-card p-6 rounded-2xl flex items-center gap-6 transition"
+                             onmouseover="this.style.background='var(--bg-surface-hover)'"
+                             onmouseout="this.style.background=''">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-brand-forest/20"
+                                 style="background: rgba(16,185,129,0.1);">
+                                <i class="fas fa-map-marker-alt text-brand-forest text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Bishnupur Gallery</h3>
+                                <p class="text-xs mt-1" style="color: var(--text-faint);">Heritage Mall Avenue</p>
+                            </div>
+                        </div>
+                        <!-- Hub 3 -->
+                        <div class="glass-card p-6 rounded-2xl flex items-center gap-6 transition"
+                             onmouseover="this.style.background='var(--bg-surface-hover)'"
+                             onmouseout="this.style.background=''">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-brand-forest/20"
+                                 style="background: rgba(16,185,129,0.1);">
+                                <i class="fas fa-map-marker-alt text-brand-forest text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Khatra Service Shell</h3>
+                                <p class="text-xs mt-1" style="color: var(--text-faint);">South Checkpost Highway</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Showroom Image -->
+                <div class="relative h-[600px] rounded-3xl overflow-hidden glass-card hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1587848443577-4cdd87483ee7?w=800&q=80"
+                        class="w-full h-full object-cover rounded-3xl" style="opacity: 0.75;" alt="Showroom interior">
+                    <div class="absolute inset-0 shop-gradient-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: DEALERSHIP CTA -->
+        <section class="panel panel-cta" id="dealership">
+            <div class="w-full max-w-3xl mx-auto px-6 text-center">
+                <i class="fas fa-handshake text-4xl text-brand-green mb-6"></i>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Partner Program.</h2>
+                <p class="text-sm mb-10" style="color: var(--text-muted);">Join the Biplab Group EV ecosystem. Start a dealership today.</p>
+
+                <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden" style="border-color: rgba(74,222,128,0.2);">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    <form onsubmit="event.preventDefault(); alert('Application Received. Our team will contact you.');"
+                        class="relative z-10 text-left">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest font-bold mb-2"
+                                       style="color: var(--text-faint);">Full Name</label>
+                                <input type="text" placeholder="John Doe" class="themed-input">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest font-bold mb-2"
+                                       style="color: var(--text-faint);">Email Address</label>
+                                <input type="email" placeholder="john@example.com" class="themed-input">
+                            </div>
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-[10px] uppercase tracking-widest font-bold mb-2"
+                                   style="color: var(--text-faint);">Target Location</label>
+                            <input type="text" placeholder="e.g. Asansol, Durgapur, Kolkata..." class="themed-input">
+                        </div>
+                        <button
+                            class="w-full bg-gradient-to-r from-brand-forest to-brand-green text-white font-bold tracking-widest uppercase text-xs py-4 rounded-xl hover:shadow-[0_0_20px_rgba(74,222,128,0.3)] transition-all">
+                            Submit Dealership Application
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Mini Footer -->
+                <!-- <div class="mt-20 pt-8 themed-border-top flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest font-bold"
+                     style="color: var(--text-faint);">
+                    <p>&copy; 2026 Biplab Group EV</p>
+                    <div class="flex gap-6">
+                        <a href="community.html" class="hover:text-brand-green transition">Community</a>
+                        <a href="index.html"      class="hover:text-brand-green transition">Main Portal</a>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ─── THEME TOGGLE ────────────────────────────────────────────────
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('themeToggle');
+
+        // Persist preference
+        const saved = localStorage.getItem('bev-theme');
+        if (saved === 'light') {
+            html.classList.replace('dark', 'light');
+        } else {
+            html.classList.add('dark');
+            html.classList.remove('light');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.replace('dark', 'light');
+                localStorage.setItem('bev-theme', 'light');
+            } else {
+                html.classList.replace('light', 'dark');
+                localStorage.setItem('bev-theme', 'dark');
+            }
+        });
+
+        // ─── SMOOTH SCROLL (LENIS) ───────────────────────────────────────
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            touchMultiplier: 2
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ─── SECTION COUNTER ─────────────────────────────────────────────
+        const sections = ['#hero', '#services', '#fleet', '#shops', '#dealership'];
+        sections.forEach((id, i) => {
+            ScrollTrigger.create({
+                trigger: id,
+                start: "top center",
+                onEnter:     () => document.getElementById('cNum').innerHTML = `0${i + 1}/<span>05</span>`,
+                onEnterBack: () => document.getElementById('cNum').innerHTML = `0${i + 1}/<span>05</span>`
+            });
+        });
+
+        // ─── AUTO-HIDE COUNTER ───────────────────────────────────────────
+        let scrollTimeout;
+        const counterWrapper = document.getElementById('counterWrapper');
+        const scrollProgress  = document.getElementById('scrollProgress');
+
+        counterWrapper.classList.add('is-visible');
+        scrollTimeout = setTimeout(() => counterWrapper.classList.remove('is-visible'), 2000);
+
+        // ─── NAVBAR ENTRANCE ANIMATION ─────────────────────────────────
+        const EASE_REVEAL = "power2.out";
+        const topNav = document.getElementById('main-nav');
+        const topNavItems = topNav.querySelectorAll(':scope > *');
+        gsap.set(topNav, { width: 0, opacity: 0, xPercent: -50, left: "50%", transformOrigin: "center center" });
+        gsap.set(topNavItems, { opacity: 0, y: 10 });
+
+        const navEntryTl = gsap.timeline({
+            paused: true,
+            onComplete: () => { topNav.style.overflow = "visible"; },
+            onReverseComplete: () => { topNav.style.overflow = "hidden"; }
+        });
+        topNav.style.overflow = "hidden";
+        navEntryTl.to(topNav, { width: "92%", opacity: 1, duration: 0.8, ease: "expo.inOut" })
+            .to(topNavItems, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: EASE_REVEAL }, "-=0.4");
+
+        const entranceTl = gsap.timeline({ delay: 0.2 });
+        entranceTl.add(() => navEntryTl.play(), 0);
+
+        // Nav hide/show on scroll
+        let lastScroll = 0;
+        let isNavVisible = true;
+        let lastScrollY = 0;
+        let navHideTimer = null;
+
+        lenis.on('scroll', (e) => {
+            // Counter logic
+            counterWrapper.classList.add('is-visible');
+            scrollProgress.style.height = `${e.progress * 100}%`;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => counterWrapper.classList.remove('is-visible'), 1200);
+
+            // Navbar hide/show on scroll
+            const current = e.scroll;
+            if (current > lastScroll && current > 100) {
+                if (isNavVisible) { isNavVisible = false; topNav.style.overflow = 'hidden'; navEntryTl.timeScale(1).reverse(); }
+            } else if (current < lastScroll || current <= 100) {
+                if (!isNavVisible) { isNavVisible = true; navEntryTl.timeScale(1).play(); }
+            }
+            lastScroll = current;
+        });
+
+        // ─── BRAND TEXT CYCLING ───────────────────────────────────────────
+        const brandNames = ['Bankura EV Care', 'Biplab Group'];
+        let brandIndex = 0;
+        const brandEl = document.getElementById('brandText');
+
+        setInterval(() => {
+            // Slide current text out (upward)
+            brandEl.classList.add('slide-out');
+
+            setTimeout(() => {
+                // Advance index
+                brandIndex = (brandIndex + 1) % brandNames.length;
+                brandEl.textContent = brandNames[brandIndex];
+
+                // Prep new text below
+                brandEl.classList.remove('slide-out');
+                brandEl.classList.add('slide-in-prep');
+
+                // Force reflow then slide in
+                void brandEl.offsetWidth;
+                brandEl.classList.remove('slide-in-prep');
+            }, 500);
+        }, 3000);
+
+        // ─── SECTION 2: NODE ANIMATION ───────────────────────────────────
+        const tlNode = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#services",
+                start:   "top 20%",
+                end:     "top -20%",
+                scrub:   1.5,
+                pin:     false
+            }
+        });
+        tlNode
+            .from("#focusScooter", { scale: 0.8, opacity: 0, duration: 1 })
+            .to(".node-1", { opacity: 1, x: 20,  duration: 0.5 }, "-=0.2")
+            .to(".node-2", { opacity: 1, x: -20, duration: 0.5 }, "-=0.3")
+            .to(".node-3", { opacity: 1, y: 20,  duration: 0.5 }, "-=0.3");
+
+        // ─── SECTION 3: FLEET ─────────────────────────────────────────────
+        const fleetData = [
+            {
+                title: "EcoGlide X",
+                price: "₹85,999",
+                img:   "https://images.unsplash.com/photo-1620021666060-63ce094cd4c8?w=800&q=80",
+                desc:  "Perfect balance of range and style for daily urban commuting in Bankura. Experience the smooth silence of premium electric mobility.",
+                speed: "65 km/h",
+                range: "120 km"
+            },
+            {
+                title: "Bankura Sport",
+                price: "₹1,12,000",
+                img:   "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
+                desc:  "High performance motor designed for quick acceleration and superior handling. Built for those who demand power on every turn.",
+                speed: "95 km/h",
+                range: "100 km"
+            },
+            {
+                title: "EV-Lite Cargo",
+                price: "₹65,000",
+                img:   "https://images.unsplash.com/photo-1593941707882-a5bba14938cb?w=800&q=80",
+                desc:  "Utility-focused lightweight EV designed for local logistics and delivery runs. The reliable partner for your business growth.",
+                speed: "45 km/h",
+                range: "80 km"
+            }
+        ];
+
+        let currentModelIndex = 0;
+        let fleetInterval;
+
+        function updateFleetView(index) {
+            const data  = fleetData[index];
+            const img   = document.getElementById('featuredImg');
+            const title = document.getElementById('modelTitle');
+            const price = document.getElementById('modelPrice');
+            const desc  = document.getElementById('modelDesc');
+            const speed = document.getElementById('specSpeed');
+            const range = document.getElementById('specRange');
+
+            gsap.to([img, title, price, desc], {
+                opacity: 0, y: 10, duration: 0.3, stagger: 0.05,
+                onComplete: () => {
+                    img.src         = data.img;
+                    title.innerText = data.title;
+                    price.innerHTML = data.price;
+                    desc.innerText  = data.desc;
+                    speed.innerText = data.speed;
+                    range.innerText = data.range;
+                    gsap.to([img, title, price, desc], { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 });
+                }
+            });
+
+            document.querySelectorAll('.fleet-thumb').forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('border-brand-green', 'scale-110');
+                    thumb.classList.remove('border-transparent', 'opacity-50');
+                } else {
+                    thumb.classList.remove('border-brand-green', 'scale-110');
+                    thumb.classList.add('border-transparent', 'opacity-50');
+                }
+            });
+        }
+
+        function initFleet() {
+            const container = document.getElementById('thumbCarousel');
+            fleetData.forEach((item, i) => {
+                const thumb = document.createElement('div');
+                thumb.className = `fleet-thumb w-12 h-12 md:w-16 md:h-16 rounded-full border-2 transition-all duration-300 cursor-pointer overflow-hidden p-1 ${i === 0 ? 'border-brand-green scale-110' : 'border-transparent opacity-50'}`;
+                thumb.innerHTML = `<img src="${item.img}" class="w-full h-full object-cover rounded-full" alt="thumb">`;
+                thumb.onclick = () => {
+                    clearInterval(fleetInterval);
+                    currentModelIndex = i;
+                    updateFleetView(i);
+                    startFleetAutoCycle();
+                };
+                container.appendChild(thumb);
+            });
+            startFleetAutoCycle();
+        }
+
+        function startFleetAutoCycle() {
+            fleetInterval = setInterval(() => {
+                currentModelIndex = (currentModelIndex + 1) % fleetData.length;
+                updateFleetView(currentModelIndex);
+            }, 5000);
+        }
+
+        initFleet();
+
+        // ===================== FOOTER PARALLAX =====================
+        gsap.to(".footer-bg-text", {
+            y: -60, ease: "none", force3D: true,
+            scrollTrigger: { trigger: ".nock-footer", start: "top bottom", end: "bottom top", scrub: 0.8 }
+        });
+    </script>
+
+    <footer class="nock-footer" style="z-index:2;">
+        <div class="footer-bg-text">Biplab</div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-12 border-t dark:border-gray-700/30 border-gray-300/50 pt-20">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="footer-heading pixel-title text-2xl uppercase mb-6">Biplab</div>
+                    <p class="footer-sub text-xs max-w-[220px] leading-relaxed">
+                        There is no risk-free industry &mdash; only disciplined execution. We manage industrial
+                        excellence with precision.
+                    </p>
+                    <div class="flex gap-3 mt-6">
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-x-twitter text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i
+                                class="fab fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Company</h4>
+                    <a href="about.html" class="block transition">About</a>
+                    <a href="community.html" class="block transition">Community</a>
+                    <a href="newsroom.html" class="block transition">Newsroom</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Divisions</h4>
+                    <a href="berger-duco.html" class="block transition">Berger & Duco</a>
+                    <a href="bankura-ev.html" class="block transition">EV Mobility</a>
+                </div>
+                <div class="space-y-4 text-sm font-medium">
+                    <h4 class="footer-sub pixel-accent uppercase text-[10px] tracking-widest mb-6">Contact</h4>
+                    <a href="mailto:contact@biplabgroup.com" class="block transition">contact@biplabgroup.com</a>
+                    <a href="tel:+913300000000" class="block transition">+91 33 0000 0000</a>
+                    <a href="#" class="block transition">Kolkata, West Bengal &middot; India</a>
+                    <a href="#" class="block transition">Careers</a>
+                </div>
+            </div>
+
+            <div
+                class="mt-32 pt-10 border-t dark:border-gray-700/20 border-gray-300/30 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="status-badge">
+                    <div class="status-dot"></div> All systems operational
+                </div>
+                <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
+                    <span>&copy; 2026 Biplab Group</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
