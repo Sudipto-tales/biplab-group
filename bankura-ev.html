@@ -576,7 +576,7 @@
                     </a>
                 </div>
             </div>
-            <img src="images/image_10.png" class="scooter-hero" alt="Bankura EV Scooter">
+            <img src="images/ev-hero-scooter.png" class="scooter-hero" alt="Bankura EV Scooter">
         </section>
 
         <!-- SECTION 2: TECH -->
@@ -594,7 +594,7 @@
                 <div class="md:w-2/3 flex items-center justify-center">
                     <div class="relative w-full max-w-md aspect-square md:aspect-auto">
                         <!-- Technical Image -->
-                        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=800&q=80"
+                        <img src="images/ev-tech-base.jpg"
                             class="w-full h-full object-cover rounded-3xl shadow-2xl"
                             style="min-height: 400px; border: 1px solid rgba(74, 222, 128, 0.2); opacity: 0.9;"
                             id="focusScooter" alt="EV Tech Base">
@@ -637,7 +637,7 @@
                 <div class="w-full md:w-1/2 h-full flex items-center justify-center relative group">
                     <div class="absolute inset-0 bg-brand-green/5 rounded-[40px] blur-3xl group-hover:bg-brand-green/10 transition-colors duration-700"></div>
                     <img id="featuredImg"
-                        src="https://images.unsplash.com/photo-1620021666060-63ce094cd4c8?w=800&q=80"
+                        src="images/ev-ecoglide-x.jpg"
                         class="relative z-10 w-full h-[300px] md:h-[450px] object-contain transition-all duration-700 ease-out rounded-3xl"
                         alt="Featured Scooter">
                 </div>
@@ -761,11 +761,18 @@
                     </div>
                 </div>
 
-                <!-- Showroom Image -->
-                <div class="relative h-[600px] rounded-3xl overflow-hidden glass-card hidden md:block">
-                    <img src="https://images.unsplash.com/photo-1587848443577-4cdd87483ee7?w=800&q=80"
-                        class="w-full h-full object-cover rounded-3xl" style="opacity: 0.75;" alt="Showroom interior">
-                    <div class="absolute inset-0 shop-gradient-overlay"></div>
+                <!-- Service Center Map -->
+                <div class="relative h-[600px] rounded-3xl overflow-hidden glass-card hidden md:block" style="border-color: var(--border-hover);">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58614.07593635787!2d87.02700548175514!3d23.238421867175508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7943b18361025%3A0x727931336c1e550!2sBankura%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1713895556213!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(100%) invert(90%) contrast(1.2) opacity(0.7);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="absolute inset-0 pointer-events-none shop-gradient-overlay"></div>
                 </div>
             </div>
         </section>
@@ -959,7 +966,7 @@
             {
                 title: "EcoGlide X",
                 price: "₹85,999",
-                img:   "https://images.unsplash.com/photo-1620021666060-63ce094cd4c8?w=800&q=80",
+                img:   "images/ev-ecoglide-x.jpg",
                 desc:  "Perfect balance of range and style for daily urban commuting in Bankura. Experience the smooth silence of premium electric mobility.",
                 speed: "65 km/h",
                 range: "120 km"
@@ -967,7 +974,7 @@
             {
                 title: "Bankura Sport",
                 price: "₹1,12,000",
-                img:   "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
+                img:   "images/ev-charging-port.jpg",
                 desc:  "High performance motor designed for quick acceleration and superior handling. Built for those who demand power on every turn.",
                 speed: "95 km/h",
                 range: "100 km"
@@ -975,7 +982,7 @@
             {
                 title: "EV-Lite Cargo",
                 price: "₹65,000",
-                img:   "https://images.unsplash.com/photo-1593941707882-a5bba14938cb?w=800&q=80",
+                img:   "images/ev-lite-cargo.jpg",
                 desc:  "Utility-focused lightweight EV designed for local logistics and delivery runs. The reliable partner for your business growth.",
                 speed: "45 km/h",
                 range: "80 km"
@@ -1049,6 +1056,10 @@
             y: -60, ease: "none", force3D: true,
             scrollTrigger: { trigger: ".nock-footer", start: "top bottom", end: "bottom top", scrub: 0.8 }
         });
+
+        // ===================== DYNAMIC YEAR =====================
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
     </script>
 
     <footer class="nock-footer" style="z-index:2;">
@@ -1103,8 +1114,9 @@
                 <div class="status-badge">
                     <div class="status-dot"></div> All systems operational
                 </div>
-                <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
-                    <span>&copy; 2026 Biplab Group</span>
+                <div class="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4 text-[11px] font-bold opacity-30 uppercase tracking-widest">
+                    <span>&copy; <span id="year"></span> Biplab Group</span>
+                    <a href="#" class="hover:text-brand-green transition">Designed by <b>Promix</b></a>
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms</a>
                 </div>

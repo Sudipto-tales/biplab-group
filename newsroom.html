@@ -506,7 +506,8 @@
                     <div class="w-[6px] h-[6px] rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)] animate-pulse"></div> All systems operational
                 </div>
                 <div class="flex gap-8 text-[11px] font-bold opacity-30 uppercase tracking-widest">
-                    <span>&copy; 2026 Biplab Group</span>
+                    <span>&copy; <span id="year"></span> Biplab Group</span>
+                    <a href="#" class="hover:text-brand-cyan transition">Designed by <b>Promix</b></a>
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms</a>
                 </div>
@@ -613,6 +614,10 @@
                 pill.classList.add('active');
             });
         });
+    
+        // ===================== DYNAMIC YEAR =====================
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
