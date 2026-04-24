@@ -155,6 +155,7 @@
         .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
         .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
         .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
         .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
         .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
     
@@ -182,12 +183,8 @@
                 <div class="nav-dropdown relative">
                     <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
                     <div class="nav-dropdown-menu">
-                        <a href="sector-ev-mobility.html">EV Mobility</a>
-                        <a href="sector-kolkata-coder.html">The Kolkata Coder</a>
-                        <a href="sector-luxe-paints.html">Luxe House Paints</a>
-                        <a href="sector-smart-manufacturing.html">Smart Manufacturing</a>
-                        <a href="sector-smart-infrastructure.html">Smart Infrastructure</a>
-                        <a href="sector-rd-labs.html">R&D Labs</a>
+                        <a href="berger-duco.html">Berger & Duco</a>
+                        <a href="bankura-ev.html">Bankura EV Care</a>
                     </div>
                 </div>
                 <a href="newsroom.html" class="hover:text-brand-cyan transition nav-link-active">Newsroom</a>
@@ -214,12 +211,8 @@
             <a href="about.html">About Us</a>
             <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
             <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
-                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">EV Mobility</a>
-                <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
-                <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
-                <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
-                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart Infrastructure</a>
-                <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
+                <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco Store</a>
+                <a href="bankura-ev.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
             </div>
             <a href="newsroom.html">Newsroom</a>
             <a href="community.html">Community</a>
@@ -263,7 +256,7 @@
                         </div>
                         <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-4">Biplab Group Unveils Next-Gen EV Fleet for Urban India</h2>
                         <p class="text-sm opacity-60 leading-relaxed mb-8 max-w-lg">In a landmark announcement, Biplab Group has unveiled its next-generation electric vehicle fleet designed specifically for the unique demands of urban Indian mobility. The fleet integrates cutting-edge solid-state battery technology with AI-driven route optimization.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-sm uppercase tracking-widest hover:gap-4 transition-all">Read More <i class="fas fa-arrow-right text-xs"></i></a>
+                        <a href="news-ev-charging-hub.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-sm uppercase tracking-widest hover:gap-4 transition-all">Read More <i class="fas fa-arrow-right text-xs"></i></a>
                     </div>
                 </div>
             </div>
@@ -276,10 +269,7 @@
             <div class="scroll-reveal flex flex-wrap gap-3">
                 <button class="filter-pill active">All</button>
                 <button class="filter-pill">EV Mobility</button>
-                <button class="filter-pill">Technology</button>
-                <button class="filter-pill">Manufacturing</button>
-                <button class="filter-pill">Infrastructure</button>
-                <button class="filter-pill">R&amp;D</button>
+                <button class="filter-pill">Paints &amp; Coatings</button>
             </div>
         </div>
     </section>
@@ -289,99 +279,99 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <!-- Card 1 -->
+                <!-- Card 1 - EV -->
                 <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
                     <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="AI Enterprise Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600" alt="EV Charging Bankura" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-4 left-4">
-                            <span class="category-badge">Technology</span>
+                            <span class="category-badge">EV Mobility</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">April 2026</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Bankura EV Care Opens New Fast-Charging Hub on NH-14</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Biplab Group's EV division inaugurates a 6-bay DC fast-charging station along National Highway 14, bringing rapid charging to rural Bengal for the first time.</p>
+                        <a href="news-ev-charging-hub.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Paint -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600" alt="Berger Weathercoat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Paints &amp; Coatings</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[11px] opacity-40 mb-3">March 2026</p>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Berger WeatherCoat Anti-Dustt Now Available at Our Bankura Store</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">The latest exterior emulsion from Berger Paints with advanced anti-dust technology is now stocked at our flagship Bankura outlet with exclusive launch offers.</p>
+                        <a href="news-berger-weathercoat.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 - EV -->
+                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600" alt="EV Service Center" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">EV Mobility</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <p class="text-[11px] opacity-40 mb-3">February 2026</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">The Kolkata Coder Launches AI-Powered Enterprise Suite</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">A comprehensive AI-driven platform designed to streamline enterprise operations, from automated workflows to predictive analytics.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Why Electric Two-Wheelers Are the Future of Rural Commute</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">With fuel costs rising and EV prices dropping, electric scooters are transforming daily commutes in towns like Bankura. Here's what's driving the shift.</p>
+                        <a href="news-ev-rural-commute.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Card 4 - Paint -->
                 <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
                     <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600" alt="Eco Paint Range" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600" alt="Duco Paint Finish" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-4 left-4">
-                            <span class="category-badge">Manufacturing</span>
+                            <span class="category-badge">Paints &amp; Coatings</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <p class="text-[11px] opacity-40 mb-3">January 2026</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Luxe House Paints Introduces Eco-Certified Color Range</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">The new eco-certified lineup features zero-VOC formulations with vibrant, long-lasting colors crafted for the modern Indian home.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Duco vs Enamel: Choosing the Right Finish for Your Furniture</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">A complete guide comparing Duco paint and traditional enamel finishes — durability, cost, application methods, and which one suits your project best.</p>
+                        <a href="news-duco-vs-enamel.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
-                <!-- Card 3 -->
+                <!-- Card 5 - EV -->
                 <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
                     <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600" alt="Urban Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600" alt="EV Battery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-4 left-4">
-                            <span class="category-badge">Infrastructure</span>
+                            <span class="category-badge">EV Mobility</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <p class="text-[11px] opacity-40 mb-3">December 2025</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Smart Infrastructure Division Wins &#8377;200Cr Urban Project</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">A major milestone as the division secures one of Bengal's largest smart city infrastructure contracts for sustainable urban development.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">EV Battery Maintenance: 5 Tips to Extend Your Vehicle's Life</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Proper battery care can add years to your electric vehicle. Our EV technicians share five practical tips every owner should follow.</p>
+                        <a href="news-ev-battery-tips.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
-                <!-- Card 4 -->
+                <!-- Card 6 - Paint -->
                 <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
                     <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600" alt="Battery Tech" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=600" alt="Home Painting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-4 left-4">
-                            <span class="category-badge">R&amp;D</span>
+                            <span class="category-badge">Paints &amp; Coatings</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <p class="text-[11px] opacity-40 mb-3">November 2025</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">R&amp;D Labs Achieves Breakthrough in Solid-State Battery Tech</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Our research team has achieved a significant breakthrough in solid-state battery energy density, pushing the boundaries of EV range.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
-                    <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600" alt="Manufacturing Expansion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4">
-                            <span class="category-badge">Manufacturing</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-[11px] opacity-40 mb-3">October 2025</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Biplab Group Expands Manufacturing Capacity by 40%</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Strategic investments in new production lines and automation have expanded our manufacturing capacity across all divisions.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="scroll-reveal news-card rounded-2xl overflow-hidden group">
-                    <div class="relative h-52 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600" alt="Green Jobs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4">
-                            <span class="category-badge">Community</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-[11px] opacity-40 mb-3">September 2025</p>
-                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Community Impact: 1000+ Green Jobs Created in Bengal</h3>
-                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Our commitment to sustainable employment has resulted in over a thousand new green jobs across rural and semi-urban Bengal.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        <h3 class="text-lg font-bold tracking-tight leading-snug mb-3">Monsoon-Proofing Your Home: Best Exterior Paints for Bengal's Climate</h3>
+                        <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-4">Bengal's heavy rains demand serious exterior protection. We break down the top Berger exterior paints that stand up to monsoon weather year after year.</p>
+                        <a href="news-monsoon-paints.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all">Read More <i class="fas fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
@@ -399,17 +389,17 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 <!-- Blog Post 1 -->
-                <div class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group">
+                <a href="blog-ev-future-india.html" class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group block no-underline">
                     <div class="blog-card-img relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800" alt="Electric Mobility" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800" alt="Electric Mobility India" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-4 mb-4">
                             <span class="category-badge">EV Mobility</span>
                             <span class="text-xs opacity-40">March 15, 2026</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">The Future of Electric Mobility in India</h3>
-                        <p class="text-sm opacity-50 leading-relaxed mb-6">An in-depth exploration of how India's EV ecosystem is evolving, the role of policy and infrastructure, and why the next five years will be transformative for sustainable transportation across the subcontinent.</p>
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">The Future of Electric Mobility in India: What 2026 Holds</h3>
+                        <p class="text-sm opacity-50 leading-relaxed mb-6">From government subsidies to charging infrastructure, India's EV revolution is accelerating. We explore how towns like Bankura are embracing electric vehicles and what it means for the next decade.</p>
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center text-white text-xs font-bold">BM</div>
                             <div>
@@ -418,29 +408,29 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Blog Post 2 -->
-                <div class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group">
+                <a href="blog-home-painting-guide.html" class="scroll-reveal blog-card news-card rounded-2xl overflow-hidden group block no-underline">
                     <div class="blog-card-img relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800" alt="Smart Factory" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800" alt="Home Painting Guide" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-4 mb-4">
-                            <span class="category-badge">Technology</span>
+                            <span class="category-badge">Paints &amp; Coatings</span>
                             <span class="text-xs opacity-40">February 28, 2026</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">Industry 4.0: How Smart Factories are Reshaping Bengal</h3>
-                        <p class="text-sm opacity-50 leading-relaxed mb-6">From IoT-enabled production lines to AI quality control, Bengal's manufacturing sector is undergoing a digital revolution. We explore how Biplab Group's smart factory initiative is leading this transformation.</p>
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-snug mb-3">The Complete Guide to Choosing Paint for Your Home in 2026</h3>
+                        <p class="text-sm opacity-50 leading-relaxed mb-6">Interior vs exterior, matte vs glossy, Berger vs Asian — picking the right paint can be overwhelming. Our experts break down everything you need to know before your next home painting project.</p>
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center text-white text-xs font-bold">AD</div>
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center text-white text-xs font-bold">BG</div>
                             <div>
-                                <p class="text-xs font-bold">Arjun Dey</p>
-                                <p class="text-[10px] opacity-40">Head of Technology</p>
+                                <p class="text-xs font-bold">Biplab Group</p>
+                                <p class="text-[10px] opacity-40">Editorial Team</p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
             </div>
         </div>
@@ -490,10 +480,8 @@
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Divisions</h4>
-                    <a href="sector-ev-mobility.html" class="block transition hover:text-brand-cyan">EV Mobility</a>
-                    <a href="sector-kolkata-coder.html" class="block transition hover:text-brand-cyan">The Kolkata Coder</a>
-                    <a href="sector-luxe-paints.html" class="block transition hover:text-brand-cyan">Luxe House Paints</a>
-                    <a href="sector-smart-manufacturing.html" class="block transition hover:text-brand-cyan">Smart Manufacturing</a>
+                    <a href="berger-duco.html" class="block transition hover:text-brand-cyan">Berger & Duco</a>
+                    <a href="bankura-ev.html" class="block transition hover:text-brand-cyan">Bankura EV Care</a>
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Contact</h4>
@@ -609,11 +597,24 @@
             }
         });
 
-        // Filter pill active state toggle (visual only)
         document.querySelectorAll('.filter-pill').forEach(pill => {
             pill.addEventListener('click', () => {
                 document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
                 pill.classList.add('active');
+                const filter = pill.textContent.trim();
+                document.querySelectorAll('.news-card, .blog-card').forEach(card => {
+                    const badge = card.querySelector('.category-badge');
+                    if (!badge) return;
+                    const cat = badge.textContent.trim();
+                    if (filter === 'All' || cat === filter) {
+                        card.closest('.scroll-reveal, a.scroll-reveal')?.style && (card.closest('.scroll-reveal, a.scroll-reveal').style.display = '');
+                        card.style.display = '';
+                    } else {
+                        const wrapper = card.closest('.scroll-reveal, a.scroll-reveal');
+                        if (wrapper && wrapper !== card) { wrapper.style.display = 'none'; }
+                        else { card.style.display = 'none'; }
+                    }
+                });
             });
         });
     

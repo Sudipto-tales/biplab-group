@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Battery Maintenance: 5 Tips to Extend Your Vehicle's Life — Biplab Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#01040a',
+                        'brand-light': '#f5f7f9',
+                        'brand-blue': '#2e66d4',
+                        'brand-cyan': '#45c1ff'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { --bg: #01040a; --text: #ffffff; }
+        .light { --bg: #f5f7f9; --text: #01040a; }
+        html { scroll-behavior: auto; }
+        body { background-color: var(--bg); color: var(--text); transition: background-color 0.5s ease, color 0.5s ease; overflow-x: hidden; font-family: 'Space Grotesk', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        .glass-nav { backdrop-filter: blur(15px); background: rgba(1, 4, 10, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .light .glass-nav { background: rgba(245, 247, 249, 0.7); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .mobile-menu-overlay { position: fixed; inset: 0; z-index: 200; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .light .mobile-menu-overlay { background: rgba(245, 247, 249, 0.95); }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu-overlay a { font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; padding: 12px 0; opacity: 0.7; transition: opacity 0.3s ease, color 0.3s ease; text-decoration: none; color: inherit; }
+        .mobile-menu-overlay a:hover { opacity: 1; color: #45c1ff; }
+        .mobile-menu-close { position: absolute; top: 30px; right: 30px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .light .mobile-menu-close { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); }
+        .gradient-text { background: linear-gradient(135deg, #45c1ff, #2e66d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
+        .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+        .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+        .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
+        .category-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: linear-gradient(135deg, rgba(45,193,255,0.15), rgba(46,102,212,0.15)); color: #45c1ff; border: 1px solid rgba(45,193,255,0.2); }
+        .light .category-badge { background: linear-gradient(135deg, rgba(46,102,212,0.1), rgba(45,193,255,0.1)); color: #2e66d4; border: 1px solid rgba(46,102,212,0.2); }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body class="dark:bg-brand-dark bg-brand-light dark:text-white text-brand-dark">
+
+    <!-- Navbar -->
+    <nav id="main-nav" class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
+        <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center no-underline" style="text-decoration:none;color:inherit;">Biplab Group</a>
+        <div class="flex items-center gap-4 md:gap-8">
+            <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-60">
+                <a href="index.html" class="hover:text-brand-cyan transition">Home</a>
+                <a href="about.html" class="hover:text-brand-cyan transition">About Us</a>
+                <div class="nav-dropdown relative">
+                    <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
+                    <div class="nav-dropdown-menu">
+                        <a href="berger-duco.html">Berger & Duco</a>
+                        <a href="bankura-ev.html">Bankura EV Care</a>
+                    </div>
+                </div>
+                <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
+                <a href="community.html" class="hover:text-brand-cyan transition">Community</a>
+                <a href="contact.html" class="hover:text-brand-cyan transition">Contact</a>
+            </div>
+            <a href="mailto:contact@biplabgroup.com" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition relative">
+                <i class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
+            </a>
+            <button id="theme-toggle" class="hover:bg-brand-cyan/20 transition w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 relative">
+                <i class="fas fa-moon dark:!hidden absolute"></i>
+                <i class="fas fa-sun !hidden dark:!block text-brand-cyan absolute"></i>
+            </button>
+            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
+                <i class="fas fa-bars text-sm"></i>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col items-center gap-2">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
+            <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
+                <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco</a>
+                <a href="bankura-ev.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
+            </div>
+            <a href="newsroom.html">Newsroom</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="flex gap-6 mt-12">
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 hover:text-brand-cyan transition"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- Hero Image -->
+    <section class="relative w-full h-[50vh] md:h-[60vh] min-h-[400px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200" alt="EV Battery" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b dark:from-brand-dark/60 dark:to-brand-dark from-brand-light/60 to-brand-light"></div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="relative dark:bg-brand-dark bg-brand-light" style="z-index:2;">
+        <div class="max-w-3xl mx-auto px-6 -mt-20 relative z-10">
+            <!-- Back link -->
+            <a href="newsroom.html" class="inline-flex items-center gap-2 text-brand-cyan font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all mb-8">
+                <i class="fas fa-arrow-left text-[10px]"></i> Back to Newsroom
+            </a>
+
+            <!-- Category & Date -->
+            <div class="flex items-center gap-4 mb-6">
+                <span class="category-badge">EV Mobility</span>
+                <span class="text-xs opacity-40">December 15, 2025</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-10">
+                EV Battery Maintenance: <span class="gradient-text">5 Tips</span> to Extend Your Vehicle's Life
+            </h1>
+
+            <!-- Body -->
+            <div class="prose prose-lg max-w-none space-y-8 text-sm md:text-base leading-relaxed opacity-70">
+                <p>Your electric vehicle's battery is its most valuable component — often accounting for 30-40% of the total vehicle cost. Yet many EV owners treat their batteries the same way they treated their old petrol tanks: use it until it's empty, then fill it up. Lithium-ion batteries, however, require a different approach. With proper care, you can significantly extend your battery's lifespan and maintain optimal range for years to come. Here are five practical tips from the service team at Bankura EV Care.</p>
+
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight mt-10 mb-4 opacity-100">1. Avoid Deep Discharge — Keep It Between 20% and 80%</h3>
+                <p>One of the most common mistakes new EV owners make is draining their battery to 0% before charging it back to 100%. Lithium-ion cells experience the most stress at extreme states of charge — both very low and very high. The ideal practice is to keep your battery level between 20% and 80% for daily use. Most modern EVs, including the Ola S1 Pro and TVS iQube, allow you to set charging limits through their companion apps. Reserve full 100% charges only for long trips where you genuinely need the extra range.</p>
+
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight mt-10 mb-4 opacity-100">2. Charge in the Shade — Heat Is Your Battery's Worst Enemy</h3>
+                <p>High temperatures accelerate battery degradation faster than almost any other factor. Charging generates heat internally, and if the ambient temperature is already high — as it often is during Bankura's summer months when temperatures exceed 42°C — the combined thermal stress can permanently reduce battery capacity. Always charge your EV in a shaded area, a garage, or at least during cooler hours of the day such as early morning or late evening. If you must charge during peak afternoon heat, consider using a slower charging rate, as fast charging generates more heat than standard charging.</p>
+
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight mt-10 mb-4 opacity-100">3. Keep Your Firmware Updated — Software Manages Battery Health</h3>
+                <p>Modern electric vehicles are essentially computers on wheels. The Battery Management System (BMS) — the software that controls charging rates, temperature regulation, and cell balancing — is regularly updated by manufacturers to optimise performance and extend battery life. Ola, Ather, and TVS all push over-the-air (OTA) firmware updates periodically. Make sure your vehicle is connected to Wi-Fi and that you install these updates promptly. If your vehicle does not support OTA updates, visit Bankura EV Care for a manual firmware flash — it takes less than 30 minutes and is usually free of charge during the warranty period.</p>
+
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight mt-10 mb-4 opacity-100">4. Follow Recommended Charging Cycles — Consistency Matters</h3>
+                <p>Every battery has a rated number of charge cycles — typically 800 to 1,500 full cycles for electric two-wheelers. A "full cycle" means going from 0% to 100%, so charging from 50% to 100% counts as only half a cycle. By maintaining the 20-80% habit mentioned above, you effectively use only 60% of a cycle per charge, meaning your battery can last significantly longer than its rated lifespan. Additionally, try to maintain a consistent charging routine. Plugging in at roughly the same time each day and using the same charger (preferably the one supplied with your vehicle) helps the BMS calibrate more accurately and manage cell balancing more efficiently.</p>
+
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight mt-10 mb-4 opacity-100">5. Get an Annual Battery Health Checkup at Bankura EV Care</h3>
+                <p>Just as you would get an annual health checkup for yourself, your EV battery benefits from a professional diagnostic at least once a year. At Bankura EV Care, our certified technicians use OEM-grade diagnostic tools to measure individual cell voltages, check for imbalances, assess overall state of health (SoH), and identify any early signs of degradation. The diagnostic takes about 45 minutes and includes a detailed report with recommendations. For vehicles under warranty, this service is complimentary. For out-of-warranty vehicles, the cost is INR 500 — a small price to pay for peace of mind and early detection of potential issues that could become expensive if left unchecked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copyright Bar -->
+    <div class="relative dark:bg-brand-dark bg-brand-light py-16" style="z-index:2;">
+        <div class="border-t dark:border-gray-700/20 border-gray-300/30 pt-8 text-center">
+            <p class="text-[11px] font-bold opacity-30 uppercase tracking-widest">&copy; 2026 Biplab Group &middot; Designed by Promix</p>
+        </div>
+    </div>
+
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.getElementById('mobile-menu-close');
+        mobileBtn.onclick = () => mobileMenu.classList.add('active');
+        mobileClose.onclick = () => mobileMenu.classList.remove('active');
+
+        const toggle = document.getElementById('theme-toggle');
+        toggle.onclick = () => {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+        };
+
+        const divToggle = document.getElementById('mobile-divisions-toggle');
+        const divSub = document.getElementById('mobile-divisions-sub');
+        const divChev = document.getElementById('mobile-div-chevron');
+        if (divToggle) {
+            divToggle.onclick = () => {
+                const open = divSub.style.display === 'flex';
+                divSub.style.display = open ? 'none' : 'flex';
+                divChev.style.transform = open ? '' : 'rotate(180deg)';
+            };
+        }
+    </script>
+</body>
+</html>

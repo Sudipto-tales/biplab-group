@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monsoon-Proofing Your Home — Biplab Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'brand-dark': '#01040a',
+                        'brand-light': '#f5f7f9',
+                        'brand-blue': '#2e66d4',
+                        'brand-cyan': '#45c1ff'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { --bg: #01040a; --text: #ffffff; }
+        .light { --bg: #f5f7f9; --text: #01040a; }
+        html { scroll-behavior: auto; }
+        body { background-color: var(--bg); color: var(--text); transition: background-color 0.5s ease, color 0.5s ease; overflow-x: hidden; font-family: 'Space Grotesk', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        .glass-nav { backdrop-filter: blur(15px); background: rgba(1, 4, 10, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .light .glass-nav { background: rgba(245, 247, 249, 0.7); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .mobile-menu-overlay { position: fixed; inset: 0; z-index: 200; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .light .mobile-menu-overlay { background: rgba(245, 247, 249, 0.95); }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu-overlay a { font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; padding: 12px 0; opacity: 0.7; transition: opacity 0.3s ease, color 0.3s ease; text-decoration: none; color: inherit; }
+        .mobile-menu-overlay a:hover { opacity: 1; color: #45c1ff; }
+        .mobile-menu-close { position: absolute; top: 30px; right: 30px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .light .mobile-menu-close { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); }
+        .gradient-text { background: linear-gradient(135deg, #45c1ff, #2e66d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
+        .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+        .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+        .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
+        .category-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 4px 12px; border-radius: 9999px; background: linear-gradient(135deg, rgba(45,193,255,0.15), rgba(46,102,212,0.15)); color: #45c1ff; border: 1px solid rgba(45,193,255,0.2); }
+        .light .category-badge { background: linear-gradient(135deg, rgba(46,102,212,0.1), rgba(45,193,255,0.1)); color: #2e66d4; border: 1px solid rgba(46,102,212,0.2); }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body class="dark:bg-brand-dark bg-brand-light dark:text-white text-brand-dark">
+
+    <!-- Navbar -->
+    <nav id="main-nav" class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-[100] px-6 md:px-10 py-3 flex justify-between items-center glass-nav rounded-2xl md:rounded-full">
+        <a href="index.html" class="font-bold tracking-tighter text-xl md:text-2xl uppercase dark:text-white text-black flex items-center no-underline" style="text-decoration:none;color:inherit;">Biplab Group</a>
+        <div class="flex items-center gap-4 md:gap-8">
+            <div class="hidden lg:flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-60">
+                <a href="index.html" class="hover:text-brand-cyan transition">Home</a>
+                <a href="about.html" class="hover:text-brand-cyan transition">About Us</a>
+                <div class="nav-dropdown relative">
+                    <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
+                    <div class="nav-dropdown-menu">
+                        <a href="berger-duco.html">Berger & Duco</a>
+                        <a href="bankura-ev.html">Bankura EV Care</a>
+                    </div>
+                </div>
+                <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
+                <a href="community.html" class="hover:text-brand-cyan transition">Community</a>
+                <a href="contact.html" class="hover:text-brand-cyan transition">Contact</a>
+            </div>
+            <a href="mailto:contact@biplabgroup.com" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition relative">
+                <i class="fas fa-envelope text-sm dark:text-white text-black opacity-70 hover:opacity-100 transition"></i>
+            </a>
+            <button id="theme-toggle" class="hover:bg-brand-cyan/20 transition w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 relative">
+                <i class="fas fa-moon dark:!hidden absolute"></i>
+                <i class="fas fa-sun !hidden dark:!block text-brand-cyan absolute"></i>
+            </button>
+            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/20 hover:border-brand-cyan/50 transition">
+                <i class="fas fa-bars text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col items-center gap-2">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
+            <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
+                <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco Store</a>
+                <a href="bankura-ev.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
+            </div>
+            <a href="newsroom.html">Newsroom</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <!-- Back link -->
+            <a href="newsroom.html" class="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 hover:text-brand-cyan transition mb-8">
+                <i class="fas fa-arrow-left"></i> Back to Newsroom
+            </a>
+
+            <!-- Category & Date -->
+            <div class="flex items-center gap-4 mb-6">
+                <span class="category-badge">Paints & Coatings</span>
+                <span class="text-xs opacity-40">November 8, 2025</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-8">Monsoon-Proofing Your Home: Best Exterior Paints for Bengal's Climate</h1>
+
+            <!-- Hero Image -->
+            <div class="rounded-2xl overflow-hidden mb-10">
+                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=1200" alt="Monsoon-proof exterior paints" class="w-full h-[300px] md:h-[450px] object-cover">
+            </div>
+
+            <!-- Body -->
+            <article class="prose prose-lg max-w-none dark:text-gray-300 text-gray-700 space-y-6 leading-relaxed">
+                <p>Bengal's monsoon season is both a blessing and a challenge for homeowners. While the rains bring relief from the summer heat, they also subject exterior walls to months of relentless moisture, driving rain, and high humidity. If your home's exterior is not adequately protected, you will see the consequences quickly — peeling paint, damp patches, algae growth, and ugly water stains that no amount of scrubbing can remove. The good news is that modern exterior paints have evolved dramatically, and with the right product and preparation, your walls can weather even the heaviest monsoon without losing their lustre.</p>
+
+                <p>The cornerstone of any monsoon-proofing strategy is a high-quality <strong class="dark:text-white text-brand-dark">waterproof exterior emulsion</strong>. Products like <strong class="dark:text-white text-brand-dark">Berger Homeshield</strong> are specifically engineered for regions with heavy rainfall. Homeshield uses a silicone-fortified resin system that forms a hydrophobic barrier on the wall surface, causing water to bead up and roll off rather than seeping into the substrate. This is fundamentally different from standard exterior emulsions, which may resist light rain but eventually allow moisture to penetrate during prolonged downpours. For homes in low-lying areas or those with walls directly exposed to wind-driven rain, a dedicated waterproofing emulsion is not a luxury — it is a necessity.</p>
+
+                <p>Equally important is <strong class="dark:text-white text-brand-dark">anti-algal and anti-fungal protection</strong>. Bengal's combination of warmth and persistent moisture creates the perfect breeding ground for algae, moss, and mildew on exterior walls, especially on north-facing surfaces and areas shaded by trees. Look for paints that incorporate biocidal additives — these are chemical agents that actively inhibit the growth of algae and fungi on the painted surface. Berger's WeatherCoat range, for instance, includes formulations with built-in anti-algal properties that keep walls looking clean for years. Without this protection, even the most beautifully painted wall will develop unsightly green and black patches within a single monsoon season.</p>
+
+                <p>No exterior paint, however premium, can perform to its potential without proper <strong class="dark:text-white text-brand-dark">wall preparation and priming</strong>. Before the monsoon arrives, inspect your exterior walls for cracks, gaps around window frames, and areas where previous paint has peeled. Fill all cracks with a flexible exterior-grade putty — rigid fillers will crack again as the wall expands and contracts with temperature changes. Once the surface is smooth and clean, apply a coat of exterior primer. Primer serves two critical functions: it seals the porous wall surface to prevent moisture ingress from behind, and it provides a uniform base that helps the topcoat adhere properly. Skipping primer to save costs is a false economy — it dramatically shortens the lifespan of your paint job and voids most manufacturer warranties.</p>
+
+                <p>At the <strong class="dark:text-white text-brand-dark">Biplab Group Berger & Duco store in Bankura</strong>, we carry the full range of Berger's monsoon-ready exterior products, including Homeshield, WeatherCoat All Guard, WeatherCoat Anti-Dustt, and exterior primers and putties. Our team can assess your specific requirements — wall condition, exposure, budget — and recommend the right combination of products for lasting protection. We also stock waterproofing solutions for terraces and rooftops, which are often the primary source of seepage during heavy rains. Visit us before the monsoon arrives to give your home the protection it deserves.</p>
+            </article>
+        </div>
+    </main>
+
+    <!-- Copyright Bar -->
+    <div class="border-t border-white/10 dark:border-white/10 light:border-black/10 py-6 text-center text-xs opacity-40">
+        &copy; 2026 Biplab Group &middot; Designed by Promix
+    </div>
+
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.getElementById('mobile-menu-close');
+        mobileBtn.onclick = () => mobileMenu.classList.add('active');
+        mobileClose.onclick = () => mobileMenu.classList.remove('active');
+
+        const toggle = document.getElementById('theme-toggle');
+        toggle.onclick = () => {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+        };
+
+        const divToggle = document.getElementById('mobile-divisions-toggle');
+        const divSub = document.getElementById('mobile-divisions-sub');
+        const divChev = document.getElementById('mobile-div-chevron');
+        if (divToggle) {
+            divToggle.onclick = () => {
+                const open = divSub.style.display === 'flex';
+                divSub.style.display = open ? 'none' : 'flex';
+                divChev.style.transform = open ? '' : 'rotate(180deg)';
+            };
+        }
+    </script>
+</body>
+</html>
