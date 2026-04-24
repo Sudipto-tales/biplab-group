@@ -1260,6 +1260,15 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        .nav-dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 0;
+            right: 0;
+            height: 14px;
+        }
+
         .nav-dropdown-menu a {
             padding: 8px 20px;
             font-size: 11px;
@@ -1353,7 +1362,7 @@
                         <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
                     <div class="nav-dropdown-menu">
                         <a href="berger-duco.html">Berger & Duco</a>
-                        <a href="sector-ev-mobility.html">Bankura EV Care</a>
+                        <a href="bankura-ev.html">Bankura EV Care</a>
                     </div>
                 </div>
                 <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
@@ -1389,13 +1398,7 @@
             <div class="mobile-divisions-sub" id="mobile-divisions-sub"
                 style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
                 <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco Store</a>
-                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
-                <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
-                <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
-                <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
-                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart
-                    Infrastructure</a>
-                <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
+                <a href="bankura-ev.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
             </div>
             <a href="newsroom.html" class="mobile-nav-link">Newsroom</a>
             <a href="community.html" class="mobile-nav-link">Community</a>
@@ -1502,15 +1505,15 @@
                         <img src="images/group-agro.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Industrial
-                            Update</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">Luxe
-                            House Paints</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Architectural coatings engineered for
-                            premium sustainable aesthetics.</p>
-                        <a href="#"
+                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Paints &amp;
+                            Coatings</span>
+                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">Berger
+                            &amp; Duco Store</h3>
+                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Bankura's premier destination for
+                            Berger House Paints, Duco auto finishes, and premium coating solutions.</p>
+                        <a href="berger-duco.html"
                             class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
-                            Read Portfolio <i class="fas fa-arrow-right text-[10px]"></i>
+                            Explore Store <i class="fas fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
                 </div>
@@ -1520,32 +1523,14 @@
                         <img src="images/group-ev.jpg" class="feature-img" loading="lazy">
                     </div>
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Mobility
-                            Division</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">EV Smart
-                            Fleet</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Next-generation electric vehicles
-                            engineered for urban efficiency and sustainability.</p>
-                        <a href="#"
+                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">EV Mobility</span>
+                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">Bankura
+                            EV Care</h3>
+                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Electric vehicle sales, servicing, and
+                            fast-charging infrastructure driving clean mobility across West Bengal.</p>
+                        <a href="bankura-ev.html"
                             class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
-                            Explore Fleet <i class="fas fa-arrow-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="feature-slide" data-slide="2">
-                    <div class="feature-img-wrap">
-                        <img src="images/group-it.jpg" class="feature-img" loading="lazy">
-                    </div>
-                    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-brand-cyan text-[10px] uppercase tracking-[0.3em] mb-3">Tech Division</span>
-                        <h3 class="text-3xl font-bold mb-3 uppercase leading-tight dark:text-white text-black">The
-                            Kolkata Coder</h3>
-                        <p class="dark:text-gray-300 text-gray-700 text-sm mb-6">Custom software solutions and digital
-                            transformation for enterprise clients.</p>
-                        <a href="#"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-blue hover:text-brand-cyan transition inline-flex items-center gap-2">
-                            View Projects <i class="fas fa-arrow-right text-[10px]"></i>
+                            Explore Division <i class="fas fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
                 </div>
@@ -1553,7 +1538,6 @@
                 <div class="slide-indicators">
                     <span class="slide-dot active" data-index="0"></span>
                     <span class="slide-dot" data-index="1"></span>
-                    <span class="slide-dot" data-index="2"></span>
                 </div>
                 <div class="slide-progress-bar" id="slide-progress-bar"></div>
             </div>
@@ -1593,8 +1577,8 @@
                 Portfolio</span>
             <h2 class="pixel-title section-title-slide text-4xl md:text-5xl uppercase tracking-tighter mb-4">Strategic
                 Sectors</h2>
-            <p class="section-title-sub text-sm opacity-70 max-w-md">Six divisions, one mission. Scroll to explore how
-                Biplab Group is rebuilding industry for a kinetic future.</p>
+            <p class="section-title-sub text-sm opacity-70 max-w-md">Two divisions, one mission. Explore how
+                Biplab Group is driving excellence across paints and EV mobility.</p>
         </div>
         <div class="sector-carousel-viewport" id="sector-carousel">
             <!-- Card 1 -->
@@ -1617,7 +1601,7 @@
             </div>
             <!-- Card 2 -->
             <div class="sector-carousel-card" data-card-index="1">
-                <a href="sector-ev-mobility.html"
+                <a href="bankura-ev.html"
                     class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
                     <img src="images/group-ev.jpg" class="sector-card-img" loading="lazy">
                     <div class="card-glow"></div>
@@ -1633,86 +1617,10 @@
                     </div>
                 </a>
             </div>
-            <!-- Card 3 -->
-            <div class="sector-carousel-card" data-card-index="2">
-                <a href="sector-luxe-paints.html"
-                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/group-agro.jpg" class="sector-card-img" loading="lazy">
-                    <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-paint-roller"></i></div>
-                    <div class="sector-card-inner">
-                        <span class="sector-card-tag relative z-10 mb-3">Division 03</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Luxe House Paints</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Architectural and industrial
-                            coatings engineered for durability, colour-fastness and sustainable finish.</p>
-                        <span
-                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
-                            <i class="fas fa-arrow-right text-[10px]"></i></span>
-                    </div>
-                </a>
-            </div>
-            <!-- Card 4 -->
-            <div class="sector-carousel-card" data-card-index="3">
-                <a href="sector-smart-manufacturing.html"
-                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/group-paints.jpg" class="sector-card-img" loading="lazy">
-                    <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-industry"></i></div>
-                    <div class="sector-card-inner">
-                        <span class="sector-card-tag relative z-10 mb-3">Division 04</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Smart Manufacturing</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Automated production lines and
-                            Industry 4.0 facilities delivering precision at industrial scale.</p>
-                        <span
-                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
-                            <i class="fas fa-arrow-right text-[10px]"></i></span>
-                    </div>
-                </a>
-            </div>
-            <!-- Card 5 -->
-            <div class="sector-carousel-card" data-card-index="4">
-                <a href="sector-smart-infrastructure.html"
-                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/group-hero-bg.jpg" class="sector-card-img" loading="lazy">
-                    <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-building"></i></div>
-                    <div class="sector-card-inner">
-                        <span class="sector-card-tag relative z-10 mb-3">Division 05</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">Smart Infrastructure</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Connected real estate, EV-ready
-                            buildings and urban infrastructure for the cities of tomorrow.</p>
-                        <span
-                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
-                            <i class="fas fa-arrow-right text-[10px]"></i></span>
-                    </div>
-                </a>
-            </div>
-            <!-- Card 6 -->
-            <div class="sector-carousel-card" data-card-index="5">
-                <a href="sector-rd-labs.html"
-                    class="sector-card border dark:border-white/10 border-black/10 block no-underline" data-tilt>
-                    <img src="images/group-infrastructure.jpg" class="sector-card-img" loading="lazy">
-                    <div class="card-glow"></div>
-                    <div class="sector-card-icon"><i class="fas fa-flask"></i></div>
-                    <div class="sector-card-inner">
-                        <span class="sector-card-tag relative z-10 mb-3">Division 06</span>
-                        <h3 class="pixel-title relative z-10 text-2xl uppercase mb-2">R&amp;D Labs</h3>
-                        <p class="relative z-10 text-xs opacity-80 leading-relaxed">Pure research into materials,
-                            batteries and automation — fuelling the next decade of Biplab innovation.</p>
-                        <span
-                            class="relative z-10 inline-flex items-center gap-2 mt-4 text-xs font-bold text-brand-cyan uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">Explore
-                            <i class="fas fa-arrow-right text-[10px]"></i></span>
-                    </div>
-                </a>
-            </div>
         </div>
         <div class="sector-progress" id="sector-progress">
             <span class="sector-progress-dot active" data-index="0"></span>
             <span class="sector-progress-dot" data-index="1"></span>
-            <span class="sector-progress-dot" data-index="2"></span>
-            <span class="sector-progress-dot" data-index="3"></span>
-            <span class="sector-progress-dot" data-index="4"></span>
-            <span class="sector-progress-dot" data-index="5"></span>
         </div>
         <div class="flex justify-center items-center gap-6 mt-6 mb-8">
             <button id="sector-prev"
@@ -1752,10 +1660,10 @@
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 02</span>
                     <h2 class="panel-year pixel-title">2022</h2>
-                    <h3 class="panel-title pixel-title dark:text-brand-cyan text-brand-blue">Industrial Expansion</h3>
-                    <p class="panel-desc">Luxe House Paints launched as the flagship coatings brand. Production capacity
-                        doubled with new automated lines, setting new benchmarks in quality and output across Eastern
-                        India.</p>
+                    <h3 class="panel-title pixel-title dark:text-brand-cyan text-brand-blue">Paints &amp; Coatings</h3>
+                    <p class="panel-desc">Berger &amp; Duco Store launched as Bankura's premier paint destination. Authorized
+                        dealership established for Berger Paints and Duco auto finishes, bringing premium coatings to
+                        West Bengal.</p>
                     <div class="panel-divider"></div>
                 </div>
             </div>
@@ -1767,10 +1675,10 @@
                 <div class="panel-content">
                     <span class="panel-tag pixel-accent">Chapter 03</span>
                     <h2 class="panel-year pixel-title">2023</h2>
-                    <h3 class="panel-title pixel-title dark:text-brand-cyan text-brand-blue">Digital Frontier</h3>
-                    <p class="panel-desc">The Kolkata Coder division was born, bringing software engineering and digital
-                        innovation under the Biplab umbrella. First enterprise clients onboarded for custom tech
-                        solutions.</p>
+                    <h3 class="panel-title pixel-title dark:text-brand-cyan text-brand-blue">EV Mobility</h3>
+                    <p class="panel-desc">Bankura EV Care division was born, bringing electric vehicle sales, servicing,
+                        and charging infrastructure under the Biplab umbrella. First EV showroom opened in Bankura
+                        town.</p>
                     <div class="panel-divider"></div>
                 </div>
             </div>

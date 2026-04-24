@@ -472,22 +472,11 @@
                 class="w-10 h-10 flex items-center justify-center rounded-full transition border border-gray-400/20 hover:border-paint-red/50 hover:text-paint-red">
                 <i class="fas fa-home text-sm"></i>
             </a>
-            <button id="mobile-menu-btn"
-                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-400/20">
-                <i class="fas fa-bars"></i>
-            </button>
+            <!-- mobile menu removed -->
         </div>
     </nav>
 
-    <div class="mobile-menu-overlay" id="mobile-menu">
-        <button class="absolute top-10 right-10 text-2xl" id="mobile-menu-close"><i class="fas fa-times"></i></button>
-        <div class="flex flex-col items-center gap-8 text-3xl font-black uppercase">
-            <a href="#palette" onclick="mobileMenu.classList.remove('active')">Palette</a>
-            <a href="#services" onclick="mobileMenu.classList.remove('active')">Services</a>
-            <a href="#color-mixer" onclick="mobileMenu.classList.remove('active')">Mixer</a>
-            <a href="#collections" onclick="mobileMenu.classList.remove('active')">Products</a>
-        </div>
-    </div>
+    <!-- mobile menu overlay removed -->
 
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <div id="hero-bg-wrapper" class="absolute inset-0">
@@ -1006,13 +995,7 @@
             document.documentElement.classList.toggle('dark');
         });
 
-        // MOBILE MENU
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileClose = document.getElementById('mobile-menu-close');
-
-        mobileBtn.onclick = () => mobileMenu.classList.add('active');
-        mobileClose.onclick = () => mobileMenu.classList.remove('active');
+        // MOBILE MENU (removed)
 
         // LENIS SMOOTH SCROLL
         const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
@@ -1161,7 +1144,7 @@
                 // Soft and high-class array of blues to match the new theme
                 const colors = ['#ffffff', '#ffffff', '#f8f9fa', '#e9ecef', '#fdfbfb', '#dee2e6'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.size = Math.random() * 1.5 + 0.5;
+                this.size = Math.random() * 2 + 1;
                 this.vx = 0; this.vy = 0;
                 this.friction = 0.88; this.ease = 0.08;
             }
@@ -1187,41 +1170,60 @@
         }
 
         function initSand() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            const dpr = window.devicePixelRatio || 1;
+            const cssWidth = canvas.offsetWidth;
+            const cssHeight = canvas.offsetHeight;
+            canvas.width = cssWidth * dpr;
+            canvas.height = cssHeight * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             particles = [];
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            // Using a classic, elegant Serif font for the sand text
             const isMobile = window.innerWidth < 768;
-            ctx.font = `900 ${isMobile ? '12vw' : '8vw'} 'Playfair Display', serif`;
-            ctx.fillText('BERGER & DUCO', canvas.width / 2, canvas.height / 2 - 40);
+            const pad = isMobile ? cssWidth * 0.06 : 0;
+            const availWidth = cssWidth - pad * 2;
 
-            ctx.font = `800 ${isMobile ? '6vw' : '3vw'} 'Playfair Display', serif`;
-            ctx.fillText('THE ART OF FINISH', canvas.width / 2, canvas.height / 2 + 40);
+            let mainFontSize = Math.round(isMobile ? cssWidth * 0.12 : cssWidth * 0.08);
+            ctx.font = `900 ${mainFontSize}px 'Playfair Display', serif`;
+            if (ctx.measureText('BERGER & DUCO').width > availWidth) {
+                mainFontSize = Math.round(mainFontSize * availWidth / ctx.measureText('BERGER & DUCO').width);
+                ctx.font = `900 ${mainFontSize}px 'Playfair Display', serif`;
+            }
+
+            const subFontSize = Math.round(isMobile ? cssWidth * 0.055 : cssWidth * 0.03);
+            const lineGap = isMobile ? mainFontSize * 0.8 : mainFontSize * 0.5;
+
+            ctx.fillText('BERGER & DUCO', cssWidth / 2, cssHeight / 2 - lineGap / 2);
+
+            ctx.font = `800 ${subFontSize}px 'Playfair Display', serif`;
+            ctx.fillText('THE ART OF FINISH', cssWidth / 2, cssHeight / 2 + lineGap);
 
             const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-            const step = isMobile ? 3 : 2;
+            const step = isMobile ? 1 : 2;
             for (let y = 0; y < canvas.height; y += step) {
                 for (let x = 0; x < canvas.width; x += step) {
-                    if (pixels.data[(y * canvas.width + x) * 4 + 3] > 128) {
-                        particles.push(new Particle(x, y));
+                    if (pixels.data[(y * canvas.width + x) * 4 + 3] > 80) {
+                        particles.push(new Particle(x / dpr, y / dpr));
                     }
                 }
             }
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const dpr = window.devicePixelRatio || 1;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
             particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
 
-        window.onresize = initSand;
+        let resizeTimeout;
+        window.onresize = () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(initSand, 150); };
         document.fonts.ready.then(() => { initSand(); animate(); });
 
         // ========== SERVICES CAROUSEL ==========

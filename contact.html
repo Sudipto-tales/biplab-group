@@ -76,6 +76,7 @@
         .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); min-width: 220px; padding: 12px 0; border-radius: 16px; backdrop-filter: blur(20px); background: rgba(1, 4, 10, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-50%) translateY(-6px); z-index: 500; display: flex; flex-direction: column; }
         .light .nav-dropdown-menu { background: rgba(245, 247, 249, 0.95); border: 1px solid rgba(0, 0, 0, 0.1); }
         .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown-menu:hover { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
         .nav-dropdown-menu a { padding: 8px 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
         .nav-dropdown-menu a:hover { opacity: 1; color: #45c1ff; background: rgba(69, 193, 255, 0.08); }
     
@@ -104,12 +105,8 @@
                 <div class="nav-dropdown relative">
                     <button class="hover:text-brand-cyan transition flex items-center gap-1 text-[10px] tracking-[0.3em] uppercase font-bold">Divisions <i class="fas fa-chevron-down text-[7px] ml-1"></i></button>
                     <div class="nav-dropdown-menu">
-                        <a href="sector-ev-mobility.html">EV Mobility</a>
-                        <a href="sector-kolkata-coder.html">The Kolkata Coder</a>
-                        <a href="sector-luxe-paints.html">Luxe House Paints</a>
-                        <a href="sector-smart-manufacturing.html">Smart Manufacturing</a>
-                        <a href="sector-smart-infrastructure.html">Smart Infrastructure</a>
-                        <a href="sector-rd-labs.html">R&D Labs</a>
+                        <a href="berger-duco.html">Berger & Duco</a>
+                        <a href="bankura-ev.html">Bankura EV Care</a>
                     </div>
                 </div>
                 <a href="newsroom.html" class="hover:text-brand-cyan transition">Newsroom</a>
@@ -135,12 +132,8 @@
             <a href="index.html">Home</a><a href="about.html">About Us</a>
             <button class="mobile-divisions-toggle" id="mobile-divisions-toggle" style="font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;padding:12px 0;opacity:0.7;background:none;border:none;color:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;">Divisions <i class="fas fa-chevron-down text-sm transition-transform" id="mobile-div-chevron"></i></button>
             <div class="mobile-divisions-sub" id="mobile-divisions-sub" style="display:none;flex-direction:column;align-items:center;gap:4px;padding-bottom:8px;">
-                <a href="sector-ev-mobility.html" style="font-size:1.1rem;opacity:0.5;">EV Mobility</a>
-                <a href="sector-kolkata-coder.html" style="font-size:1.1rem;opacity:0.5;">The Kolkata Coder</a>
-                <a href="sector-luxe-paints.html" style="font-size:1.1rem;opacity:0.5;">Luxe House Paints</a>
-                <a href="sector-smart-manufacturing.html" style="font-size:1.1rem;opacity:0.5;">Smart Manufacturing</a>
-                <a href="sector-smart-infrastructure.html" style="font-size:1.1rem;opacity:0.5;">Smart Infrastructure</a>
-                <a href="sector-rd-labs.html" style="font-size:1.1rem;opacity:0.5;">R&D Labs</a>
+                <a href="berger-duco.html" style="font-size:1.1rem;opacity:0.5;">Berger & Duco Store</a>
+                <a href="bankura-ev.html" style="font-size:1.1rem;opacity:0.5;">Bankura EV Care</a>
             </div>
             <a href="newsroom.html">Newsroom</a><a href="community.html">Community</a><a href="contact.html">Contact</a>
         </div>
@@ -444,10 +437,8 @@
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Divisions</h4>
-                    <a href="sector-ev-mobility.html" class="block transition hover:text-brand-cyan">EV Mobility</a>
-                    <a href="sector-kolkata-coder.html" class="block transition hover:text-brand-cyan">The Kolkata Coder</a>
-                    <a href="sector-luxe-paints.html" class="block transition hover:text-brand-cyan">Luxe House Paints</a>
-                    <a href="sector-smart-manufacturing.html" class="block transition hover:text-brand-cyan">Smart Manufacturing</a>
+                    <a href="berger-duco.html" class="block transition hover:text-brand-cyan">Berger & Duco</a>
+                    <a href="bankura-ev.html" class="block transition hover:text-brand-cyan">Bankura EV Care</a>
                 </div>
                 <div class="space-y-4 text-sm font-medium">
                     <h4 class="uppercase text-[10px] tracking-widest mb-6 opacity-40">Contact</h4>
